@@ -1,0 +1,70 @@
+%% LaTeX structure for cheatsheets
+%% (compile with XeTeX. see below if you dont have XeTeX.)
+
+\usepackage[utf8]{inputenc}
+\usepackage{jheppub}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{hyperref}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+% document what this is for
+\usepackage{scalerel}
+% writes "appendix" on appendices (works in body.. TODO: how to do in contents?)
+\usepackage[title]{appendix}
+
+% added for XITS math font support (uses XeTeX).
+% if you don't have XeTeX and XITS font:
+%  1) comment out block below
+%  2) remove "%%% TeX-engine: xetex" line at end of main file.
+% BEGIN NO XeTeX COMMENT BLOCK
+\usepackage{unicode-math}
+\setmainfont[Extension = .otf, UprightFont = *-regular, BoldFont = *-bold,
+             ItalicFont = *-italic, BoldItalicFont = *-bolditalic]{xits}
+\setmathfont[Extension = .otf, BoldFont = *bold]{xits-math}
+\setmonofont[Path = ./fonts/, Extension = .ttf, Scale = 0.84]
+{RobotoMono-Regular}
+% \setmonofont[Path = ./fonts/, Extension = .otf, Scale = 0.84]
+% {Monospace 821 Regular}
+% END NO XeTeX COMMENT BLOCK
+
+% for support of bold mathbb letters, see "\mbbb" command below.
+\newlength\bshft
+\bshft=.18pt\relax
+\def\fakebold#1{\ThisStyle{\ooalign{$\SavedStyle#1$\cr%
+  \kern-\bshft$\SavedStyle#1$\cr%
+  \kern\bshft$\SavedStyle#1$}}}
+
+%% macros
+\newcommand{\nn}{\nonumber} % kill eqnum
+\newcommand{\nncr}{\nonumber\\} % to kill eqnums on all eqs in env except last
+\newcommand{\eeg}{\emph{e.g. }}
+\newcommand{\eie}{\emph{i.e. }}
+% text
+\newcommand{\tbf}[1]{\textbf{#1}} % bold text
+\newcommand{\tit}[1]{\textit{#1}} % italic text
+\newcommand{\tbfit}[1]{\textbf{\textit{#1}}} % bold italic text
+\newcommand{\ttt}[1]{\texttt{#1}} % verbatim text
+% math
+\newcommand{\trm}[1]{\textrm{#1}} % text stylee math in math env
+\newcommand{\mbf}[1]{\mathbf{#1}} % bold math
+\newcommand{\mbb}[1]{\mathbb{#1}} % set-type math chars
+\newcommand{\mbbb}[1]{\fakebold{\mathbb{#1}}} % set-type bold math chars
+% other
+\newcommand{\blue}[1]{{\color{blue}#1}} % blue color shortcut
+\newcommand{\TODO}[1]{\blue{\tbf{TODO: #1}}} % colored TODO item
+\newcommand{\TODOFIN}[1]{\blue{\tbf{TODO: finish --- #1}}} % colored TODO item++
+
+
+% proclamation styles
+\newtheorem{definition}{Definition}
+
+% Non-indenting itemize
+\newenvironment{itemize-noindent}
+{\setlength{\leftmargini}{0em}\begin{itemize}}
+{\end{itemize}}
+
+% turn off indentation of paragraphs by default
+\setlength\parindent{0pt}
