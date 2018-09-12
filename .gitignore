@@ -1,0 +1,12 @@
+# auto/ dir
+auto/
+
+# AucTeX latex-preview image stuff
+_region_.*
+
+# kill LaTeX compilation BS
+*.log
+*.toc
+*.out
+*.aux
+*.gz

@@ -17,24 +17,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conventions}
 \label{sec:conv}
-\tbf{Math Notation}
+\paragraph{Math Notation}
 \begin{itemize}
-  \setlength\itemsep{1pt}
   \item $x \in \{0, 1\}^r$ : $x$ is a vector of form \eeg
   $(0, 1, 1, 0, \dots, 1, 0)$ of length $r$.
-  \item $\sim$ : random variable drawn from a distribution,$\quad$ $\simeq$ :
-  ``proportional to''.
+  \item $\sim$ : random variable drawn from a distribution\\
+  $\propto$ : ``proportional to''
   \item $\mbf{1}$($\cdot$) : indicator function --- 1 when arg is true, 0 when
   arg is false.
   \item Boldface capital letters are matrices, \eeg $\mbf{A} = \mbf{UWV}^T$
   \item $\log$ is base $e$ by default $\to$ entropy in nats.
 \end{itemize}
 
-\tbf{Ng CS229 / DeepLearning.ai}\\
-Note our non-conventional definition of the design matrix $\mbf{X}$. The more
-conventional version is denoted $\mbbb{X}$.
+\paragraph{Ng CS229 / DeepLearning.ai}
 \begin{itemize}
-  \setlength\itemsep{1pt}
   \item $m$ : number of training examples in the dataset
   \item $n$ : dimension of training examples
   \item $x^{(i)} \in \mathbb{R}^{n}$ : $i^{th}$ training example (\emph{column}
@@ -42,7 +38,9 @@ conventional version is denoted $\mbbb{X}$.
   \item $y^{(i)}$ : $i^{th}$ output (\emph{column} vector), $1 \leq i \leq m$
   \item $x_j$ : $j^{th}$ component of a training example, $1 \leq j \leq n$.
   \item $\mbf{X} \in \mathbb{R}^{n \times\, m}$ : (input/design) matrix
-  (training examples are \emph{column} vectors)
+  (training examples are \emph{column} vectors)\footnote{Note our
+    non-conventional definition of the design matrix $\mbf{X}$. The more
+    conventional version is denoted $\mbbb{X}$.}
   \item $\mbbb{X} \in \mathbb{R}^{m \times\, n}$ : (input/design) matrix
   (training examples are \emph{row} vectors)
 
@@ -138,7 +136,7 @@ deriv of cost func. clean up notation.}
 $p(x|y)$, then get posterior $p(y|x)$ via Bayes' theorem.
 
 \subsection{GDA}
-Can use GDA for classification problem when input features are continuous-valued
+Can used GDA for classification problem when input features are continuous-valued
 random vars. Models $p(x|y)$ as multivariate Gaussian. Model is
 \begin{align}
   y &\sim \trm{Bernoulli}(\phi) \\
@@ -179,8 +177,8 @@ which has MLE values
 \end{align}
 To make predictions, we don't need the evidence $p(x)$; we just need to compare
 \begin{align}
-  p(y=1|x) &\simeq p(x|y=1)p(y=1)\nncr
-  p(y=0|x) &\simeq p(x|y=0)p(y=0)
+  p(y=1|x) &\propto p(x|y=1)p(y=1)\nncr
+  p(y=0|x) &\propto p(x|y=0)p(y=0)
 \end{align}
 and pick the class that has the higher value (un-normalized posterior).
 
@@ -189,10 +187,9 @@ and pick the class that has the higher value (un-normalized posterior).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Bias/Variance tradeoff}
+\section{Bias/Variance Tradeoff}
 \label{sec:bias_var}
 \begin{itemize}
-  \setlength\itemsep{1pt}
   \item \tbf{High bias}: underfitting. high training error and test error.
   \item \tbf{High variance}: overfitting. \tit{low} training error and
   \tit{high} test error
@@ -200,11 +197,11 @@ and pick the class that has the higher value (un-normalized posterior).
 
 Can't use the test set to decide on values of hypers (\eeg number of parameters
 in model) because ``we could just tweak the values of the hypers until the
-estimator performs optimally [on the test set]''
+estimator performs optimally [on the test set]''.
 
 Cross-validation allows you to do model scoring (on frequentist stats, versus
 \eeg info criteria for Bayesian stats.. \TODO{verify i know what i'm talking
-  about.})
+  about}).
 
 Can average together multiple models with high capacity (low bias, but high
 variance). The result of combining is to \emph{reduce} the variance of the
@@ -241,7 +238,7 @@ doesn't have cancer'', we want \emph{high precision}.
 
 \tbfit{Recall} is ability of classifer to find all positive samples.
 
-\subsubsection{Receiver Operating Characteristic (ROC) curve}
+\subsubsection{Receiver operating characteristic curve (ROC)}
 \tbfit{True Positive Rate (TPR):} same as recall \\
 \tbfit{True Negative Rate (TNR):} fraction of actual negatives that are
 classified as negative $\trm{TN}/(\trm{TN} + \trm{FP})$
@@ -262,13 +259,11 @@ $k$: number of model parameters
 \section{K-means}
 \label{sec:kmeans}
 \begin{itemize}
-  \setlength\itemsep{1pt}
   \item Setup: Select any $K$ points from data to serve as initial centroids of
   the clusters.
   \item Repeat until (stopping criteria: \eeg no points change clusters,
   sum of distances is minimized, some total number of iterations..):
   \begin{enumerate}
-    \setlength\itemsep{1pt}
     \item Assign each datapoint to the cluster with closest centroid.
     \item Compute $K$ new centroids, each the mean of the datapoints in its
     cluster.
@@ -336,7 +331,7 @@ If our prior is not a conjugate prior to our likelihood, we can't compute
 posterior in closed form. Try:
 
 \begin{itemize}
-  \item approximate intract posterior $p(\vec{\theta} | \vec{y})$ with tractable
+  \item approximate intractable posterior $p(\vec{\theta} | \vec{y})$ with tractable
   $q(\vec{\theta} | \gamma)$.
   \item Adjust $\gamma$ to minimize
   $KL \big[p(\vec{\theta} | \vec{y}) || q(\vec{\theta} | \gamma)\big]$ $\to\,$
@@ -356,8 +351,8 @@ posterior in closed form. Try:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{appendices}
-\section{Math stuff}
-\subsection{Singular Value Decomposition}
+\section{Math Stuff}
+\subsection{Singular value decomposition}
 \label{subsec:SVD}
 An $M \times N$ matrix $\tbf{A}$ can be written as $\tbf{U}\tbf{W}\tbf{V}^T$,
 where $\tbf{U}$ is $M \times N$, $\tbf{W}$ is $N \times N$ and diagonal, and
@@ -378,11 +373,11 @@ are its eigenvalues...
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The Linear Regression Hierarchy}
-Linear regression starting from Maximum Likelihood, through variational Bayes.
-\subsection{Maximum Likelihood}
+Linear regression starting from maximum likelihood, through variational Bayes.
+\subsection{Maximum likelihood}
 Maximize likelihood $p(y | \theta ; \beta)$ wrt $\theta$, $\beta$.
 
-\subsection{Maximum A Posteriori}
+\subsection{Maximum a posteriori}
 Introduce prior $p(\theta ; \alpha) = \exp(-\alpha \theta^T \theta)$. Find
 $\theta$ by maximizing $p(y | \theta ; \beta) p(\theta ; \alpha)$ wrt $\theta$.
 \\
