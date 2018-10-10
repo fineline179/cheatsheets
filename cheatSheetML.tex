@@ -5,6 +5,8 @@
 \synctex=1
 \input{structure_cheatSheet.tex}
 
+%% GITHUB SSH ACCESS IN EMACS TEST
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title{ML Cheatsheet}
 \author{Steve Young}
@@ -330,6 +332,16 @@ Hypers: learning rate, nm iteractions, num hidden layers, num units in
 each layer, choise of activation function, amnt of momentum, minibatch size,
 regularization type and amount.
 
+\subsection{Bias/Variance}
+
+Bias/variance is less of a \tit{tradeoff} in neural network training, since we
+have a number of methods to reduce both independently.
+\begin{itemize}
+  \item \tbf{Reduce bias (tr set perf):} Bigger network, train longer, (NN arch
+  search)
+  \item \tbf{Reduce variance (dev set perf):} More data, regularization.. (when
+  changed go back and retune bias)
+\end{itemize}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
