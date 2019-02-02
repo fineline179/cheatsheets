@@ -5,8 +5,8 @@ auto/
 _region_.*
 
 # kill LaTeX compilation BS
-*.log
-*.toc
-*.out
 *.aux
+*.log
+*.out
 *.gz
+*.toc
