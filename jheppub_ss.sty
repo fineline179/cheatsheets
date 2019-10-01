@@ -1,4 +1,4 @@
-%% jheppub.sty
+%% jheppub_ss.sty
 %% Copyright 2013 SISSA Medialab
 %
 % This work may be distributed and/or modified under the
@@ -14,12 +14,15 @@
 % The Current Maintainer of this work is
 % SISSA Medialab <info@medialab.sissa.it>
 %
-% This work consists of the file jheppub.sty.
+% This work consists of the file jheppub_ss.sty.
+% This is jheppub.sty, with the section headings set to the sans serif font family, and
+% the jhep header removed
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{jheppub}[2013/03/21 r534]
+\ProvidesPackage{jheppub_ss}[2013/03/21 r534]
 
 
-\gdef\@fpheader{Prepared for submission to JHEP}
+% \gdef\@fpheader{Prepared for submission to JHEP}
+\gdef\@fpheader{\@empty}
 \gdef\@journal{jhep}
 
 \newif\ifnotoc\notocfalse
@@ -73,6 +76,7 @@
 \newcommand\acknowledgments{\section*{Acknowledgments}}
 \newcommand\notoc{\notoctrue}
 \newcommand\preprint[1]{\gdef\@preprint{\hfill #1}}
+
 
 
 
@@ -319,15 +323,15 @@
 \renewcommand\section{\@startsection{section}{1}{\z@}%
                                    {-3.5ex \@plus -1.3ex \@minus -.7ex}%
                                    {2.3ex \@plus.4ex \@minus .4ex}%
-                                   {\normalfont\large\bfseries}}
+                                   {\normalfont\large\bfseries\sffamily}}
 \renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
                                    {-2.3ex\@plus -1ex \@minus -.5ex}%
                                    {1.2ex \@plus .3ex \@minus .3ex}%
-                                   {\normalfont\normalsize\bfseries}}
+                                   {\normalfont\normalsize\bfseries\sffamily}}
 \renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
                                    {-2.3ex\@plus -1ex \@minus -.5ex}%
                                    {1ex \@plus .2ex \@minus .2ex}%
-                                   {\normalfont\normalsize\bfseries}}
+                                   {\normalfont\normalsize\bfseries\sffamily}}
 \renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
                                    {1.75ex \@plus1ex \@minus.2ex}%
                                    {-1em}%

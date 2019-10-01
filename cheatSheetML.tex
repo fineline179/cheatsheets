@@ -105,11 +105,11 @@ with $p$ the actual outputs, and $q$ the hypothesis $h_\theta(x)$
 
 \subsection{2+ classes}
 
-\paragraph{One-versus-all:} For $k$ classes, do $k$ normal log regs. Each has two
+\tbf{One-versus-all:} For $k$ classes, do $k$ normal log regs. Each has two
 classes: the target class, and all the rest. New examples are classified by whichever of
 these $k$ log regs. has highest score.
 
-\paragraph{Softmax regression:} Model classification cases as \emph{multinomial}
+\tbf{Softmax regression:} Model classification cases as \emph{multinomial}
 distribution. For $k$ classes, hypothesis is $k$-dim vector
 \begin{equation}
   h_\theta (x) = \frac{1}{\sum_{l=1}^k \exp(\theta^{(l)T} x)} \times
@@ -133,7 +133,7 @@ The log-likelihood is
 then get posterior $p(y|x)$ via Bayes' theorem.
 
 \subsection{GDA}
-Can used GDA for classification problem when input features are continuous-val random
+Can use GDA for classification problem when input features are continuous-val random
 vars. Models $p(x|y)$ as multivariate Gaussian. Model is
 \begin{align}
   y     &\sim \trm{Bernoulli}(\phi) \nncr
