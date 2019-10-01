@@ -43,32 +43,49 @@
   \kern-\bshft$\SavedStyle#1$\cr%
   \kern\bshft$\SavedStyle#1$}}}
 
-%% macros
+%%% Macros
 \newcommand{\nn}{\nonumber} % kill eqnum
 \newcommand{\nncr}{\nonumber\\} % to kill eqnums on all eqs in env except last
 \newcommand{\eeg}{\emph{e.g. }}
 \newcommand{\eie}{\emph{i.e. }}
-% text
+%% Text
 \newcommand{\tbf}[1]{\textbf{#1}} % bold text
 \newcommand{\tit}[1]{\textit{#1}} % italic text
 \newcommand{\tbfit}[1]{\textbf{\textit{#1}}} % bold italic text
 \newcommand{\ttt}[1]{\texttt{#1}} % verbatim text
-% math
+%% Math
 \newcommand{\trm}[1]{\textrm{#1}} % text stylee math in math env
 \newcommand{\mbf}[1]{\mathbf{#1}} % bold math
 \newcommand{\mbb}[1]{\mathbb{#1}} % set-type math chars
 \newcommand{\mbbb}[1]{\fakebold{\mathbb{#1}}} % set-type bold math chars
-% bold math SYMBOLS. note \mathbf doesn't work on greek symbols. The modern way to
+%% Bold math SYMBOLS. note \mathbf doesn't work on greek symbols. The modern way to
 % handle this is to use the bm package, but it doesn't seem to work.
 \newcommand{\bms}[1]{\boldsymbol{#1}}
 
-% other
+%% Other
 \newcommand{\blue}[1]{{\color{blue}#1}} % blue color shortcut
 \newcommand{\TODO}[1]{\blue{\tbf{TODO: #1}}} % colored TODO item
 \newcommand{\TODOFIN}[1]{\blue{\tbf{TODO: finish --- #1}}} % colored TODO item++
 
+%% Bold matrix macros
+% Latin
+\newcommand{\mA}{\mbf{A}}
+\newcommand{\mB}{\mbf{B}}
+\newcommand{\mC}{\mbf{C}}
+\newcommand{\mD}{\mbf{D}}
+\newcommand{\mL}{\mbf{L}}
+\newcommand{\mM}{\mbf{M}}
+\newcommand{\mU}{\mbf{U}}
+\newcommand{\mV}{\mbf{V}}
+\newcommand{\mW}{\mbf{W}}
+\newcommand{\mX}{\mbf{X}}
+\newcommand{\mY}{\mbf{Y}}
+\newcommand{\mZ}{\mbf{Z}}
+% Greek
+\newcommand{\mSigma}{\bms{\Sigma}}
+\newcommand{\mLambda}{\bms{\Lambda}}
 
-% proclamation styles
+% Proclamation styles
 \newtheorem{definition}{Definition}
 
 % Non-indenting itemize

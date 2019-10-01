@@ -25,7 +25,7 @@
   $\propto$ : ``proportional to''
   \item $\mbf{1}$($\cdot$) : indicator function --- 1 when arg is true, 0 when arg is
   false.
-  \item Boldface capital letters are matrices, \eeg $\mbf{A} = \mbf{UWV}^T$
+  \item Boldface capital letters are matrices, \eeg $\mA = \mU \mW \mV^T$
   \item $\log$ is base $e$ by default $\to$ entropy in nats.
 \end{itemize}
 
@@ -37,9 +37,9 @@
   $1 \leq i \leq m$
   \item $y^{(i)}$ : $i^{th}$ output (\emph{column} vector), $1 \leq i \leq m$
   \item $x_j$ : $j^{th}$ component of a training example, $1 \leq j \leq n$.
-  \item $\mbf{X} \in \mbb{R}^{n \times\, m}$ : (input/design) matrix (training examples
-  are \emph{column} vectors)\footnote{Note our non-conventional definition of the design
-    matrix $\mbf{X}$. The more conventional version is denoted $\mbbb{X}$.}
+  \item $\mX \in \mbb{R}^{n \times\, m}$ : (input/design) matrix (training examples are
+  \emph{column} vectors)\footnote{Note our non-conventional definition of the design
+    matrix $\mX$. The more conventional version is denoted $\mbbb{X}$.}
   \item $\mbbb{X} \in \mbb{R}^{m \times\, n}$ : (input/design) matrix (training examples
   are \emph{row} vectors)
 \end{itemize}
@@ -59,10 +59,10 @@
   \begin{equation}
     J(\theta) = \frac{1}{2} \sum_{i=1}^m \left(h_\theta(x^{(i)}) - y^{(i)}\right)^2
   \end{equation}
-  \item Analytically solve via normal equations, where $\mbf{X}$ is the augmented
+  \item Analytically solve via normal equations, where $\mX$ is the augmented
   $(n+1) \times m$ design matrix
   \begin{equation}
-    \vec{\theta} = \left(\mbf{X} \mbf{X}^T\right)^{-1} \mbf{X}\, \vec{y}
+    \vec{\theta} = \left(\mX \mX^T\right)^{-1} \mX\, \vec{y}
   \end{equation}
   where $\vec{\theta}$ and $\vec{y}$ are column vectors of the $n+1$ weights and $m$
   outputs, respectively.
@@ -74,8 +74,8 @@
 \section{Logistic Regression}
 \label{sec:logreg}
 \subsection{2 classes}
-With 2 labels $y \in \{0,1\}$ and $m$ training examples
-$x^{(i)},\ \ 1 \leq i \leq m$, we have
+With 2 labels $y \in \{0,1\}$ and $m$ training examples $x^{(i)},\ \ 1 \leq i \leq m$,
+we have
 \begin{equation}
   h_\theta (x) = \frac{1}{1 + e^{-\theta^T x}}
 \end{equation}
@@ -137,8 +137,8 @@ Can use GDA for classification problem when input features are continuous-val ra
 vars. Models $p(x|y)$ as multivariate Gaussian. Model is
 \begin{align}
   y     &\sim \trm{Bernoulli}(\phi) \nncr
-  x|y=0 &\sim \mathcal{N(\mu_0, \Sigma)} \nncr
-  x|y=1 &\sim \mathcal{N(\mu_1, \Sigma)}
+  x|y=0 &\sim \mathcal{N(\mu_0, \mSigma)} \nncr
+  x|y=1 &\sim \mathcal{N(\mu_1, \mSigma)}
 \end{align}
 
 \TODOFIN{}
@@ -272,13 +272,13 @@ directions of maximum variance, ordered by decreasing variance in their directio
 \paragraph{To calc:}
 \begin{itemize}
   \item \tbf{via eigenvectors:} Principal components of \emph{de-meaned} $n \times m$
-  design matrix $\mbf{X}$ are the eigenvectors of the covariance matrix of $\mbf{X}$,
-  $\mbf{C_X} = \frac{1}{m}\mbf{XX}^T$.
-  \item \tbf{via SVD:} Define $\mbf{Y} = \frac{1}{\sqrt{m}}\mbf{X}^T$, and take its SVD
-  \ref{subsec:SVD}, which is $\mbf{Y} = \mbf{UWV}^T$. Then $\mbf{U}^T$ is $n \times m$
-  matrix that projects $\mbf{X}$ onto its principal components, $\mbf{W}$ is the matrix
-  of principal comp values, and $\mbf{V}$ is orthonormal matrix of the principal
-  components. \TODO{Verify/fix statement on \tbf{U} projection.}
+  design matrix $\mX$ are the eigenvectors of the covariance matrix of $\mX$,
+  $\mbf{C_X} = \frac{1}{m}\mX\mX^T$.
+  \item \tbf{via SVD:} Define $\mY = \frac{1}{\sqrt{m}} \mX^T$, and take its SVD
+  \ref{subsec:SVD}, which is $\mY = \mU \mW \mV^T$. Then $\mU^T$ is $n \times m$ matrix
+  that projects $\mX$ onto its principal components, $\mW$ is the matrix of principal
+  comp values, and $\mV$ is orthonormal matrix of the principal
+  components. \TODO{Verify/fix statement on $\mU$ projection.}
 \end{itemize}
 
 
@@ -367,25 +367,25 @@ closed form. Try:
   \subsection{Matrix Stuff}
   \subsubsection{Partitioned Matrix Inversion}
   Given block decomposition of matrix into submatrices
-  $\mbf{A}, \mbf{B}, \mbf{C}, \mbf{D}$, the inverse is:
+  $\mA, \mB, \mC, \mD$, the inverse is:
   \begin{equation}
     \left(
       \begin{matrix}
-        \mbf{A} & \mbf{B}\\
-        \mbf{C} & \mbf{D}
+        \mA & \mB \\
+        \mC & \mD
       \end{matrix}
     \right)^{-1}
     =
     \left(
       \begin{matrix}
-        \mbf{M} & \mbf{-M B D^{-1}}\\
-        \mbf{-D^{-1} C M}\quad & \mbf{D^{-1}+D^{-1} C M B D^{-1}}
+        \mM & - \mM \mB \mD^{-1} \\
+        - \mD^{-1} \mC \mM \quad & \mD^{-1} + \mD^{-1} \mC \mM \mB \mD^{-1}
       \end{matrix}
     \right),
   \end{equation}
   where
   \begin{equation}
-    \mbf{M} = \left(\mbf{A} - \mbf{B D^{-1} C} \right)^{-1}
+    \mM = \left(\mA - \mB \mD^{-1} \mC \right)^{-1}
   \end{equation}
   (NB compare with Matt Headrick's compendium inversion formula)
 
@@ -394,8 +394,8 @@ closed form. Try:
 \subsubsection{Partitioned Gaussians: Conditional and Marginal Distributions}
 From BISHOP, sections 2.3.1 - 2.3.2.
 
-Consider a joint Gaussian distribution, $\mathcal{N}(\vec{x} | \vec{\mu}, \bms{\Sigma})$
-with $\bms{\Lambda} \equiv \bms{\Sigma}^{-1}$ and
+Consider a joint Gaussian distribution, $\mathcal{N}(\vec{x} | \vec{\mu}, \mSigma)$ with
+$\mLambda \equiv \mSigma^{-1}$ and
 \begin{equation}
   \vec{x} =
   \left(
@@ -415,36 +415,36 @@ with $\bms{\Lambda} \equiv \bms{\Sigma}^{-1}$ and
 \end{equation}
 
 \begin{equation}
-  \bms{\Sigma} =
+  \mSigma =
   \left(
     \begin{matrix}
-      \bms{\Sigma}_{aa} & \bms{\Sigma}_{ab} \\
-      \bms{\Sigma}_{ba} & \bms{\Sigma}_{bb}
+      \mSigma_{aa} & \mSigma_{ab} \\
+      \mSigma_{ba} & \mSigma_{bb}
     \end{matrix}
   \right)
   , \quad
-  \bms{\Lambda} =
+  \mLambda =
   \left(
     \begin{matrix}
-      \bms{\Lambda}_{aa} & \bms{\Lambda}_{ab} \\
-      \bms{\Lambda}_{ba} & \bms{\Lambda}_{bb}
+      \mLambda_{aa} & \mLambda_{ab} \\
+      \mLambda_{ba} & \mLambda_{bb}
     \end{matrix}
   \right).
 \end{equation}
 (That is, the vector $\vec{x}$ is partitioned into $\vec{x}_a$ and $\vec{x}_b$, which
-induces a block partitioning of the covariance matrix $\bms{\Sigma}$.)
+induces a block partitioning of the covariance matrix $\mSigma$.)
 
 The \tit{conditional distribution} is:
 \begin{align}
   p(\vec{x}_a | \vec{x}_b) &= \mathcal{N}(\vec{x} | \vec{\mu}_{a | b},
-                              \bms{\Lambda}_{aa}^{-1}) \\ 
-  \vec{\mu}_{a | b}        &= \vec{\mu}_a - \bms{\Lambda}_{aa}^{-1} \bms{\Lambda}_{ab}
+                              \mLambda_{aa}^{-1}) \\ 
+  \vec{\mu}_{a | b}        &= \vec{\mu}_a - \mLambda_{aa}^{-1} \mLambda_{ab}
                               (\vec{x}_b - \vec{\mu}_b) 
 \end{align}
 
 The \tit{marginal distribution} is:
 \begin{equation}
-  p(\vec{x}_a) = \mathcal{N}(\vec{x}_a | \vec{\mu}_a, \bms{\Sigma}_{aa})
+  p(\vec{x}_a) = \mathcal{N}(\vec{x}_a | \vec{\mu}_a, \mSigma_{aa})
 \end{equation}
 
 \subsubsection{Bayes' theorem for Gaussian variables}
@@ -453,35 +453,34 @@ From BISHOP, section 2.3.3. NB This is known as a \tit{linear Gaussian model}.
 Given a marginal Gaussian distribution for $\vec{x}$ and a conditional Gaussian
 distribution for $\vec{y}$ given $\vec{x}$ in the form:
 \begin{align}
-  p(\vec{x})         &= \mathcal{N}(\vec{x} | \vec{\mu}, \bms{\Lambda}^{-1}) \\
-  p(\vec{y}|\vec{x}) &= \mathcal{N}(\vec{y} | \mbf{A} \vec{x} + \vec{b}, \mbf{L}^{-1}),
+  p(\vec{x})         &= \mathcal{N}(\vec{x} | \vec{\mu}, \mLambda^{-1}) \\
+  p(\vec{y}|\vec{x}) &= \mathcal{N}(\vec{y} | \mA \vec{x} + \vec{b}, \mL^{-1}),
 \end{align}
 we have
 \begin{align}
-  p(\vec{y})         &= \mathcal{N} (\vec{y} |\mbf{A} \vec{\mu} + \vec{b}, \mbf{L}^{-1}
-                        + \mbf{A}\bms{\Lambda}^{-1} \mbf{A}^T ) \\
-  p(\vec{x}|\vec{y}) &= \mathcal{N} ( \vec{x} | \bms{\Sigma} \{ \mbf{A}^T \mbf{L}
-                        (\vec{y} - \vec{b}) + \bms{\Lambda} \vec{\mu} \}, \bms{\Sigma})
+  p(\vec{y})         &= \mathcal{N} (\vec{y} |\mA \vec{\mu} + \vec{b}, \mL^{-1}
+                        + \mA\ mLambda^{-1} \mA^T ) \\
+  p(\vec{x}|\vec{y}) &= \mathcal{N} ( \vec{x} | \mSigma \{ \mA^T \mL
+                        (\vec{y} - \vec{b}) + \mLambda \vec{\mu} \}, \mSigma)
 \end{align}
 where
 \begin{equation}
-  \bms{\Sigma} \equiv \left(\bms{\Lambda} + \mbf{A}^T \mbf{LA} \right)^{-1}
+  \mSigma \equiv \left(\mLambda + \mA^T \mL \mA \right)^{-1}
 \end{equation}
 
 
 \subsection{Singular value decomposition}
 \label{subsec:SVD}
-An $M \times N$ matrix $\tbf{A}$ can be written as $\tbf{U}\tbf{W}\tbf{V}^T$, where
-$\tbf{U}$ is $M \times N$, $\tbf{W}$ is $N \times N$ and diagonal, and $\tbf{V}$ is
-$N \times N$ and orthonormal.
+An $M \times N$ matrix $\mA$ can be written as $\mU\mW\mV^T$, where $\mU$ is
+$M \times N$, $\mW$ is $N \times N$ and diagonal, and $\mV$ is $N \times N$ and
+orthonormal.
 
-If $\tbf{A}$ is square, $\tbf{V}$ are its eigenvectors, and $\tbf{W}$ are its
-eigenvalues...
+If $\mA$ is square, $\mV$ are its eigenvectors, and $\mW$ are its eigenvalues...
 
 \paragraph{Uses}
 \begin{itemize}
-  \item If $M \geq N$, cols of $\tbf{U}$ are an orthonormal basis for space spanned by
-  cols of $\tbf{A}$
+  \item If $M \geq N$, cols of $\mU$ are an orthonormal basis for space spanned by cols
+  of $\mA$
 \end{itemize}
 
 \TODOFIN{}
