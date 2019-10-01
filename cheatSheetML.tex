@@ -13,6 +13,7 @@
 \begin{document}
 \maketitle
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conventions}
@@ -105,9 +106,9 @@ with $p$ the actual outputs, and $q$ the hypothesis $h_\theta(x)$
 
 \subsection{2+ classes}
 
-\tbf{One-versus-all:} For $k$ classes, do $k$ normal log regs. Each has two
-classes: the target class, and all the rest. New examples are classified by whichever of
-these $k$ log regs. has highest score.
+\tbf{One-versus-all:} For $k$ classes, do $k$ normal log regs. Each has two classes: the
+target class, and all the rest. New examples are classified by whichever of these $k$
+log regs. has highest score.
 
 \tbf{Softmax regression:} Model classification cases as \emph{multinomial}
 distribution. For $k$ classes, hypothesis is $k$-dim vector
@@ -269,7 +270,8 @@ $k$: number of model parameters
 PCA is unsupervised technique for finding directions of most variance in dataset. The
 \tbfit{principal components} are a set of $n$ orthonormal $n$-dim basis vects along the
 directions of maximum variance, ordered by decreasing variance in their directions.
-\paragraph{To calc:}
+
+\tbf{To calc:}
 \begin{itemize}
   \item \tbf{via eigenvectors:} Principal components of \emph{de-meaned} $n \times m$
   design matrix $\mX$ are the eigenvectors of the covariance matrix of $\mX$,
@@ -459,7 +461,7 @@ distribution for $\vec{y}$ given $\vec{x}$ in the form:
 we have
 \begin{align}
   p(\vec{y})         &= \mathcal{N} (\vec{y} |\mA \vec{\mu} + \vec{b}, \mL^{-1}
-                        + \mA\ mLambda^{-1} \mA^T ) \\
+                        + \mA \mLambda^{-1} \mA^T ) \\
   p(\vec{x}|\vec{y}) &= \mathcal{N} ( \vec{x} | \mSigma \{ \mA^T \mL
                         (\vec{y} - \vec{b}) + \mLambda \vec{\mu} \}, \mSigma)
 \end{align}
@@ -477,7 +479,7 @@ orthonormal.
 
 If $\mA$ is square, $\mV$ are its eigenvectors, and $\mW$ are its eigenvalues...
 
-\paragraph{Uses}
+\tbf{Uses}:
 \begin{itemize}
   \item If $M \geq N$, cols of $\mU$ are an orthonormal basis for space spanned by cols
   of $\mA$
