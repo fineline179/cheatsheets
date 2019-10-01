@@ -5,7 +5,7 @@
 \synctex=1
 \input{structure_cheatSheet.tex}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title{Python Cheatsheet}
 \author{Steve Young}
 \abstract{Everything I know about Python.}
@@ -13,7 +13,7 @@
 \begin{document}
 \maketitle
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \TODO{make sidebar marker telling what python library command depends on (and
 needs to be loaded beforehand)}
@@ -21,10 +21,10 @@ needs to be loaded beforehand)}
 \section{Data Processing}
 \begin{description}
   \setlength\itemsep{1pt}
-  \item[Read data from json file:] \ttt{with open('data.json', 'r') as f:
-    data = json.load(f) }
-  \item[Write data to json file:] \ttt{with open('data.json', 'w') as f:
-    data = json.dump(f) }
+  \item[Read data from json file:] \ttt{with open('data.json', 'r') as f: data =
+    json.load(f) }
+  \item[Write data to json file:] \ttt{with open('data.json', 'w') as f: data =
+    json.dump(f) }
   \item[Regex processing of text, \ttt{re} package:] look at
   \href{https://docs.python.org/3/library/re.html}
   {https://docs.python.org/3/library/re.html}
@@ -43,8 +43,7 @@ Using \ttt{import numpy as np}
 \subsection{Data Processing}
 \begin{description}
   \setlength\itemsep{1pt}
-  \item[Import data from csv file:] \ttt{np.genfromtxt('filename',
-    delimiter='','')}
+  \item[Import data from csv file:] \ttt{np.genfromtxt('filename', delimiter='','')}
 \end{description}
 
 \subsection{Number generation}
@@ -53,14 +52,13 @@ Using \ttt{import numpy as np}
   \item[Constant matrix:] \ttt{np.full(shape, val)}
   \item[Matrix of ones/zeros:] \ttt{np.ones(shape)}, \quad \ttt{np.zeros(shape)}
   \item[Id matrix:] \ttt{np.eye(dim)}
-  \item[Uniform dist on (low,high):] \ttt{np.random.uniform(low, high, numsamps
-    or shape)}
+  \item[Uniform dist on (low,high):] \ttt{np.random.uniform(low, high, numsamps or
+    shape)}
   \item[Uniform dist on (0,1) with given dims:] \ttt{np.random.rand(d1, d2, ..)}
   \item[Normal dist:] \ttt{np.random.normal(mean, stddev, numsamps)}
   \item[Normal dist on with given dims:] \ttt{np.random.randn(d1, d2, ..)}
   \item[Multivariate normal:] \ttt{np.random.multivariate\_normal(..args)}
-  \item[Random permutation of elements in ndarray:]
-  \ttt{np.random.permutation(NDArray)}
+  \item[Random permutation of elements in ndarray:] \ttt{np.random.permutation(NDArray)}
   \item[Permute elements of (range or ndarray) \emph{in place}:]
   \ttt{np.random.shuffle(int or NDArray)}
   \item[Integers over specified range:] \ttt{np.arange(start, stop)}
@@ -81,15 +79,14 @@ Using \ttt{import numpy as np}
 \subsection{NDArray ops}
 \begin{description}
   \setlength\itemsep{1pt}
-  \item[max/min element of array:] \ttt{np.max(NDArray)},\quad
-  \ttt{np.min(NDArray)}
+  \item[max/min element of array:] \ttt{np.max(NDArray)},\quad \ttt{np.min(NDArray)}
   \item[index of max/min element of array:] \ttt{np.argmax(NDArray)},\quad
   \ttt{np.argmin(NDArray)}
   \item[fill diagonal of sq matrix:] \ttt{np.fill\_diagonal(NDArray, val)}
   \item[round elements to nearest int:] \ttt{np.rint(NDArray)}
   \item[return bin counts in histogram:] \ttt{np.histogram(NDArray, binboundaries)}
-  \item[nth difference of array:]\footnote{Think transforming array of tick
-    prices into array of tick prices \emph{changes}} \ttt{np.diff(NDArray, n)}
+  \item[nth difference of array:]\footnote{Think transforming array of tick prices into
+    array of tick prices \emph{changes}} \ttt{np.diff(NDArray, n)}
 \end{description}
 
 \subsection{Linear Algebra}
@@ -103,7 +100,7 @@ Using \ttt{import numpy as np}
 
 
 \newpage
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Matplotlib}
 Using \ttt{import matplotlib as mpl}, \ \ttt{import matplotlib.pyplot as plt}
 
@@ -112,8 +109,7 @@ Using \ttt{import matplotlib as mpl}, \ \ttt{import matplotlib.pyplot as plt}
   \item[show image (if not in inline mode):] \ttt{plt.show()}
   \item[plot image:] \ttt{plt.imshow(NDArray)}
   \item[set axis bounds:] \ttt{plt.axis([xmin, xmax, ymin, ymax])}
-  \item[set x,y axis label:] \ttt{plt.xlabel(name)}, \quad
-  \ttt{plt.ylabel(name)}
+  \item[set x,y axis label:] \ttt{plt.xlabel(name)}, \quad \ttt{plt.ylabel(name)}
   \item[set plot title:] \ttt{plt.title(name)}
   \item[show plot legend:] \ttt{plt.legend()}
   \item[visualize matrix vals as heat map:] \ttt{plt.matshow(NDArray)}
@@ -122,11 +118,11 @@ Using \ttt{import matplotlib as mpl}, \ \ttt{import matplotlib.pyplot as plt}
 \end{description}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Pandas}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{sklearn}
 
 \begin{description}
@@ -134,7 +130,7 @@ Using \ttt{import matplotlib as mpl}, \ \ttt{import matplotlib.pyplot as plt}
   \item[Cross Validation:] \ttt{sklearn.model\_selection.cross\_val\_score}
 \end{description}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{re}
 
 \begin{description}
@@ -143,7 +139,7 @@ Using \ttt{import matplotlib as mpl}, \ \ttt{import matplotlib.pyplot as plt}
 
 \end{description}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{packages to try}
 
 \begin{description}
@@ -153,8 +149,8 @@ Using \ttt{import matplotlib as mpl}, \ \ttt{import matplotlib.pyplot as plt}
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \end{document}
 
