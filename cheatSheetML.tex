@@ -118,9 +118,8 @@ distribution. For $k$ classes, hypothesis is $k$-dim vector
 \end{equation}
 The log-likelihood is
 \begin{equation}
-  l(\theta) = - \sum_{i=1}^m \sum_{l=1}^k
-  \mbf{1}(y^{(i)} = l)
-  \log \frac{\exp(\theta^{(l)T} x)}{\sum_{m=1}^k \exp(\theta^{(m)T} x)}
+  l(\theta) = - \sum_{i=1}^m \sum_{l=1}^k \mbf{1}(y^{(i)} = l)
+  \log \frac{\exp(\theta^{(l)T} x)}{\sum_{m=1}^k \exp(\theta^{(m)T} x)} 
 \end{equation}
 
 \TODO{show how 2-class log reg cost func can be written this way. write down deriv of
