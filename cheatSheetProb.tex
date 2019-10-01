@@ -4,6 +4,7 @@
 \documentclass[11pt]{article}
 \synctex=1
 \input{structure_cheatSheet.tex}
+\usepackage{xfrac}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title{Prob/Stats Cheatsheet}
@@ -40,8 +41,19 @@ For $x \in \{0, 1\}$, Bernoulli dist parametrized by $\mu$, with
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Prob and stats}
-\subsection{Covariance}
+\subsection{The Rules of Probability}
+\begin{itemize}
+  \item \tbf{Product Rule}: $p(x, y) = p(x|y) p(y) = p(y|x) p(x)$
+  \item \tbf{Sum Rule}: $p(x) = \sum\limits_y p(x, y) = \sum\limits_y p(x | y) p(y)$
+\end{itemize}
 
+\subsection{Bayes' Rule}
+Using $p(y|x) p(x) = p(x, y) = p(x|y) p(y)$, we have
+\begin{equation}
+  p(y|x) = \frac{p(x|y) p(y)}{p(x)} = \frac{p(x|y) p(y)}{\sum\limits_y p(x|y) p(y)}
+\end{equation}
+
+\subsection{Covariance}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
