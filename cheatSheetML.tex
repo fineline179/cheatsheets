@@ -33,15 +33,15 @@
 \begin{itemize}
   \item $m$ : number of training examples in the dataset
   \item $n$ : dimension of training examples
-  \item $x^{(i)} \in \mathbb{R}^{n}$ : $i^{th}$ training example (\emph{column}
+  \item $x^{(i)} \in \mbb{R}^{n}$ : $i^{th}$ training example (\emph{column}
   vector), $1 \leq i \leq m$
   \item $y^{(i)}$ : $i^{th}$ output (\emph{column} vector), $1 \leq i \leq m$
   \item $x_j$ : $j^{th}$ component of a training example, $1 \leq j \leq n$.
-  \item $\mbf{X} \in \mathbb{R}^{n \times\, m}$ : (input/design) matrix
+  \item $\mbf{X} \in \mbb{R}^{n \times\, m}$ : (input/design) matrix
   (training examples are \emph{column} vectors)\footnote{Note our
     non-conventional definition of the design matrix $\mbf{X}$. The more
     conventional version is denoted $\mbbb{X}$.}
-  \item $\mbbb{X} \in \mathbb{R}^{m \times\, n}$ : (input/design) matrix
+  \item $\mbbb{X} \in \mbb{R}^{m \times\, n}$ : (input/design) matrix
   (training examples are \emph{row} vectors)
 
 \end{itemize}
@@ -139,7 +139,7 @@ $p(x|y)$, then get posterior $p(y|x)$ via Bayes' theorem.
 Can used GDA for classification problem when input features are continuous-val
 random vars. Models $p(x|y)$ as multivariate Gaussian. Model is
 \begin{align}
-  y &\sim \trm{Bernoulli}(\phi) \nncr
+  y     &\sim \trm{Bernoulli}(\phi) \nncr
   x|y=0 &\sim \mathcal{N(\mu_0, \Sigma)} \nncr
   x|y=1 &\sim \mathcal{N(\mu_1, \Sigma)}
 \end{align}
@@ -172,7 +172,7 @@ which has MLE values
 \begin{align}
   \phi_{j|y=1} &= \trm{fraction of spam (y=1) in which word j appears}\nncr
   \phi_{j|y=0} &= \trm{fraction of non-spam (y=0) in which word j appears}\nncr
-  \phi_{y} &=  \trm{ fraction of training examples that are spam}
+  \phi_{y}     &=  \trm{ fraction of training examples that are spam}
 \end{align}
 To make predictions, we don't need the evidence $p(x)$; we just need to compare
 \begin{align}
@@ -374,20 +374,126 @@ posterior in closed form. Try:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{appendices}
-\section{Math Stuff}
+  \section{Math Stuff}
+
+  \subsection{Matrix Stuff}
+  \subsubsection{Partitioned Matrix Inversion}
+  Given block decomposition of matrix into submatrices
+  $\mbf{A}, \mbf{B}, \mbf{C}, \mbf{D}$, the inverse is:
+  \begin{equation}
+    \left(
+      \begin{matrix}
+        \mbf{A} & \mbf{B}\\
+        \mbf{C} & \mbf{D}
+      \end{matrix}
+    \right)^{-1}
+    =
+    \left(
+      \begin{matrix}
+        \mbf{M} & \mbf{-M B D^{-1}}\\
+        \mbf{-D^{-1} C M}\quad & \mbf{D^{-1}+D^{-1} C M B D^{-1}}
+      \end{matrix}
+    \right),
+  \end{equation}
+  where
+  \begin{equation}
+    \mbf{M} = \left(\mbf{A} - \mbf{B D^{-1} C} \right)^{-1}
+  \end{equation}
+  (NB compare with Matt Headrick's compendium inversion formula)
+
+
+\subsection{Gaussians}
+\subsubsection{Partitioned Gaussians: Conditional and Marginal Distributions}
+From BISHOP, sections 2.3.1 - 2.3.2.
+
+Consider a joint Gaussian distribution, $\mathcal{N}(\vec{x} | \vec{\mu}, \bms{\Sigma})$ with
+$\bms{\Lambda} \equiv \bms{\Sigma}^{-1}$ and
+\begin{equation}
+  \vec{x} =
+  \left(
+    \begin{matrix}
+      \vec{x}_a \\
+      \vec{x}_b
+    \end{matrix}
+  \right)
+  , \quad
+  \vec{\mu} =
+  \left(
+    \begin{matrix}
+      \vec{\mu}_a \\
+      \vec{\mu}_b
+    \end{matrix}
+  \right)
+\end{equation}
+
+\begin{equation}
+  \bms{\Sigma} =
+  \left(
+    \begin{matrix}
+      \bms{\Sigma}_{aa} & \bms{\Sigma}_{ab} \\
+      \bms{\Sigma}_{ba} & \bms{\Sigma}_{bb}
+    \end{matrix}
+  \right)
+  , \quad
+  \bms{\Lambda} =
+  \left(
+    \begin{matrix}
+      \bms{\Lambda}_{aa} & \bms{\Lambda}_{ab} \\
+      \bms{\Lambda}_{ba} & \bms{\Lambda}_{bb}
+    \end{matrix}
+  \right).
+\end{equation}
+(That is, the vector $\vec{x}$ is partitioned into $\vec{x}_a$ and $\vec{x}_b$, which
+induces a block partitioning of the covariance matrixx $\bms{\Sigma}$.)
+
+The \tit{conditional distribution} is:
+\begin{align}
+  p(\vec{x}_a | \vec{x}_b) &= \mathcal{N}(\vec{x} | \vec{\mu}_{a | b},
+                              \bms{\Lambda}_{aa}^{-1}) \\ 
+  \vec{\mu}_{a | b}        &= \vec{\mu}_a - \bms{\Lambda}_{aa}^{-1} \bms{\Lambda}_{ab}
+                              (\vec{x}_b - \vec{\mu}_b) 
+\end{align}
+
+The \tit{marginal distribution} is:
+\begin{equation}
+  p(\vec{x}_a) = \mathcal{N}(\vec{x}_a | \vec{\mu}_a, \bms{\Sigma}_{aa})
+\end{equation}
+
+\subsubsection{Bayes' theorem for Gaussian variables}
+From BISHOP, section 2.3.3. NB This is known as a \tit{linear Gaussian model}.
+
+Given a marginal Gaussian distribution for $\vec{x}$ and a conditional Gaussian distribution
+for $\vec{y}$ given $\vec{x}$ in the form:
+\begin{align}
+  p(\vec{x})         &= \mathcal{N}(\vec{x} | \vec{\mu}, \bms{\Lambda}^{-1}) \\
+  p(\vec{y}|\vec{x}) &= \mathcal{N}(\vec{y} | \mbf{A} \vec{x} + \vec{b}, \mbf{L}^{-1}),
+\end{align}
+we have
+\begin{align}
+  p(\vec{y})         &= \mathcal{N} (\vec{y} |\mbf{A} \vec{\mu} + \vec{b}, \mbf{L}^{-1}
+                        + \mbf{A}\bms{\Lambda}^{-1} \mbf{A}^T ) \\
+  p(\vec{x}|\vec{y}) &= \mathcal{N} ( \vec{x} | \bms{\Sigma} \{ \mbf{A}^T \mbf{L}
+                        (\vec{y} - \vec{b}) + \bms{\Lambda} \vec{\mu} \}, \bms{\Sigma})
+\end{align}
+where
+\begin{equation}
+  \bms{\Sigma} = \left(\bms{\Lambda} + \mbf{A}^T \mbf{LA} \right)^{-1}
+\end{equation}
+
+
 \subsection{Singular value decomposition}
 \label{subsec:SVD}
-An $M \times N$ matrix $\tbf{A}$ can be written as $\tbf{U}\tbf{W}\tbf{V}^T$,
-where $\tbf{U}$ is $M \times N$, $\tbf{W}$ is $N \times N$ and diagonal, and
-$\tbf{V}$ is $N \times N$ and orthonormal.
+An $M \times N$ matrix $\tbf{A}$ can be written as $\tbf{U}\tbf{W}\tbf{V}^T$, where
+$\tbf{U}$ is $M \times N$, $\tbf{W}$ is $N \times N$ and diagonal, and $\tbf{V}$ is
+$N \times N$ and orthonormal.
 
-If $\tbf{A}$ is square, $\tbf{V}$ are its eigenvectors, and $\tbf{W}$
-are its eigenvalues...
+If $\tbf{A}$ is square, $\tbf{V}$ are its eigenvectors, and $\tbf{W}$ are its
+eigenvalues...
 
 \paragraph{Uses}
 \begin{itemize}
-  \item If $M \geq N$, cols of $\tbf{U}$ are an orthonormal basis for space
-  spanned by cols of $\tbf{A}$
+  \item If $M \geq N$, cols of $\tbf{U}$ are an orthonormal basis for space spanned by
+  cols of $\tbf{A}$
 \end{itemize}
 
 \TODOFIN{}
@@ -400,6 +506,9 @@ are its eigenvalues...
   \vec{a} 
 \end{equation}
 
+\TODO{review understanding of this (I recall this expression not enough to answer my
+  questions on a formula derivation) and give examples.}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -409,19 +518,18 @@ Linear regression starting from maximum likelihood, through variational Bayes.
 Maximize likelihood $p(y | \theta ; \beta)$ wrt $\theta$, $\beta$.
 
 \subsection{Maximum a posteriori}
-Introduce prior $p(\theta ; \alpha) = \exp(-\alpha \theta^T \theta)$. Find
-$\theta$ by maximizing $p(y | \theta ; \beta) p(\theta ; \alpha)$ wrt $\theta$.
+Introduce prior $p(\theta ; \alpha) = \exp(-\alpha \theta^T \theta)$. Find $\theta$ by
+maximizing $p(y | \theta ; \beta) p(\theta ; \alpha)$ wrt $\theta$.
 \\
 Q: what is proper way to estimate $\beta$ and $\alpha$ here?
 
 \subsection{Full Bayesian (stationary prior)}
 Calc posterior
-$p(\theta | y) = p(y | \theta ; \beta) p(\theta ; \alpha) / p(y ; \alpha,
-\beta)$, where
-$p(y ; \alpha, \beta) = \int_\theta p(y | \theta ; \beta) p(\theta ; \alpha)$ is
-the evidence. Determine values of hypers $\alpha, \beta$ by maximizing
-evidence. This is difficult to do directly, as derivs wrt $\alpha, \beta$ are
-hard to compute, so use EM algorithm.
+$p(\theta | y) = p(y | \theta ; \beta) p(\theta ; \alpha) / p(y ; \alpha, \beta)$, where
+$p(y ; \alpha, \beta) = \int_\theta p(y | \theta ; \beta) p(\theta ; \alpha)$ is the
+evidence. Determine values of hypers $\alpha, \beta$ by maximizing evidence. This is
+difficult to do directly, as derivs wrt $\alpha, \beta$ are hard to compute, so use EM
+algorithm.
 
 \subsection{Variational Bayes (non-stationary prior)}
 

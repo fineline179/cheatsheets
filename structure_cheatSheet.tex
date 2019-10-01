@@ -3,7 +3,7 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage{jheppub}
-\usepackage{amsmath}
+\usepackage{amsmath, amssymb}
 \usepackage{graphicx}
 \usepackage{caption}
 \usepackage{subcaption}
@@ -15,6 +15,7 @@
 % writes "appendix" on appendices (works in body.. TODO: how to do in contents?)
 \usepackage[title]{appendix}
 \usepackage{parskip}
+
 
 % increase spacing between paragraphs (to make up for the lack of indentaiton)
 \setlength{\parskip}{4pt}
@@ -56,6 +57,10 @@
 \newcommand{\mbf}[1]{\mathbf{#1}} % bold math
 \newcommand{\mbb}[1]{\mathbb{#1}} % set-type math chars
 \newcommand{\mbbb}[1]{\fakebold{\mathbb{#1}}} % set-type bold math chars
+% bold math SYMBOLS. note \mathbf doesn't work on greek symbols. The modern way to
+% handle this is to use the bm package, but it doesn't seem to work.
+\newcommand{\bms}[1]{\boldsymbol{#1}}
+
 % other
 \newcommand{\blue}[1]{{\color{blue}#1}} % blue color shortcut
 \newcommand{\TODO}[1]{\blue{\tbf{TODO: #1}}} % colored TODO item
