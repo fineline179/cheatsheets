@@ -19,12 +19,12 @@
 \label{sec:conv}
 \paragraph{Math Notation}
 \begin{itemize}
-  \item $x \in \{0, 1\}^r$ : $x$ is a vector of form \eeg
-  $(0, 1, 1, 0, \dots, 1, 0)$ of length $r$.
+  \item $x \in \{0, 1\}^r$ : $x$ is a vector of form \eeg $(0, 1, 1, 0, \dots, 1, 0)$ of
+  length $r$.
   \item $\sim$ : random variable drawn from a distribution\\
   $\propto$ : ``proportional to''
-  \item $\mbf{1}$($\cdot$) : indicator function --- 1 when arg is true, 0 when
-  arg is false.
+  \item $\mbf{1}$($\cdot$) : indicator function --- 1 when arg is true, 0 when arg is
+  false.
   \item Boldface capital letters are matrices, \eeg $\mbf{A} = \mbf{UWV}^T$
   \item $\log$ is base $e$ by default $\to$ entropy in nats.
 \end{itemize}
@@ -33,16 +33,15 @@
 \begin{itemize}
   \item $m$ : number of training examples in the dataset
   \item $n$ : dimension of training examples
-  \item $x^{(i)} \in \mbb{R}^{n}$ : $i^{th}$ training example (\emph{column}
-  vector), $1 \leq i \leq m$
+  \item $x^{(i)} \in \mbb{R}^{n}$ : $i^{th}$ training example (\emph{column} vector),
+  $1 \leq i \leq m$
   \item $y^{(i)}$ : $i^{th}$ output (\emph{column} vector), $1 \leq i \leq m$
   \item $x_j$ : $j^{th}$ component of a training example, $1 \leq j \leq n$.
-  \item $\mbf{X} \in \mbb{R}^{n \times\, m}$ : (input/design) matrix
-  (training examples are \emph{column} vectors)\footnote{Note our
-    non-conventional definition of the design matrix $\mbf{X}$. The more
-    conventional version is denoted $\mbbb{X}$.}
-  \item $\mbbb{X} \in \mbb{R}^{m \times\, n}$ : (input/design) matrix
-  (training examples are \emph{row} vectors)
+  \item $\mbf{X} \in \mbb{R}^{n \times\, m}$ : (input/design) matrix (training examples
+  are \emph{column} vectors)\footnote{Note our non-conventional definition of the design
+    matrix $\mbf{X}$. The more conventional version is denoted $\mbbb{X}$.}
+  \item $\mbbb{X} \in \mbb{R}^{m \times\, n}$ : (input/design) matrix (training examples
+  are \emph{row} vectors)
 
 \end{itemize}
 
@@ -54,20 +53,20 @@
 \label{sec:linreg}
 \subsection{Basics}
 \begin{itemize}
-  \item Hypothesis $h_\theta(x) = \theta_0 + \theta_1 x_1 + \theta_2 x_2 + \dots
-  = \sum_{j=0}^{n} \theta_j x_j \equiv \theta^T x$, where $x_0 = 1$.
+  \item Hypothesis
+  $h_\theta(x) = \theta_0 + \theta_1 x_1 + \theta_2 x_2 + \dots = \sum_{j=0}^{n}
+  \theta_j x_j \equiv \theta^T x$, where $x_0 = 1$.
   \item Cost function
   \begin{equation}
-    J(\theta) = \frac{1}{2} \sum_{i=1}^m \left(h_\theta(x^{(i)}) -
-      y^{(i)}\right)^2
+    J(\theta) = \frac{1}{2} \sum_{i=1}^m \left(h_\theta(x^{(i)}) - y^{(i)}\right)^2
   \end{equation}
-  \item Analytically solve via normal equations, where $\mbf{X}$ is the
-  augmented $(n+1) \times m$ design matrix
+  \item Analytically solve via normal equations, where $\mbf{X}$ is the augmented
+  $(n+1) \times m$ design matrix
   \begin{equation}
     \vec{\theta} = \left(\mbf{X} \mbf{X}^T\right)^{-1} \mbf{X}\, \vec{y}
   \end{equation}
-  where $\vec{\theta}$ and $\vec{y}$ are column vectors of the $n+1$ weights and
-  $m$ outputs, respectively.
+  where $\vec{\theta}$ and $\vec{y}$ are column vectors of the $n+1$ weights and $m$
+  outputs, respectively.
 \end{itemize}
 
 
@@ -86,11 +85,11 @@ $x^{(i)},\ \ 1 \leq i \leq m$, we have
 \end{equation}
 \begin{equation}
   L(\theta) = \prod_{i=1}^m (h_\theta (x^{(i)}))^{y^{(i)}} (1 - h_\theta
-  (x^{(i)}))^{1-y^{(i)}}
+  (x^{(i)}))^{1-y^{(i)}} 
 \end{equation}
 \begin{equation}
-  l(\theta) = \log L(\theta) = \sum_{i=1}^m y^{(i)} \log h_\theta (x^{(i)}) +
-  (1 - y^{(i)}) \log(1 - h_\theta (x^{(i)}))
+  l(\theta) = \log L(\theta) = \sum_{i=1}^m y^{(i)} \log h_\theta (x^{(i)}) + (1 -
+  y^{(i)}) \log(1 - h_\theta  (x^{(i)}))
 \end{equation}
 with deriv
 \begin{equation}
@@ -107,15 +106,15 @@ with $p$ the actual outputs, and $q$ the hypothesis $h_\theta(x)$
 
 \subsection{2+ classes}
 
-\paragraph{One-versus-all:} For $k$ classes, do $k$ normal log regs. Each has
-two classes: the target class, and all the rest. New examples are classified by
-whichever of these $k$ log regs. has highest score.
+\paragraph{One-versus-all:} For $k$ classes, do $k$ normal log regs. Each has two
+classes: the target class, and all the rest. New examples are classified by whichever of
+these $k$ log regs. has highest score.
 
 \paragraph{Softmax regression:} Model classification cases as \emph{multinomial}
 distribution. For $k$ classes, hypothesis is $k$-dim vector
 \begin{equation}
   h_\theta (x) = \frac{1}{\sum_{l=1}^k \exp(\theta^{(l)T} x)} \times
-  \big[\exp(\theta^{(1)T} x), \dots, \exp(\theta^{(k)T} x)\big]
+  \big[\exp(\theta^{(1)T} x), \dots, \exp(\theta^{(k)T} x)\big] 
 \end{equation}
 The log-likelihood is
 \begin{equation}
@@ -124,20 +123,20 @@ The log-likelihood is
   \log \frac{\exp(\theta^{(l)T} x)}{\sum_{m=1}^k \exp(\theta^{(m)T} x)}
 \end{equation}
 
-\TODO{show how 2-class log reg cost func can be written this way. write down
-deriv of cost func. clean up notation.}
+\TODO{show how 2-class log reg cost func can be written this way. write down deriv of
+  cost func. clean up notation.}
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Gaussian Discriminant Analysis (GDA) and Naive Bayes}
 \label{sec:GDA_nbayes}
-\tbfit{Generative algorithm}: Instead of modeling $p(y|x)$, model $p(y)$ and
-$p(x|y)$, then get posterior $p(y|x)$ via Bayes' theorem.
+\tbfit{Generative algorithm}: Instead of modeling $p(y|x)$, model $p(y)$ and $p(x|y)$,
+then get posterior $p(y|x)$ via Bayes' theorem.
 
 \subsection{GDA}
-Can used GDA for classification problem when input features are continuous-val
-random vars. Models $p(x|y)$ as multivariate Gaussian. Model is
+Can used GDA for classification problem when input features are continuous-val random
+vars. Models $p(x|y)$ as multivariate Gaussian. Model is
 \begin{align}
   y     &\sim \trm{Bernoulli}(\phi) \nncr
   x|y=0 &\sim \mathcal{N(\mu_0, \Sigma)} \nncr
@@ -147,26 +146,23 @@ random vars. Models $p(x|y)$ as multivariate Gaussian. Model is
 \TODOFIN{}
 
 \subsection{Naive Bayes (for text classification)}
-For training examples $x \in \{0,1\}^n$ (a \tbfit{vocabulary}\footnote{the
-  $j^{th}$ entry is 1 if the example contains the $j^{th}$ word in the
-  vocabulary. \tbf{Example}: If the vocab is \{cats, rats, bats\}, then $n=3$,
-  and a training example that contains ``cats'', ``rats'', but not ``bats'',
-  would be $x = (1, 1, 0)$.} of length $n$), assume the components of an
-example, $x_j$, are conditionally independent given $y$ (\tbfit{Naive Bayes
-  assumption}).
+For training examples $x \in \{0,1\}^n$ (a \tbfit{vocabulary}\footnote{the $j^{th}$
+  entry is 1 if the example contains the $j^{th}$ word in the vocabulary. \tbf{Example}:
+  If the vocab is \{cats, rats, bats\}, then $n=3$, and a training example that contains
+  ``cats'', ``rats'', but not ``bats'', would be $x = (1, 1, 0)$.} of length $n$),
+assume the components of an example, $x_j$, are conditionally independent given $y$
+(\tbfit{Naive Bayes assumption}).
 \begin{equation}
   p(x_1, \dots, x_n | y) = \prod_{i=1}^n p(x_i | y)
 \end{equation}
 
 Model is parameterized by
 \begin{equation}
-  \phi_y = p(y=1),\qquad \phi_{j|y=1} = p(x_j=1|y=1), \qquad \phi_{j|y=0} =
-  p(x_j=1|y=0)
+  \phi_y = p(y=1),\qquad \phi_{j|y=1} = p(x_j=1|y=1), \qquad \phi_{j|y=0} = p(x_j=1|y=0)
 \end{equation}
 where $j \in (1, n)$, for a total of $2n +1$ parameters. Likelihood is
 \begin{equation}
-  L(\phi_y, \{\phi_{j|y=1}, \phi_{j|y=0}\}_{j=1}^n) = \prod_{i=1}^m
-  p(x^{(i)}, y^{(i)})
+  L(\phi_y, \{\phi_{j|y=1}, \phi_{j|y=0}\}_{j=1}^n) = \prod_{i=1}^m p(x^{(i)}, y^{(i)})
 \end{equation}
 which has MLE values
 \begin{align}
@@ -194,17 +190,16 @@ and pick the class that has the higher value (un-normalized posterior).
   \tit{high} test error
 \end{itemize}
 
-Can't use the test set to decide on values of hypers (\eeg number of parameters
-in model) because ``we could just tweak the values of the hypers until the
-estimator performs optimally [on the test set]''.
+Can't use the test set to decide on values of hypers (\eeg number of parameters in
+model) because ``we could just tweak the values of the hypers until the estimator
+performs optimally [on the test set]''.
 
-Cross-validation allows you to do model scoring (on frequentist stats, versus
-\eeg info criteria for Bayesian stats.. \TODO{verify i know what i'm talking
-  about}).
+Cross-validation allows you to do model scoring (on frequentist stats, versus \eeg info
+criteria for Bayesian stats.. \TODO{verify i know what i'm talking about}).
 
 Can average together multiple models with high capacity (low bias, but high
-variance). The result of combining is to \emph{reduce} the variance of the
-combined model.
+variance). The result of combining is to \emph{reduce} the variance of the combined
+model.
 
 
 
@@ -213,9 +208,8 @@ combined model.
 \label{sec:model_ass}
 \subsection{Classification}
 \subsubsection{Precision/Recall}
-For 2 classes, with \{TN, FN, FP, TP\} = \{true negatives, false negatives,
-false positives, true positives\}, we have the \tbfit{loss} or \tbfit{confusion
-matrix}:
+For 2 classes, with \{TN, FN, FP, TP\} = \{true negatives, false negatives, false
+positives, true positives\}, we have the \tbfit{loss} or \tbfit{confusion matrix}:
 \begin{equation}
   \left(
     \begin{matrix}
@@ -224,23 +218,22 @@ matrix}:
     \end{matrix}
   \right),
 \end{equation}
-where the rows/columns are actual/predicted numbers of examples not-in-class
-(negative), or in-class (positive). We define the \tbfit{precision} and
-\tbfit{recall}:
+where the rows/columns are actual/predicted numbers of examples not-in-class (negative),
+or in-class (positive). We define the \tbfit{precision} and \tbfit{recall}:
 \begin{equation}
   \trm{precision} = \frac{\trm{TP}}{\trm{TP} + \trm{FP}}, \qquad
   \trm{recall} = \frac{\trm{TP}}{\trm{TP} + \trm{FN}}.
 \end{equation}
-\tbfit{Precision} is ability of classifier to not classify actual negatives as
-positive (\eie \emph{low} false positives). So \eeg if positive is ``person
-doesn't have cancer'', we want \emph{high precision}.
+\tbfit{Precision} is ability of classifier to not classify actual negatives as positive
+(\eie \emph{low} false positives). So \eeg if positive is ``person doesn't have
+cancer'', we want \emph{high precision}.
 
 \tbfit{Recall} is ability of classifer to find all positive samples.
 
 \subsubsection{Receiver operating characteristic curve (ROC)}
 \tbfit{True Positive Rate (TPR):} same as recall \\
-\tbfit{True Negative Rate (TNR):} fraction of actual negatives that are
-classified as negative $\trm{TN}/(\trm{TN} + \trm{FP})$
+\tbfit{True Negative Rate (TNR):} fraction of actual negatives that are classified as
+negative $\trm{TN}/(\trm{TN} + \trm{FP})$
 \tbfit{False Positive Rate (FPR):} 1 - TNR
 
 ROC plots TPR versus FPR.
@@ -260,14 +253,13 @@ $k$: number of model parameters
 \section{K-means}
 \label{sec:kmeans}
 \begin{itemize}
-  \item Setup: Select any $K$ points from data to serve as initial centroids of
-  the clusters.
-  \item Repeat until (stopping criteria: \eeg no points change clusters,
-  sum of distances is minimized, some total number of iterations..):
+  \item Setup: Select any $K$ points from data to serve as initial centroids of the
+  clusters.
+  \item Repeat until (stopping criteria: \eeg no points change clusters, sum of
+  distances is minimized, some total number of iterations..):
   \begin{enumerate}
     \item Assign each datapoint to the cluster with closest centroid.
-    \item Compute $K$ new centroids, each the mean of the datapoints in its
-    cluster.
+    \item Compute $K$ new centroids, each the mean of the datapoints in its cluster.
   \end{enumerate}
 \end{itemize}
 
@@ -276,21 +268,19 @@ $k$: number of model parameters
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{PCA}
 \label{sec:pca}
-PCA is unsupervised technique for finding directions of most variance in
-dataset. The \tbfit{principal components} are a set of $n$ orthonormal $n$-dim
-basis vects along the directions of maximum variance, ordered by decreasing
-variance in their directions.
+PCA is unsupervised technique for finding directions of most variance in dataset. The
+\tbfit{principal components} are a set of $n$ orthonormal $n$-dim basis vects along the
+directions of maximum variance, ordered by decreasing variance in their directions.
 \paragraph{To calc:}
 \begin{itemize}
-  \item \tbf{via eigenvectors:} Principal components of \emph{de-meaned}
-  $n \times m$ design matrix $\mbf{X}$ are the eigenvectors of the covariance
-  matrix of $\mbf{X}$, $\mbf{C_X} = \frac{1}{m}\mbf{XX}^T$.
-  \item \tbf{via SVD:} Define $\mbf{Y} = \frac{1}{\sqrt{m}}\mbf{X}^T$, and take
-  its SVD \ref{subsec:SVD}, which is $\mbf{Y} = \mbf{UWV}^T$. Then $\mbf{U}^T$
-  is $n \times m$ matrix that projects $\mbf{X}$ onto its principal components,
-  $\mbf{W}$ is the matrix of principal comp values, and $\mbf{V}$ is orthonormal
-  matrix of the principal components. \TODO{Verify/fix statement on \tbf{U}
-    projection.}
+  \item \tbf{via eigenvectors:} Principal components of \emph{de-meaned} $n \times m$
+  design matrix $\mbf{X}$ are the eigenvectors of the covariance matrix of $\mbf{X}$,
+  $\mbf{C_X} = \frac{1}{m}\mbf{XX}^T$.
+  \item \tbf{via SVD:} Define $\mbf{Y} = \frac{1}{\sqrt{m}}\mbf{X}^T$, and take its SVD
+  \ref{subsec:SVD}, which is $\mbf{Y} = \mbf{UWV}^T$. Then $\mbf{U}^T$ is $n \times m$
+  matrix that projects $\mbf{X}$ onto its principal components, $\mbf{W}$ is the matrix
+  of principal comp values, and $\mbf{V}$ is orthonormal matrix of the principal
+  components. \TODO{Verify/fix statement on \tbf{U} projection.}
 \end{itemize}
 
 
@@ -300,19 +290,19 @@ variance in their directions.
 \label{sec:timeseries}
 \subsection{Stationarity}
 
-\begin{definition}[Second Order Stationarity] is when correlation between
-  sequential observations is only a function of the lag.
+\begin{definition}[Second Order Stationarity] is when correlation between sequential
+  observations is only a function of the lag.
 \end{definition}
 
 \begin{itemize}
-  \item \tbf{Dickey-Fuller test:} tests for stationarity of AR model. Null
-  hypothesis is ``series is \tit{non-stationary}''.
+  \item \tbf{Dickey-Fuller test:} tests for stationarity of AR model. Null hypothesis is
+  ``series is \tit{non-stationary}''.
 \end{itemize}
 
 \subsection{ARCH}
 \begin{itemize}
-  \item{\tbf{Box-Jenkins:} systematic methodology for identifying and estimating
-    models that can incorporate both AR and MA.}
+  \item{\tbf{Box-Jenkins:} systematic methodology for identifying and estimating models
+    that can incorporate both AR and MA.}
 \end{itemize}
 
 
@@ -328,19 +318,19 @@ variance in their directions.
 \label{sec:nn}
 
 \subsection{Hyperparameters}
-Hypers: learning rate, num iteractions, num hidden layers, num units in each
-layer, choise of activation function, amout of momentum, minibatch size,
-regularization type and amount.
+Hypers: learning rate, num iteractions, num hidden layers, num units in each layer,
+choise of activation function, amout of momentum, minibatch size, regularization type
+and amount.
 
 \subsection{Bias/Variance}
 
-Bias/variance is less of a \tit{tradeoff} in neural network training, since we
-have a number of methods to reduce both independently.
+Bias/variance is less of a \tit{tradeoff} in neural network training, since we have a
+number of methods to reduce both independently.
 \begin{itemize}
-  \item \tbf{Reduce bias (train set perf):} Bigger network, train longer, (NN
-  arch search)
-  \item \tbf{Reduce variance (dev set perf):} More data, regularization.. (when
-  changed go back and retune bias)
+  \item \tbf{Reduce bias (train set perf):} Bigger network, train longer, (NN arch
+  search)
+  \item \tbf{Reduce variance (dev set perf):} More data, regularization.. (when changed
+  go back and retune bias)
 \end{itemize}
 
 
@@ -349,23 +339,23 @@ have a number of methods to reduce both independently.
 \label{sec:var_meth}
 \blue{\tbf{Preliminary section!}}
 
-If our prior is not a conjugate prior to our likelihood, we can't compute
-posterior in closed form. Try:
+If our prior is not a conjugate prior to our likelihood, we can't compute posterior in
+closed form. Try:
 
 \begin{itemize}
-  \item approximate intractable posterior $p(\vec{\theta} | \vec{y})$ with
-  tractable $q(\vec{\theta} | \gamma)$.
+  \item approximate intractable posterior $p(\vec{\theta} | \vec{y})$ with tractable
+  $q(\vec{\theta} | \gamma)$.
   \item Adjust $\gamma$ to minimize
   $KL \big[p(\vec{\theta} | \vec{y}) || q(\vec{\theta} | \gamma)\big]$ $\to\,$
-  complicated, since we don't know $p(\vec{\theta} | \vec{y})$. Eventually will
-  use \tbfit{Expectation Propagation} to solve.
+  complicated, since we don't know $p(\vec{\theta} | \vec{y})$. Eventually will use
+  \tbfit{Expectation Propagation} to solve.
   \item Adjust $\gamma$ to minimize
-  $KL \big[q(\vec{\theta} | \gamma) || p(\vec{\theta} | \vec{y})\big]$ $\to\,$
-  simpler: \tbfit{Variational Bayes}.
-  \item \tbf{Variational Bayes}: minimizing $KL \big[q(\vec{\theta} | \gamma) ||
-  p(\vec{\theta} | \vec{y})\big]$ $\iff$ maximizing ELBO $\mathcal{L}$
-  \item note the \emph{latent/hidden variables} helping us are the
-  $\vec{\theta}$
+  $KL \big[q(\vec{\theta} | \gamma) || p(\vec{\theta} | \vec{y})\big]$ $\to\,$ simpler:
+  \tbfit{Variational Bayes}.
+  \item \tbf{Variational Bayes}: minimizing
+  $KL \big[q(\vec{\theta} | \gamma) || p(\vec{\theta} | \vec{y})\big]$ $\iff$ maximizing
+  ELBO $\mathcal{L}$
+  \item note the \emph{latent/hidden variables} helping us are the $\vec{\theta}$
 \end{itemize}
 
 
@@ -406,8 +396,8 @@ posterior in closed form. Try:
 \subsubsection{Partitioned Gaussians: Conditional and Marginal Distributions}
 From BISHOP, sections 2.3.1 - 2.3.2.
 
-Consider a joint Gaussian distribution, $\mathcal{N}(\vec{x} | \vec{\mu}, \bms{\Sigma})$ with
-$\bms{\Lambda} \equiv \bms{\Sigma}^{-1}$ and
+Consider a joint Gaussian distribution, $\mathcal{N}(\vec{x} | \vec{\mu}, \bms{\Sigma})$
+with $\bms{\Lambda} \equiv \bms{\Sigma}^{-1}$ and
 \begin{equation}
   \vec{x} =
   \left(
@@ -444,7 +434,7 @@ $\bms{\Lambda} \equiv \bms{\Sigma}^{-1}$ and
   \right).
 \end{equation}
 (That is, the vector $\vec{x}$ is partitioned into $\vec{x}_a$ and $\vec{x}_b$, which
-induces a block partitioning of the covariance matrixx $\bms{\Sigma}$.)
+induces a block partitioning of the covariance matrix $\bms{\Sigma}$.)
 
 The \tit{conditional distribution} is:
 \begin{align}
@@ -462,8 +452,8 @@ The \tit{marginal distribution} is:
 \subsubsection{Bayes' theorem for Gaussian variables}
 From BISHOP, section 2.3.3. NB This is known as a \tit{linear Gaussian model}.
 
-Given a marginal Gaussian distribution for $\vec{x}$ and a conditional Gaussian distribution
-for $\vec{y}$ given $\vec{x}$ in the form:
+Given a marginal Gaussian distribution for $\vec{x}$ and a conditional Gaussian
+distribution for $\vec{y}$ given $\vec{x}$ in the form:
 \begin{align}
   p(\vec{x})         &= \mathcal{N}(\vec{x} | \vec{\mu}, \bms{\Lambda}^{-1}) \\
   p(\vec{y}|\vec{x}) &= \mathcal{N}(\vec{y} | \mbf{A} \vec{x} + \vec{b}, \mbf{L}^{-1}),
