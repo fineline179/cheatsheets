@@ -33,6 +33,7 @@
 \DeclareOption{no-natbib-sort}{\natbibsortfalse}
 \ProcessOptions\relax
 
+
 \RequirePackage{amsmath}
 \RequirePackage{amssymb}
 \RequirePackage{epsfig}
@@ -341,6 +342,13 @@
                                    {-1em}%
                                    {\normalfont\normalsize\bfseries}}
 
+% Set table of contents font to sans serif
+% (comment this block to go back to normal ToC style) 
+\RequirePackage{tocloft}                                 
+\renewcommand{\cfttoctitlefont}{\bfseries\sffamily\large}
+\renewcommand{\cftsecfont}{\bfseries\sffamily\small}
+\renewcommand{\cftsubsecfont}{\sffamily\small}
+\renewcommand{\cftsubsubsecfont}{\sffamily\small}
 
 %Caption of figure and table
 \def\fnum@figure{\textbf{\figurename\nobreakspace\thefigure}}
