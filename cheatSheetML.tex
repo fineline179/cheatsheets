@@ -26,6 +26,7 @@
   $\propto$ : ``proportional to''
   \item $\mbf{1}$($\cdot$) : indicator function --- 1 when arg is true, 0 when arg is
   false.
+  \item $\mbf{I}_k$: $k \times k$ identity matrix
   \item Boldface capital letters are matrices, \eeg $\mA = \mU \mW \mV^T$
   \item $\log$ is base $e$ by default $\to$ entropy in nats.
 \end{itemize}
@@ -310,6 +311,102 @@ directions of maximum variance, ordered by decreasing variance in their directio
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Gaussian Processes}
 \label{sec:gp}
+\subsection{Prior over functions, from basis functions}
+Following the treatment in section 6.4 of BISHOP (with different notation than above).
+
+Let $d$ be the number of \emph{basis functions} $\vec \phi$, which are non-linear
+functions of the $n$ dimensional training examples $\vec x$. We write the hypothesis as
+\begin{equation}
+  y(\vec x) = \vec w^T \vec \phi(\vec x)
+\end{equation}
+where $\vec w$ is a $d$ dimensional vector of weights.
+
+As in MAP and Bayesian linear regression, we introduce a isotropic Gaussian prior over
+the weights, with $\alpha$ its inverse variance:
+\begin{equation}
+  p(\vec w) = \mathcal{N}(\vec w | \vec 0, \alpha^{-1} \mbf{I}_d)
+\end{equation}
+The prior over $\vec w$ thus induces a prior over \emph{functions} $y(\vec x)$.
+
+The design matrix is now $\mbbb{X} \in \mbb{R}^{m \times\, d}$, so the hypothesis
+evaluated on our training examples is an $m$ dim vector
+\begin{equation}
+  \vec y = \mbbb{X} \vec w
+\end{equation}
+Each element of $\vec y$ is linear combination of Gaussians (given by the $\vec w$
+prior), where the weights in the linear combination come from elements of the design
+matrix. Thus the vector $\vec y$ itself is a multivariate Gaussian, completely specified
+by its mean vector and covariance matrix.
+\begin{align}
+  \mathbb{E}[\vec y]   &= \mbbb{X}\, \mathbb{E}[\vec w] = \vec 0 \\
+  \textrm{cov}[\vec y] &= \mathbb{E}[\vec y \vec y^T]
+                         = \mbbb{X}\, \mathbb{E}[\vec w \vec w^T]\, \mbbb{X}^T
+                         = \alpha^{-1} \mbbb{X}\, \mbbb{X}^T
+                         \equiv \mbf{K}
+\end{align}
+where $\mbf{K}$ is the $m \times m$ \emph{Gram matrix} with elements
+\begin{equation}
+  \mbf{K}_{ij} \equiv k(\vec x_i, \vec x_j) = \alpha^{-1} \vec \phi(\vec x_i)^T\, \vec
+  \phi(\vec x_j).
+\end{equation}
+Our prior over functions is then
+\begin{equation}
+  p(\vec y) = \mathcal{N}(\vec y | \vec 0, \mbf{K})
+\end{equation}
+
+\subsection{Basic Gaussian process regression}
+For regression, we assume our target variables are given by the hypothesis $\vec y$ with
+added Gaussian noise
+\begin{equation}
+  p(t_i | y_i) = \mathcal{N}(t_i | y_i, \beta^{-1}) \qquad 1 \leq i \leq m
+\end{equation}
+where $\beta$ is the inverse variance of the Gaussian, and the noise is i.i.d for each
+training example. The $m$ dim vector of target variables is then given by a multivariate
+Gaussian
+\begin{equation}
+  p(\vec t | \vec y) = \mathcal{N}(\vec t | \vec y, \beta^{-1} \mbf{I}_m)
+\end{equation}
+To get the joint distribution $p(\vec t)$ over all the target variables, we integrate
+out $\vec y$ via \ref{eq:gauss_bayes_marg}, analagous to how we integrate out the
+weights $\vec w$ in Bayesian regression,
+\begin{equation}
+  p(\vec t) = \int p(\vec t | \vec y) p(\vec y) d\vec y =
+  \mathcal{N}(\vec t | \vec 0, \mbf{C})
+\end{equation}
+where $\mbf{C}$ is $m \times m$ with elements
+$\mbf{C}_{ij} = \mbf{K}_{ij} + \beta^{-1} \delta_{ij}$.
+
+To make a prediction based on the $m$ training examples, we form the joint distribution
+over $m+1$ examples,
+\begin{equation}
+  \mathcal{N}(\vec t_{m+1} | \vec 0, \mbf{C}_{m+1})
+\end{equation}
+with the $(m+1) \times (m+1)$ matrix $\mbf{C}_{m+1}$ partitioned as
+\begin{equation}
+  \mbf{C}_{m+1} = 
+  \left(
+    \begin{matrix}
+      \mbf{C}_m & \vec k\\
+      \vec k^T  & c
+    \end{matrix}
+  \right),
+\end{equation}
+where
+\begin{itemize}
+  \item $\mbf{C}_m$ is $m \times m$ with elements $\mbf{C}_{ij} = \mbf{K}_{ij} +
+  \beta^{-1} \delta_{ij}$
+  \item $\vec k$ has elements $k(\vec x_i, \vec x_{m+1})$ for $1 \leq i \leq m$
+  \item $c = k(\vec x_{m+1}, \vec x_{m+1}) + \beta^{-1}$
+\end{itemize}
+
+The conditional distribution $p(t_{m+1} | \vec t)$ is then given by a Gaussian with
+\begin{align}
+  m(\vec x_{m+1}) &= \vec k^T \mbf{C}_m^{-1}\, \vec t\\
+  \sigma^2 (\vec x_{m+1}) &= c - \vec k^T \mbf{C}_m^{-1}\, \vec k.
+\end{align}
+which we obtain by using \ref{eq:gauss_part_cond}. \TODO{check this to make sure it's
+  the right eq.}
+
 
 
 
@@ -441,12 +538,13 @@ The \tit{conditional distribution} is:
   p(\vec{x}_a | \vec{x}_b) &= \mathcal{N}(\vec{x} | \vec{\mu}_{a | b},
                               \mLambda_{aa}^{-1}) \\ 
   \vec{\mu}_{a | b}        &= \vec{\mu}_a - \mLambda_{aa}^{-1} \mLambda_{ab}
-                              (\vec{x}_b - \vec{\mu}_b) 
+                              (\vec{x}_b - \vec{\mu}_b)   \label{eq:gauss_part_cond} 
 \end{align}
 
 The \tit{marginal distribution} is:
 \begin{equation}
-  p(\vec{x}_a) = \mathcal{N}(\vec{x}_a | \vec{\mu}_a, \mSigma_{aa})
+  p(\vec{x}_a) = \mathcal{N}(\vec{x}_a | \vec{\mu}_a,
+  \mSigma_{aa}) \label{eq:gauss_part_marg} 
 \end{equation}
 
 \subsubsection{Bayes' theorem for Gaussian variables}
@@ -461,9 +559,10 @@ distribution for $\vec{y}$ given $\vec{x}$ in the form:
 we have
 \begin{align}
   p(\vec{y})         &= \mathcal{N} (\vec{y} |\mA \vec{\mu} + \vec{b}, \mL^{-1}
-                        + \mA \mLambda^{-1} \mA^T ) \\
+                        + \mA \mLambda^{-1} \mA^T )   \label{eq:gauss_bayes_marg} \\
   p(\vec{x}|\vec{y}) &= \mathcal{N} ( \vec{x} | \mSigma \{ \mA^T \mL
-                        (\vec{y} - \vec{b}) + \mLambda \vec{\mu} \}, \mSigma)
+                        (\vec{y} - \vec{b}) + \mLambda \vec{\mu} \},
+                       \mSigma)   \label{eq:gauss_bayes_cond} 
 \end{align}
 where
 \begin{equation}
