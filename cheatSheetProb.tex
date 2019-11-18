@@ -24,13 +24,26 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Distributions}
 \subsection{Gaussians}
-To start with, remember that
-\begin{equation}
-  \int_{-\infty}^{\infty} dx \, e^{-\alpha x^2} = \left(\frac{\pi}{\alpha}\right)^{1/2},
-  \qquad \alpha = \frac{1}{2 \sigma^2} 
-\end{equation}
 
-\noindent where $\sigma^2$ is the variance of a Gaussian distribution.
+\begin{enumerate}
+  \item To start with, \emph{memorize} that
+  \begin{equation}
+    \boxed{\int_{-\infty}^{\infty} dx \, e^{-x^2} = \sqrt{\pi}}
+  \end{equation}
+
+  \item Next, anything multiplying the $x^2$ in the integrand is present in inverse
+  under the square root.
+  \begin{equation}
+    \int_{-\infty}^{\infty} dx \, e^{-\textrm{stuff}\, x^2} =
+    \sqrt{\frac{\pi}{\textrm{stuff}}}
+  \end{equation}
+  so, for example:
+  \begin{equation}
+    \int_{-\infty}^{\infty} dx \, e^{-\frac{1}{2} a x^2} =
+    \sqrt{\frac{2 \pi}{a}}
+  \end{equation}
+
+\end{enumerate}
 
 \subsection{Bernoulli}
 For $x \in \{0, 1\}$, Bernoulli dist parametrized by $\mu$, with

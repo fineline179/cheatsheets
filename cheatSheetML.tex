@@ -26,7 +26,7 @@
   $\propto$ : ``proportional to''
   \item $\mbf{1}$($\cdot$) : indicator function --- 1 when arg is true, 0 when arg is
   false.
-  \item Boldface capital letters are matrices, \eeg $\mA = \mU \mW \mV^\top$
+  \item Boldface capital letters are matrices, \eeg $\mA = \mU \mW \mV^T$
   \item $\log$ is base $e$ by default $\to$ entropy in nats.
 \end{itemize}
 
@@ -55,7 +55,7 @@
 \begin{itemize}
   \item Hypothesis
   $h_\theta(x) = \theta_0 + \theta_1 x_1 + \theta_2 x_2 + \dots = \sum_{j=0}^{n}
-  \theta_j x_j \equiv \theta^\top x$, where $x_0 = 1$.
+  \theta_j x_j \equiv \theta^T x$, where $x_0 = 1$.
   \item Cost function
   \begin{equation}
     J(\theta) = \frac{1}{2} \sum_{i=1}^m \left(h_\theta(x^{(i)}) - y^{(i)}\right)^2
@@ -63,7 +63,7 @@
   \item Analytically solve via normal equations, where $\mX$ is the augmented
   $(n+1) \times m$ design matrix
   \begin{equation}
-    \vec{\theta} = \left(\mX \mX^\top\right)^{-1} \mX\, \vec{y}
+    \vec{\theta} = \left(\mX \mX^T \right)^{-1} \mX\, \vec{y}
   \end{equation}
   where $\vec{\theta}$ and $\vec{y}$ are column vectors of the $n+1$ weights and $m$
   outputs, respectively.
@@ -78,7 +78,7 @@
 With 2 labels $y \in \{0,1\}$ and $m$ training examples $x^{(i)},\ \ 1 \leq i \leq m$,
 we have
 \begin{equation}
-  h_\theta (x) = \frac{1}{1 + e^{-\theta^\top x}}
+  h_\theta (x) = \frac{1}{1 + e^{-\theta^T x}}
 \end{equation}
 \begin{equation}
   p(y|x;\theta) = (h_\theta (x))^y (1 - h_\theta (x))^{1-y}
@@ -93,7 +93,7 @@ we have
 \end{equation}
 with deriv
 \begin{equation}
-  \frac{\partial}{\partial \theta_j} l(\theta) = x_j^\top (y - h_\theta (x))
+  \frac{\partial}{\partial \theta_j} l(\theta) = x_j^T (y - h_\theta (x))
 \end{equation}
 We can't minimize the log-likelihood analytically, so we must use numerical
 optimization.
@@ -116,7 +116,7 @@ distribution. For $k$ classes, hypothesis is $k$-dim vector
   h_\theta (x) = \frac{1}{\sum_{l=1}^k \exp(\theta^{(l)T} x)} \times
   \big[\exp(\theta^{(1)T} x), \dots, \exp(\theta^{(k)T} x)\big] 
 \end{equation}
-The log-likelihood is
+so that the final output layer has $k$ units. The log-likelihood is
 \begin{equation}
   l(\theta) = - \sum_{i=1}^m \sum_{l=1}^k \mbf{1}(y^{(i)} = l)
   \log \frac{\exp(\theta^{(l)T} x)}{\sum_{m=1}^k \exp(\theta^{(m)T} x)} 
@@ -275,9 +275,9 @@ directions of maximum variance, ordered by decreasing variance in their directio
 \begin{itemize}
   \item \tbf{via eigenvectors:} Principal components of \emph{de-meaned} $n \times m$
   design matrix $\mX$ are the eigenvectors of the covariance matrix of $\mX$,
-  $\mbf{C_X} = \frac{1}{m}\mX\mX^\top$.
-  \item \tbf{via SVD:} Define $\mY = \frac{1}{\sqrt{m}} \mX^\top$, and take its SVD
-  \ref{subsec:SVD}, which is $\mY = \mU \mW \mV^\top$. Then $\mU^\top$ is $n \times m$
+  $\mbf{C_X} = \frac{1}{m} \mX \mX^T$.
+  \item \tbf{via SVD:} Define $\mY = \frac{1}{\sqrt{m}} \mX^T$, and take its SVD
+  \ref{subsubsec:SVD}, which is $\mY = \mU \mW \mV^T$. Then $\mU^T$ is $n \times m$
   matrix that projects $\mX$ onto its principal components, $\mW$ is the matrix of
   principal comp values, and $\mV$ is orthonormal matrix of the principal
   components. \TODO{Verify/fix statement on $\mU$ projection.}
@@ -461,23 +461,35 @@ distribution for $\vec{y}$ given $\vec{x}$ in the form:
 we have
 \begin{align}
   p(\vec{y})         &= \mathcal{N} (\vec{y} |\mA \vec{\mu} + \vec{b}, \mL^{-1}
-                        + \mA \mLambda^{-1} \mA^\top ) \\
-  p(\vec{x}|\vec{y}) &= \mathcal{N} ( \vec{x} | \mSigma \{ \mA^\top \mL
+                        + \mA \mLambda^{-1} \mA^T ) \\
+  p(\vec{x}|\vec{y}) &= \mathcal{N} ( \vec{x} | \mSigma \{ \mA^T \mL
                         (\vec{y} - \vec{b}) + \mLambda \vec{\mu} \}, \mSigma)
 \end{align}
 where
 \begin{equation}
-  \mSigma \equiv \left(\mLambda + \mA^\top \mL \mA \right)^{-1}
+  \mSigma \equiv \left(\mLambda + \mA^T \mL \mA \right)^{-1}
 \end{equation}
 
 
-\subsection{Singular value decomposition}
-\label{subsec:SVD}
-An $M \times N$ matrix $\mA$ can be written as $\mU\mW\mV^\top$, where $\mU$ is
-$M \times N$, $\mW$ is $N \times N$ and diagonal, and $\mV$ is $N \times N$ and
-orthonormal.
+\subsection{Matrix Factorization}
+\subsubsection{Diagonalization (Eigendecomposition)}
+\label{subsubsec:matrix}
+A square $N \times N$ symmetric matrix $\mA$ has real eigenvalues from its symmetricity,
+and $N$ linearly independent eigenvectors. We can write
+$\mA = \mO \mD \mO^{-1} = \mO \mD \mO^T$, with $\mO$ an orthogonal\footnote{An
+  \emph{orthogonal} matrix should really be called an \emph{orthonormal} matrix, as its
+  columns are linearly indepdendent, but also normalized.} matrix with columns equal to
+$\mA$'s eigenvectors, and $\mD$ a diagonal matrix of $\mA$'s eigenvalues.
 
-If $\mA$ is square, $\mV$ are its eigenvectors, and $\mW$ are its eigenvalues...
+
+\subsubsection{Singular value decomposition}
+\label{subsubsec:SVD}
+An $M \times N$ matrix $\mA$ can be written as $\mU \mD \mV^T$, where $\mU$ is
+$M \times N$, $\mD$ is $N \times N$ and diagonal, and $\mV$ is $N \times N$ and
+orthogonal.
+
+If $\mA$ is square, the columns of $\mV$ are its eigenvectors, and $\mD$ are its
+eigenvalues.
 
 \tbf{Uses}:
 \begin{itemize}
@@ -490,12 +502,12 @@ If $\mA$ is square, $\mV$ are its eigenvectors, and $\mW$ are its eigenvalues...
 \subsection{Matrix derivatives}
 
 \begin{equation}
-  \frac{\partial}{\partial \vec{x}} \left( \vec{x}^{\top} \vec{a} \right) =
-  \frac{\partial}{\partial \vec{x}} \left( \vec{a}^{\top} \vec{x} \right) =
+  \frac{\partial}{\partial \vec{x}} \left( \vec{x}^T \vec{a} \right) =
+  \frac{\partial}{\partial \vec{x}} \left( \vec{a}^T \vec{x} \right) =
   \vec{a} 
 \end{equation}
 
-\TODO{review understanding of this (I recall this expression not enough to answer my
+\TODO{review understanding of this (I recall this expression was not enough to answer my
   questions on a formula derivation) and give examples.}
 
 
@@ -507,7 +519,7 @@ Linear regression starting from maximum likelihood, through variational Bayes.
 Maximize likelihood $p(y | \theta ; \beta)$ wrt $\theta$, $\beta$.
 
 \subsection{Maximum a posteriori}
-Introduce prior $p(\theta ; \alpha) = \exp(-\alpha \theta^\top \theta)$. Find $\theta$
+Introduce prior $p(\theta ; \alpha) = \exp(-\alpha \theta^T \theta)$. Find $\theta$
 by maximizing $p(y | \theta ; \beta) p(\theta ; \alpha)$ wrt $\theta$.
 \\
 Q: what is proper way to estimate $\beta$ and $\alpha$ here?
