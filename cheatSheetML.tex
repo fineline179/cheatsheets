@@ -1,4 +1,4 @@
-%% Machine Learning cheat sheet
+% Machine Learning cheat sheet
 %% (compile with XeTeX. see notes in structure_cheatSheet.tex if no XeTeX.)
 
 \documentclass[11pt]{article}
@@ -64,9 +64,9 @@
   \item Analytically solve via normal equations, where $\mX$ is the augmented
   $(n+1) \times m$ design matrix
   \begin{equation}
-    \vec{\theta} = \left(\mX \mX^T \right)^{-1} \mX\, \vec{y}
+    \v{\theta} = \left(\mX \mX^T \right)^{-1} \mX\, \v{y}
   \end{equation}
-  where $\vec{\theta}$ and $\vec{y}$ are column vectors of the $n+1$ weights and $m$
+  where $\v{\theta}$ and $\v{y}$ are column vectors of the $n+1$ weights and $m$
   outputs, respectively.
 \end{itemize}
 
@@ -86,7 +86,7 @@ we have
 \end{equation}
 \begin{equation}
   L(\theta) = \prod_{i=1}^m (h_\theta (x^{(i)}))^{y^{(i)}} (1 - h_\theta
-  (x^{(i)}))^{1-y^{(i)}} 
+  (x^{(i)}))^{1-y^{(i)}}
 \end{equation}
 \begin{equation}
   l(\theta) = \log L(\theta) = \sum_{i=1}^m y^{(i)} \log h_\theta (x^{(i)}) + (1 -
@@ -315,48 +315,48 @@ directions of maximum variance, ordered by decreasing variance in their directio
 \subsection{Prior over functions, from basis functions}
 Following the treatment in section 6.4 of BISHOP (with different notation than above).
 
-Let $d$ be the number of \emph{basis functions} $\vec \phi$, which are non-linear
-functions of the $n$ dimensional training examples $\vec x$. We write the hypothesis as
+Let $d$ be the number of \emph{basis functions} $\v{\phi}$, which are non-linear
+functions of the $n$ dimensional training examples $\v{x}$. We write the hypothesis as
 \begin{equation}
-  y(\vec x) = \vec w^T \vec \phi(\vec x)
+  y(\v{x}) = \v{w}^T \v{\phi}(\v{x})
 \end{equation}
-where $\vec w$ is a $d$ dimensional vector of weights.
+where $\v{w}$ is a $d$ dimensional vector of weights.
 
 As in MAP and Bayesian linear regression, we introduce a isotropic Gaussian prior over
 the weights, with $\alpha$ its inverse variance:
 \begin{equation}
-  p(\vec w) = \mathcal{N}(\vec w | \vec 0, \alpha^{-1} \mbf{I}_d)
+  p(\v{w}) = \mathcal{N}(\v{w} | \v{0}, \alpha^{-1} \mbf{I}_d)
 \end{equation}
-The prior over $\vec w$ thus induces a prior over \emph{functions} $y(\vec x)$.
+The prior over $\v{w}$ thus induces a prior over \emph{functions} $y(\v{x})$.
 
 The design matrix is now $\mbbb{X} \in \mbb{R}^{m \times\, d}$, so the hypothesis
 evaluated on our training examples is an $m$ dim vector
 \begin{equation}
-  \vec y = \mbbb{X} \vec w
+  \v{y} = \mbbb{X} \v{w}
 \end{equation}
-Each element of $\vec y$ is linear combination of Gaussians (given by the $\vec w$
-prior), where the weights in the linear combination come from elements of the design
-matrix. Thus the vector $\vec y$ itself is a multivariate Gaussian, completely specified
+Each element of $\v{y}$ is linear combination of Gaussians (given by the $\v{w}$ prior),
+where the weights in the linear combination come from elements of the design
+matrix. Thus the vector $\v{y}$ itself is a multivariate Gaussian, completely specified
 by its mean vector and covariance matrix.
 \begin{align}
-  \mathbb{E}[\vec y]   &= \mbbb{X}\, \mathbb{E}[\vec w] = \vec 0 \\
-  \textrm{cov}[\vec y] &= \mathbb{E}[\vec y \vec y^T]
-                         = \mbbb{X}\, \mathbb{E}[\vec w \vec w^T]\, \mbbb{X}^T
+  \mathbb{E}[\v{y}]   &= \mbbb{X}\, \mathbb{E}[\v{w}] = \v{0} \\
+  \textrm{cov}[\v{y}] &= \mathbb{E}[\v{y} \v{y}^T]
+                         = \mbbb{X}\, \mathbb{E}[\v{w} \v{w}^T]\, \mbbb{X}^T
                          = \alpha^{-1} \mbbb{X}\, \mbbb{X}^T
                          \equiv \mbf{K}
 \end{align}
 where $\mbf{K}$ is the $m \times m$ \emph{Gram matrix} with elements
 \begin{equation}
-  \mbf{K}_{ij} \equiv k(\vec x_i, \vec x_j) = \alpha^{-1} \vec \phi(\vec x_i)^T\, \vec
-  \phi(\vec x_j).
+  \mbf{K}_{ij} \equiv k(\v{x}_i, \v{x}_j) = \alpha^{-1} \v{\phi}(\v{x}_i)^T\,
+  \v{\phi}(\v{x}_j). 
 \end{equation}
 Our prior over functions is then
 \begin{equation}
-  p(\vec y) = \mathcal{N}(\vec y | \vec 0, \mbf{K})
+  p(\v{y}) = \mathcal{N}(\v{y} | \v{0}, \mbf{K})
 \end{equation}
 
 \subsection{Basic Gaussian process regression}
-For regression, we assume our target variables are given by the hypothesis $\vec y$ with
+For regression, we assume our target variables are given by the hypothesis $\v{y}$ with
 added Gaussian noise
 \begin{equation}
   p(t_i | y_i) = \mathcal{N}(t_i | y_i, \beta^{-1}) \qquad 1 \leq i \leq m
@@ -365,14 +365,13 @@ where $\beta$ is the inverse variance of the Gaussian, and the noise is i.i.d fo
 training example. The $m$ dim vector of target variables is then given by a multivariate
 Gaussian
 \begin{equation}
-  p(\vec t | \vec y) = \mathcal{N}(\vec t | \vec y, \beta^{-1} \mbf{I}_m)
+  p(\v{t} | \v{y}) = \mathcal{N}(\v{t} | \v{y}, \beta^{-1} \mbf{I}_m)
 \end{equation}
-To get the joint distribution $p(\vec t)$ over all the target variables, we integrate
-out $\vec y$ via \ref{eq:gauss_bayes_marg}, analagous to how we integrate out the
-weights $\vec w$ in Bayesian regression,
+To get the joint distribution $p(\v{t})$ over all the target variables, we integrate out
+$\v{y}$ via \ref{eq:gauss_bayes_marg}, analagous to how we integrate out the weights
+$\v{w}$ in Bayesian regression,
 \begin{equation}
-  p(\vec t) = \int p(\vec t | \vec y) p(\vec y) d\vec y =
-  \mathcal{N}(\vec t | \vec 0, \mbf{C})
+  p(\v{t}) = \int p(\v{t} | \v{y}) p(\v{y}) d\v{y} = \mathcal{N}(\v{t} | \v{0}, \mbf{C})
 \end{equation}
 where $\mbf{C}$ is $m \times m$ with elements
 $\mbf{C}_{ij} = \mbf{K}_{ij} + \beta^{-1} \delta_{ij}$.
@@ -380,30 +379,30 @@ $\mbf{C}_{ij} = \mbf{K}_{ij} + \beta^{-1} \delta_{ij}$.
 To make a prediction based on the $m$ training examples, we form the joint distribution
 over $m+1$ examples,
 \begin{equation}
-  \mathcal{N}(\vec t_{m+1} | \vec 0, \mbf{C}_{m+1})
+  \mathcal{N}(\v{t}_{m+1} | \v{0}, \mbf{C}_{m+1})
 \end{equation}
 with the $(m+1) \times (m+1)$ matrix $\mbf{C}_{m+1}$ partitioned as
 \begin{equation}
   \mbf{C}_{m+1} = 
   \left(
     \begin{matrix}
-      \mbf{C}_m & \vec k\\
-      \vec k^T  & c
+      \mbf{C}_m & \v{k}\\
+      \v{k}^T   & c
     \end{matrix}
   \right),
 \end{equation}
 where
 \begin{itemize}
-  \item $\mbf{C}_m$ is $m \times m$ with elements $\mbf{C}_{ij} = \mbf{K}_{ij} +
-  \beta^{-1} \delta_{ij}$
-  \item $\vec k$ has elements $k(\vec x_i, \vec x_{m+1})$ for $1 \leq i \leq m$
-  \item $c = k(\vec x_{m+1}, \vec x_{m+1}) + \beta^{-1}$
+  \item $\mbf{C}_m$ is $m \times m$ with elements
+  $\mbf{C}_{ij} = \mbf{K}_{ij} + \beta^{-1} \delta_{ij}$
+  \item $\v{k}$ has elements $k(\v{x}_i, \v{x}_{m+1})$ for $1 \leq i \leq m$
+  \item $c = k(\v{x}_{m+1}, \v{x}_{m+1}) + \beta^{-1}$
 \end{itemize}
 
-The conditional distribution $p(t_{m+1} | \vec t)$ is then given by a Gaussian with
+The conditional distribution $p(t_{m+1} | \v{t})$ is then given by a Gaussian with
 \begin{align}
-  m(\vec x_{m+1}) &= \vec k^T \mbf{C}_m^{-1}\, \vec t\\
-  \sigma^2 (\vec x_{m+1}) &= c - \vec k^T \mbf{C}_m^{-1}\, \vec k.
+  m(\v{x}_{m+1})         &= \v{k}^T \mbf{C}_m^{-1}\, \v{t}\\
+  \sigma^2 (\v{x}_{m+1}) &= c - \v{k}^T \mbf{C}_m^{-1}\, \v{k}.
 \end{align}
 which we obtain by using \ref{eq:gauss_part_cond}.
 
@@ -441,19 +440,19 @@ If our prior is not a conjugate prior to our likelihood, we can't compute poster
 closed form. Try:
 
 \begin{itemize}
-  \item approximate intractable posterior $p(\vec{\theta} | \vec{y})$ with tractable
-  $q(\vec{\theta} | \gamma)$.
+  \item approximate intractable posterior $p(\v{\theta} | \v{y})$ with tractable
+  $q(\v{\theta} | \gamma)$.
   \item Adjust $\gamma$ to minimize
-  $KL \big[p(\vec{\theta} | \vec{y}) || q(\vec{\theta} | \gamma)\big]$ $\to\,$
-  complicated, since we don't know $p(\vec{\theta} | \vec{y})$. Eventually will use
-  \tbfit{Expectation Propagation} to solve.
+  $KL \big[p(\v{\theta} | \v{y}) || q(\v{\theta} | \gamma)\big]$ $\to\,$ complicated,
+  since we don't know $p(\v{\theta} | \v{y})$. Eventually will use \tbfit{Expectation
+    Propagation} to solve.
   \item Adjust $\gamma$ to minimize
-  $KL \big[q(\vec{\theta} | \gamma) || p(\vec{\theta} | \vec{y})\big]$ $\to\,$ simpler:
+  $KL \big[q(\v{\theta} | \gamma) || p(\v{\theta} | \v{y})\big]$ $\to\,$ simpler:
   \tbfit{Variational Bayes}.
   \item \tbf{Variational Bayes}: minimizing
-  $KL \big[q(\vec{\theta} | \gamma) || p(\vec{\theta} | \vec{y})\big]$ $\iff$ maximizing
-  ELBO $\mathcal{L}$
-  \item note the \emph{latent/hidden variables} helping us are the $\vec{\theta}$
+  $KL \big[q(\v{\theta} | \gamma) || p(\v{\theta} | \v{y})\big]$ $\iff$ maximizing ELBO
+  $\mathcal{L}$
+  \item note the \emph{latent/hidden variables} helping us are the $\v{\theta}$
 \end{itemize}
 
 
@@ -478,8 +477,8 @@ closed form. Try:
     =
     \left(
       \begin{matrix}
-        \mM & - \mM \mB \mD^{-1} \\
-        - \mD^{-1} \mC \mM \quad & \mD^{-1} + \mD^{-1} \mC \mM \mB \mD^{-1}
+        \mM                     & - \mM \mB \mD^{-1} \\
+        -\mD^{-1} \mC \mM \quad & \mD^{-1} + \mD^{-1} \mC \mM \mB \mD^{-1}
       \end{matrix}
     \right),
   \end{equation}
@@ -494,22 +493,22 @@ closed form. Try:
 \subsubsection{Partitioned Gaussians: Conditional and Marginal Distributions}
 From BISHOP, sections 2.3.1 - 2.3.2.
 
-Consider a joint Gaussian distribution, $\mathcal{N}(\vec{x} | \vec{\mu}, \mSigma)$ with
+Consider a joint Gaussian distribution, $\mathcal{N}(\v{x} | \v{\mu}, \mSigma)$ with
 $\mLambda \equiv \mSigma^{-1}$ and
 \begin{equation}
-  \vec{x} =
+  \v{x} =
   \left(
     \begin{matrix}
-      \vec{x}_a \\
-      \vec{x}_b
+      \v{x}_a \\
+      \v{x}_b
     \end{matrix}
   \right)
   , \quad
-  \vec{\mu} =
+  \v{\mu} =
   \left(
     \begin{matrix}
-      \vec{\mu}_a \\
-      \vec{\mu}_b
+      \v{\mu}_a \\
+      \v{\mu}_b
     \end{matrix}
   \right)
 \end{equation}
@@ -531,39 +530,38 @@ $\mLambda \equiv \mSigma^{-1}$ and
     \end{matrix}
   \right).
 \end{equation}
-(That is, the vector $\vec{x}$ is partitioned into $\vec{x}_a$ and $\vec{x}_b$, which
+(That is, the vector $\v{x}$ is partitioned into $\v{x}_a$ and $\v{x}_b$, which
 induces a block partitioning of the covariance matrix $\mSigma$.)
 
 The \tit{conditional distribution} is:
 \begin{align}
-  p(\vec{x}_a | \vec{x}_b) &= \mathcal{N}(\vec{x} | \vec{\mu}_{a | b},
-                              \mLambda_{aa}^{-1}) \\ 
-  \vec{\mu}_{a | b}        &= \vec{\mu}_a - \mLambda_{aa}^{-1} \mLambda_{ab}
-                              (\vec{x}_b - \vec{\mu}_b)   \label{eq:gauss_part_cond} 
+  p(\v{x}_a | \v{x}_b) &= \mathcal{N}(\v{x} | \v{\mu}_{a | b},
+                         \mLambda_{aa}^{-1}) \\ 
+  \v{\mu}_{a | b}      &= \v{\mu}_a - \mLambda_{aa}^{-1} \mLambda_{ab}
+                         (\v{x}_b - \v{\mu}_b)   \label{eq:gauss_part_cond} 
 \end{align}
 
 The \tit{marginal distribution} is:
 \begin{equation}
-  p(\vec{x}_a) = \mathcal{N}(\vec{x}_a | \vec{\mu}_a,
-  \mSigma_{aa}) \label{eq:gauss_part_marg} 
+  p(\v{x}_a) = \mathcal{N}(\v{x}_a | \v{\mu}_a, \mSigma_{aa}) \label{eq:gauss_part_marg} 
 \end{equation}
 
 \subsubsection{Bayes' theorem for Gaussian variables}
 From BISHOP, section 2.3.3. NB This is known as a \tit{linear Gaussian model}.
 
-Given a marginal Gaussian distribution for $\vec{x}$ and a conditional Gaussian
-distribution for $\vec{y}$ given $\vec{x}$ in the form:
+Given a marginal Gaussian distribution for $\v{x}$ and a conditional Gaussian
+distribution for $\v{y}$ given $\v{x}$ in the form:
 \begin{align}
-  p(\vec{x})         &= \mathcal{N}(\vec{x} | \vec{\mu}, \mLambda^{-1}) \\
-  p(\vec{y}|\vec{x}) &= \mathcal{N}(\vec{y} | \mA \vec{x} + \vec{b}, \mL^{-1}),
+  p(\v{x})       &= \mathcal{N}(\v{x} | \v{\mu}, \mLambda^{-1}) \\
+  p(\v{y}|\v{x}) &= \mathcal{N}(\v{y} | \mA \v{x} + \v{b}, \mL^{-1}),
 \end{align}
 we have
 \begin{align}
-  p(\vec{y})         &= \mathcal{N} (\vec{y} |\mA \vec{\mu} + \vec{b}, \mL^{-1}
-                        + \mA \mLambda^{-1} \mA^T )   \label{eq:gauss_bayes_marg} \\
-  p(\vec{x}|\vec{y}) &= \mathcal{N} ( \vec{x} | \mSigma \{ \mA^T \mL
-                        (\vec{y} - \vec{b}) + \mLambda \vec{\mu} \},
-                       \mSigma)   \label{eq:gauss_bayes_cond} 
+  p(\v{y})       &= \mathcal{N} (\v{y} |\mA \v{\mu} + \v{b}, \mL^{-1}
+                   + \mA \mLambda^{-1} \mA^T )   \label{eq:gauss_bayes_marg} \\
+  p(\v{x}|\v{y}) &= \mathcal{N} ( \v{x} | \mSigma \{ \mA^T \mL
+                   (\v{y} - \v{b}) + \mLambda \v{\mu} \},
+                   \mSigma)   \label{eq:gauss_bayes_cond} 
 \end{align}
 where
 \begin{equation}
@@ -602,9 +600,9 @@ eigenvalues.
 \subsection{Matrix derivatives}
 
 \begin{equation}
-  \frac{\partial}{\partial \vec{x}} \left( \vec{x}^T \vec{a} \right) =
-  \frac{\partial}{\partial \vec{x}} \left( \vec{a}^T \vec{x} \right) =
-  \vec{a} 
+  \frac{\partial}{\partial \v{x}} \left( \v{x}^T \v{a} \right) =
+  \frac{\partial}{\partial \v{x}} \left( \v{a}^T \v{x} \right) =
+  \v{a} 
 \end{equation}
 
 \TODO{review understanding of this (I recall this expression was not enough to answer my
