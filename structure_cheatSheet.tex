@@ -26,9 +26,11 @@
 %  2) remove "%%% TeX-engine: xetex" line at end of main file.
 % BEGIN NO XeTeX COMMENT BLOCK
 \usepackage{unicode-math}
-\setmainfont[Extension = .otf, UprightFont = *-regular, BoldFont = *-bold,
-             ItalicFont = *-italic, BoldItalicFont = *-bolditalic]{xits}
-\setmathfont[Extension = .otf, BoldFont = *bold]{xits-math}
+\setmainfont[Path = ./fonts/, Extension = .otf,
+             UprightFont = *-Regular, BoldFont = *-Bold, ItalicFont = *-Italic,
+             BoldItalicFont = *-BoldItalic]{XITS}
+\setmathfont[Path = ./fonts/, Extension = .otf,
+             BoldFont = XITSMath-Bold]{XITSMath-Regular}
 \setmonofont[Path = ./fonts/, Extension = .ttf, Scale = 0.84]{RobotoMono-Regular}
 % \setmonofont[Path = ./fonts/, Extension = .otf, Scale = 0.84] {Monospace 821 Regular}
 % END NO XeTeX COMMENT BLOCK

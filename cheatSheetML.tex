@@ -245,7 +245,7 @@ The F1 score is the \emph{harmonic mean} of precision and recall. It's an ok one
 metric for evaluating effectiveness of different classifiers on problem:
 \begin{equation}
   \label{eq:F1}
-  \textrm{F1} = \frac{2}{\left(\frac{1}{\textrm{prec}} + \frac{1}{\textrm{rec}}\right)}
+  \trm{F1} = \frac{2}{\left(\frac{1}{\trm{prec}} + \frac{1}{\trm{rec}}\right)}
 \end{equation}
 
 
@@ -339,11 +339,11 @@ where the weights in the linear combination come from elements of the design
 matrix. Thus the vector $\v{y}$ itself is a multivariate Gaussian, completely specified
 by its mean vector and covariance matrix.
 \begin{align}
-  \mathbb{E}[\v{y}]   &= \mbbb{X}\, \mathbb{E}[\v{w}] = \v{0} \\
-  \textrm{cov}[\v{y}] &= \mathbb{E}[\v{y} \v{y}^T]
-                         = \mbbb{X}\, \mathbb{E}[\v{w} \v{w}^T]\, \mbbb{X}^T
-                         = \alpha^{-1} \mbbb{X}\, \mbbb{X}^T
-                         \equiv \mbf{K}
+  \mathbb{E}[\v{y}] &= \mbbb{X}\, \mathbb{E}[\v{w}] = \v{0} \\
+  \trm{cov}[\v{y}]  &= \mathbb{E}[\v{y} \v{y}^T]
+                      = \mbbb{X}\, \mathbb{E}[\v{w} \v{w}^T]\, \mbbb{X}^T
+                      = \alpha^{-1} \mbbb{X}\, \mbbb{X}^T
+                      \equiv \mbf{K}
 \end{align}
 where $\mbf{K}$ is the $m \times m$ \emph{Gram matrix} with elements
 \begin{equation}
