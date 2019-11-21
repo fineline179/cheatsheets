@@ -238,14 +238,15 @@ negative $\trm{TN}/(\trm{TN} + \trm{FP})$
 
 ROC plots TPR versus FPR.
 
-\TODO{F score}
+\TODO{More on why the ROC is useful. Maybe a picture.}
 
-\subsection{Misc}
-$k$: number of model parameters
-\begin{itemize}
-  \item \tbf{Akaike Information Criteria (AIC)}:\quad $2k - 2 \ln L(\theta)$ \\
-  \TODO{how to apply in practice}
-\end{itemize}
+\subsubsection{F1 Score}
+The F1 score is the \emph{harmonic mean} of precision and recall. It's an ok one-number
+metric for evaluating effectiveness of different classifiers on problem:
+\begin{equation}
+  \label{eq:F1}
+  \textrm{F1} = \frac{2}{\left(\frac{1}{\textrm{prec}} + \frac{1}{\textrm{rec}}\right)}
+\end{equation}
 
 
 
@@ -404,9 +405,9 @@ The conditional distribution $p(t_{m+1} | \vec t)$ is then given by a Gaussian w
   m(\vec x_{m+1}) &= \vec k^T \mbf{C}_m^{-1}\, \vec t\\
   \sigma^2 (\vec x_{m+1}) &= c - \vec k^T \mbf{C}_m^{-1}\, \vec k.
 \end{align}
-which we obtain by using \ref{eq:gauss_part_cond}. \TODO{check this to make sure it's
-  the right eq.}
+which we obtain by using \ref{eq:gauss_part_cond}.
 
+\TODO{check this to make sure it's the right eq.}
 
 
 
