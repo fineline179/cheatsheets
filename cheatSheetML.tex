@@ -4,6 +4,7 @@
 \documentclass[11pt]{article}
 \synctex=1
 \input{structure_cheatSheet.tex}
+\addbibresource{refs.bib}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title{ML Cheatsheet}
@@ -313,7 +314,7 @@ directions of maximum variance, ordered by decreasing variance in their directio
 \section{Gaussian Processes}
 \label{sec:gp}
 \subsection{Prior over functions, from basis functions}
-Following the treatment in section 6.4 of BISHOP (with different notation than above).
+Following the treatment in section 6.4 of \cite{BISHOP} (with Bishop's notation).
 
 Let $d$ be the number of \emph{basis functions} $\v{\phi}$, which are non-linear
 functions of the $n$ dimensional training examples $\v{x}$. We write the hypothesis as
@@ -491,7 +492,7 @@ closed form. Try:
 
 \subsection{Gaussians}
 \subsubsection{Partitioned Gaussians: Conditional and Marginal Distributions}
-From BISHOP, sections 2.3.1 - 2.3.2.
+From \cite{BISHOP}, sections 2.3.1 - 2.3.2.
 
 Consider a joint Gaussian distribution, $\mathcal{N}(\v{x} | \v{\mu}, \mSigma)$ with
 $\mLambda \equiv \mSigma^{-1}$ and
@@ -547,7 +548,7 @@ The \tit{marginal distribution} is:
 \end{equation}
 
 \subsubsection{Bayes' theorem for Gaussian variables}
-From BISHOP, section 2.3.3. NB This is known as a \tit{linear Gaussian model}.
+From \cite{BISHOP}, section 2.3.3. NB This is known as a \tit{linear Gaussian model}.
 
 Given a marginal Gaussian distribution for $\v{x}$ and a conditional Gaussian
 distribution for $\v{y}$ given $\v{x}$ in the form:
@@ -633,6 +634,11 @@ algorithm.
 \subsection{Variational Bayes (non-stationary prior)}
 
 \end{appendices}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\printbibliography[heading=bibintoc]
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document}
