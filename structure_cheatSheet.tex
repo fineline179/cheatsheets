@@ -15,6 +15,7 @@
 % writes "appendix" on appendices (works in body.. TODO: how to do in contents?)
 \usepackage[title]{appendix}
 \usepackage{parskip}
+% use biblatex for citation management. 'style=draft' allows for literal citation names
 \usepackage[backend=biber,style=draft]{biblatex}
 
 % increase spacing between paragraphs (to make up for the lack of indentaiton)
@@ -66,8 +67,9 @@
 
 %% Other
 \newcommand{\blue}[1]{{\color{blue}#1}} % blue color shortcut
-\newcommand{\TODO}[1]{\blue{\tbf{TODO: #1}}} % colored TODO item
-\newcommand{\TODOFIN}[1]{\blue{\tbf{TODO: finish --- #1}}} % colored TODO item++
+\newcommand{\red}[1]{{\color{red}#1}}   % red color shortcut
+\newcommand{\TODO}[1]{\red{\tbf{TODO: #1}}} % colored TODO item
+\newcommand{\TODOFIN}[1]{\red{\tbf{TODO: finish --- #1}}} % colored TODO item++
 \renewcommand{\v}{\vec} % abbreviated vector (redefined from \vec)
 
 %% Bold matrix macros

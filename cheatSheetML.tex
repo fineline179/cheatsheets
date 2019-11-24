@@ -15,7 +15,7 @@
 \maketitle
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conventions}
 \label{sec:conv}
@@ -435,7 +435,7 @@ number of methods to reduce both independently.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Variational Methods}
 \label{sec:var_meth}
-\blue{\tbf{Preliminary section!}}
+\red{\tbf{Preliminary section!}}
 
 If our prior is not a conjugate prior to our likelihood, we can't compute posterior in
 closed form. Try:
@@ -583,6 +583,8 @@ $\mA$'s eigenvectors, and $\mD$ a diagonal matrix of $\mA$'s eigenvalues.
 
 \subsubsection{Singular value decomposition}
 \label{subsubsec:SVD}
+Using conventions of \cite{PRESS}, section 2.6.
+
 An $M \times N$ matrix $\mA$ can be written as $\mU \mD \mV^T$, where $\mU$ is
 $M \times N$, $\mD$ is $N \times N$ and diagonal, and $\mV$ is $N \times N$ and
 orthogonal.

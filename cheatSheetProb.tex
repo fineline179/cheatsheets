@@ -5,6 +5,7 @@
 \synctex=1
 \input{structure_cheatSheet.tex}
 \usepackage{xfrac}
+\addbibresource{refs.bib}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title{Prob/Stats Cheatsheet}
@@ -34,8 +35,8 @@
   \item Next, anything multiplying the $x^2$ in the integrand is present in inverse
   under the square root.
   \begin{equation}
-    \int_{-\infty}^{\infty} dx \, e^{-\textrm{stuff}\, x^2} =
-    \sqrt{\frac{\pi}{\textrm{stuff}}}
+    \int_{-\infty}^{\infty} dx \, e^{-\trm{stuff}\, x^2} =
+    \sqrt{\frac{\pi}{\trm{stuff}}}
   \end{equation}
   so, for example:
   \begin{equation}
@@ -93,9 +94,12 @@ where $H(p,q)$ is the cross entropy, and $H(p)$ is the entropy.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\bibliographystyle{JHEP}
-\bibliography{refs}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\printbibliography[heading=bibintoc]
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document}
 
 %%% Local Variables:
