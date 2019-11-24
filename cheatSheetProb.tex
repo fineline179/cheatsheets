@@ -29,19 +29,17 @@
 \begin{enumerate}
   \item To start with, \emph{memorize} that
   \begin{equation}
-    \boxed{\int_{-\infty}^{\infty} dx \, e^{-x^2} = \sqrt{\pi}}
+    \boxed{\int_{-\infty}^{\infty} dx\, e^{-x^2} = \sqrt{\pi}}
   \end{equation}
 
   \item Next, anything multiplying the $x^2$ in the integrand is present in inverse
   under the square root.
   \begin{equation}
-    \int_{-\infty}^{\infty} dx \, e^{-\trm{stuff}\, x^2} =
-    \sqrt{\frac{\pi}{\trm{stuff}}}
+    \int_{-\infty}^{\infty} dx\, e^{-\trm{stuff}\, x^2} = \sqrt{\frac{\pi}{\trm{stuff}}} 
   \end{equation}
   so, for example:
   \begin{equation}
-    \int_{-\infty}^{\infty} dx \, e^{-\frac{1}{2} a x^2} =
-    \sqrt{\frac{2 \pi}{a}}
+    \int_{-\infty}^{\infty} dx\, e^{-\frac{1}{2} a x^2} = \sqrt{\frac{2 \pi}{a}}
   \end{equation}
 
 \end{enumerate}
@@ -62,7 +60,7 @@ For $x \in \{0, 1\}$, Bernoulli dist parametrized by $\mu$, with
 \end{itemize}
 
 \subsection{Bayes' Rule}
-Using $p(y|x) p(x) = p(x, y) = p(x|y) p(y)$, we have
+Using $p(y|x) p(x) = p(x,y) = p(x|y) p(y)$, we have
 \begin{equation}
   p(y|x) = \frac{p(x|y) p(y)}{p(x)} = \frac{p(x|y) p(y)}{\sum\limits_y p(x|y) p(y)}
 \end{equation}
@@ -75,10 +73,11 @@ Using $p(y|x) p(x) = p(x, y) = p(x|y) p(y)$, we have
 \paragraph{KL divergence:}
 \begin{align}
   KL\big[p(x) || q(x)\big] &= \sum_{x_i} p(x_i) \log\left(\frac{p(x_i)}{q(x_i)} \right)
-                              = -\sum_{x_i} p(x_i) \log\left(\frac{q(x_i)}{p(x_i)}
-                              \right) \nncr 
-  &= -\sum_{x_i} p(x_i) \log q(x_i) + \sum_{x_i} p(x_i) \log p(x_i) \nncr
-  &= H(p,q) - H(p)
+                             = -\sum_{x_i} p(x_i) \log\left(\frac{q(x_i)}{p(x_i)}
+                             \right) \nncr 
+                           &= -\sum_{x_i} p(x_i) \log q(x_i) + \sum_{x_i} p(x_i) \log
+                             p(x_i) \nncr 
+                           &= H(p,q) - H(p)
 \end{align}
 where $H(p,q)$ is the cross entropy, and $H(p)$ is the entropy.
 
