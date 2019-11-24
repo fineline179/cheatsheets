@@ -34,10 +34,12 @@
              BoldFont = XITSMath-Bold]{XITSMath-Regular}
 \setmonofont[Path = ./fonts/, Extension = .ttf, Scale = 0.84]{RobotoMono-Regular}
 % \setmonofont[Path = ./fonts/, Extension = .otf, Scale = 0.84] {Monospace 821 Regular}
-% END NO XeTeX COMMENT BLOCK
 
 % change sans font to TeX Gyre Heros (Helvetica)
-\setsansfont{TeX Gyre Heros}
+\setsansfont[Path = ./fonts/, Extension = .otf,
+             UprightFont = *-regular, BoldFont = *-bold]{texgyreheros}
+% END NO XeTeX COMMENT BLOCK
+
 
 % for support of bold mathbb letters, see "\mbbb" command below.
 \newlength\bshft

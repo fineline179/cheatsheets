@@ -18,3 +18,5 @@ jheppub_ss.sty - modified jheppub.sty. Uses sans font for section headings. Remo
 instead.
 
 refs.bib - references
+
+fonts/ - required fonts. (referenced in jheppub_ss.sty) 
