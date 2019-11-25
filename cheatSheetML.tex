@@ -30,6 +30,8 @@
   \item $\mbf{I}_k$: $k \times k$ identity matrix
   \item Boldface capital letters are matrices, \eeg $\mA = \mU \mW \mV^T$
   \item $\log$ is base $e$ by default $\to$ entropy in nats.
+  \item $\mathbb{E}_{\theta}$ : Expectation value (with repect to some parameter
+  $\theta$. Parameter may be omitted if clear from context.)
 \end{itemize}
 
 \paragraph{Ng CS229 / DeepLearning.ai}
@@ -316,7 +318,7 @@ directions of maximum variance, ordered by decreasing variance in their directio
 \subsection{Prior over functions, from basis functions}
 Following the treatment in section 6.4 of \cite{BISHOP} (with Bishop's notation).
 
-Let $d$ be the number of \emph{basis functions} $\v{\phi}$, which are non-linear
+Let $d$ be the number of \tbfit{basis functions} $\v{\phi}$, which are non-linear
 functions of the $n$ dimensional training examples $\v{x}$. We write the hypothesis as
 \begin{equation}
   y(\v{x}) = \v{w}^T \v{\phi}(\v{x})
@@ -340,13 +342,13 @@ where the weights in the linear combination come from elements of the design
 matrix. Thus the vector $\v{y}$ itself is a multivariate Gaussian, completely specified
 by its mean vector and covariance matrix.
 \begin{align}
-  \mathbb{E}[\v{y}] &= \mbbb{X}\, \mathbb{E}[\v{w}] = \v{0} \\
-  \trm{cov}[\v{y}]  &= \mathbb{E}[\v{y} \v{y}^T]
-                      = \mbbb{X}\, \mathbb{E}[\v{w} \v{w}^T]\, \mbbb{X}^T
+  \mathbb{E}_{\v{w}}[\v{y}] &= \mbbb{X}\, \mathbb{E}_{\v{w}}[\v{w}] = \v{0} \\
+  \trm{cov}[\v{y}]  &= \mathbb{E}_{\v{w}}[\v{y} \v{y}^T]
+                      = \mbbb{X}\, \mathbb{E}_{\v{w}}[\v{w} \v{w}^T]\, \mbbb{X}^T
                       = \alpha^{-1} \mbbb{X}\, \mbbb{X}^T
                       \equiv \mbf{K}
 \end{align}
-where $\mbf{K}$ is the $m \times m$ \emph{Gram matrix} with elements
+where $\mbf{K}$ is the $m \times m$ \tbfit{Gram matrix} with elements
 \begin{equation}
   \mbf{K}_{ij} \equiv k(\v{x}_i, \v{x}_j) = \alpha^{-1} \v{\phi}(\v{x}_i)^T\,
   \v{\phi}(\v{x}_j). 
@@ -357,14 +359,14 @@ Our prior over functions is then
 \end{equation}
 
 \subsection{Basic Gaussian process regression}
-For regression, we assume our target variables are given by the hypothesis $\v{y}$ with
-added Gaussian noise
+For regression, we assume our target variables $t_i$ are given by the hypothesis $\v{y}$
+with added Gaussian noise
 \begin{equation}
   p(t_i | y_i) = \mathcal{N}(t_i | y_i, \beta^{-1}) \qquad 1 \leq i \leq m
 \end{equation}
 where $\beta$ is the inverse variance of the Gaussian, and the noise is i.i.d for each
-training example. The $m$ dim vector of target variables is then given by a multivariate
-Gaussian
+training example. The $m$ dim vector of target variables, $\v{t}$, is then given by a
+multivariate Gaussian
 \begin{equation}
   p(\v{t} | \v{y}) = \mathcal{N}(\v{t} | \v{y}, \beta^{-1} \mbf{I}_m)
 \end{equation}
@@ -377,12 +379,13 @@ $\v{w}$ in Bayesian regression,
 where $\mbf{C}$ is $m \times m$ with elements
 $\mbf{C}_{ij} = \mbf{K}_{ij} + \beta^{-1} \delta_{ij}$.
 
-To make a prediction based on the $m$ training examples, we form the joint distribution
-over $m+1$ examples,
+To make a prediction $t_{m+1}$, based on the $m$ training examples, we form the joint
+distribution over $m+1$ examples,
 \begin{equation}
-  \mathcal{N}(\v{t}_{m+1} | \v{0}, \mbf{C}_{m+1})
+  \mathcal{N}(\v{t} | \v{0}, \mbf{C}_{m+1})
 \end{equation}
-with the $(m+1) \times (m+1)$ matrix $\mbf{C}_{m+1}$ partitioned as
+where $\v{t}$ is now $m+1$-dimensional, and the $(m+1) \times (m+1)$ matrix
+$\mbf{C}_{m+1}$ is partitioned as
 \begin{equation}
   \mbf{C}_{m+1} = 
   \left(
@@ -548,7 +551,7 @@ The \tit{marginal distribution} is:
 \end{equation}
 
 \subsubsection{Bayes' theorem for Gaussian variables}
-From \cite{BISHOP}, section 2.3.3. NB This is known as a \tit{linear Gaussian model}.
+From \cite{BISHOP}, section 2.3.3. NB This is known as a \tbfit{linear Gaussian model}.
 
 Given a marginal Gaussian distribution for $\v{x}$ and a conditional Gaussian
 distribution for $\v{y}$ given $\v{x}$ in the form:
@@ -573,12 +576,18 @@ where
 \subsection{Matrix Factorization}
 \subsubsection{Diagonalization (Eigendecomposition)}
 \label{subsubsec:matrix}
-A square $N \times N$ symmetric matrix $\mA$ has real eigenvalues from its symmetricity,
-and $N$ linearly independent eigenvectors. We can write
-$\mA = \mO \mD \mO^{-1} = \mO \mD \mO^T$, with $\mO$ an orthogonal\footnote{An
+A square $N \times N$ symmetric matrix $\mA$ has \emph{real} eigenvalues from its
+symmetricity, and $N$ linearly independent eigenvectors.  We can write
+$\mA = \mU \mD \mU^{-1} = \mU \mD \mU^T$, with $\mU$ an orthogonal\footnote{An
   \emph{orthogonal} matrix should really be called an \emph{orthonormal} matrix, as its
-  columns are linearly indepdendent, but also normalized.} matrix with columns equal to
-$\mA$'s eigenvectors, and $\mD$ a diagonal matrix of $\mA$'s eigenvalues.
+  columns are linearly indepdendent, but also normalized.} matrix with columns $\v{u}_i$
+equal to $\mA$'s eigenvectors, and $\mD$ a diagonal matrix of $\mA$'s eigenvalues,
+$\lambda_i$.
+
+We can also write down the \tbfit{spectral decomposition} of $\mA$:
+\begin{equation}
+  \mA = \mU \mD \mU^T = \sum_{i=1}^N \lambda_i\, \v{u}_i\, \v{u}_i^T.
+\end{equation}
 
 
 \subsubsection{Singular value decomposition}
