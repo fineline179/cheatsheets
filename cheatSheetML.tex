@@ -337,8 +337,8 @@ evaluated on our training examples is an $m$ dim vector
 \begin{equation}
   \v{y} = \mbbb{X} \v{w}
 \end{equation}
-Each element of $\v{y}$ is linear combination of Gaussians (given by the $\v{w}$ prior),
-where the weights in the linear combination come from elements of the design
+Each element of $\v{y}$ is a linear combination of Gaussians (given by the $\v{w}$
+prior), where the weights in the linear combination come from elements of the design
 matrix. Thus the vector $\v{y}$ itself is a multivariate Gaussian, completely specified
 by its mean vector and covariance matrix.
 \begin{align}
@@ -448,11 +448,11 @@ closed form. Try:
   $q(\v{\theta} | \gamma)$.
   \item Adjust $\gamma$ to minimize
   $KL \big[p(\v{\theta} | \v{y}) || q(\v{\theta} | \gamma)\big]$ $\to\,$ complicated,
-  since we don't know $p(\v{\theta} | \v{y})$. Eventually will use \tbfit{Expectation
-    Propagation} to solve.
+  since we don't know $p(\v{\theta} | \v{y})$. Eventually will use \tbfit{expectation
+    propagation} to solve.
   \item Adjust $\gamma$ to minimize
   $KL \big[q(\v{\theta} | \gamma) || p(\v{\theta} | \v{y})\big]$ $\to\,$ simpler:
-  \tbfit{Variational Bayes}.
+  \tbfit{variational Bayes}.
   \item \tbf{Variational Bayes}: minimizing
   $KL \big[q(\v{\theta} | \gamma) || p(\v{\theta} | \v{y})\big]$ $\iff$ maximizing ELBO
   $\mathcal{L}$
@@ -538,16 +538,17 @@ $\mLambda \equiv \mSigma^{-1}$ and
 induces a block partitioning of the covariance matrix $\mSigma$.)
 
 The \tit{conditional distribution} is:
-\begin{align}
-  p(\v{x}_a | \v{x}_b) &= \mathcal{N}(\v{x} | \v{\mu}_{a | b},
-                         \mLambda_{aa}^{-1}) \nncr
-  \v{\mu}_{a | b}      &= \v{\mu}_a - \mLambda_{aa}^{-1} \mLambda_{ab}
-                         (\v{x}_b - \v{\mu}_b)   \label{eq:gauss_part_cond} 
-\end{align}
+\begin{equation}
+  \label{eq:gauss_part_cond}
+  p(\v{x}_a | \v{x}_b) = \mathcal{N}(\v{x} | \v{\mu}_{a | b}, \mLambda_{aa}^{-1}),
+  \qquad  \trm{where}\quad \v{\mu}_{a | b} \equiv \v{\mu}_a - \mLambda_{aa}^{-1}
+  \mLambda_{ab} (\v{x}_b - \v{\mu}_b).
+\end{equation}
 
 The \tit{marginal distribution} is:
 \begin{equation}
-  p(\v{x}_a) = \mathcal{N}(\v{x}_a | \v{\mu}_a, \mSigma_{aa}) \label{eq:gauss_part_marg} 
+  \label{eq:gauss_part_marg}
+  p(\v{x}_a) = \mathcal{N}(\v{x}_a | \v{\mu}_a, \mSigma_{aa})
 \end{equation}
 
 \subsubsection{Bayes' theorem for Gaussian variables}
@@ -556,20 +557,21 @@ From \cite{BISHOP}, section 2.3.3. NB This is known as a \tbfit{linear Gaussian 
 Given a marginal Gaussian distribution for $\v{x}$ and a conditional Gaussian
 distribution for $\v{y}$ given $\v{x}$ in the form:
 \begin{align}
-  p(\v{x})       &= \mathcal{N}(\v{x} | \v{\mu}, \mLambda^{-1}) \\
-  p(\v{y}|\v{x}) &= \mathcal{N}(\v{y} | \mA \v{x} + \v{b}, \mL^{-1}),
+  p(\v{x})       &= \mathcal{N}(\v{x} | \v{\mu}, \mLambda^{-1})\\
+  p(\v{y}|\v{x}) &= \mathcal{N}(\v{y} | \mA \v{x} + \v{b}, \mL^{-1})
 \end{align}
 we have
 \begin{align}
-  p(\v{y})       &= \mathcal{N} (\v{y} |\mA \v{\mu} + \v{b}, \mL^{-1}
-                   + \mA \mLambda^{-1} \mA^T )   \label{eq:gauss_bayes_marg} \\
-  p(\v{x}|\v{y}) &= \mathcal{N} ( \v{x} | \mSigma \{ \mA^T \mL
-                   (\v{y} - \v{b}) + \mLambda \v{\mu} \},
-                   \mSigma)   \label{eq:gauss_bayes_cond} 
+  \label{eq:gauss_bayes_marg}
+  p(\v{y})       &= \mathcal{N} (\v{y} |\mA \v{\mu} + \v{b}, \mL^{-1} + \mA
+                   \mLambda^{-1} \mA^T )\\
+  \label{eq:gauss_bayes_cond}
+  p(\v{x}|\v{y}) &= \mathcal{N} ( \v{x} | \mSigma \{ \mA^T \mL (\v{y} - \v{b}) +
+                   \mLambda \v{\mu} \}, \mSigma)
 \end{align}
 where
 \begin{equation}
-  \mSigma \equiv \left(\mLambda + \mA^T \mL \mA \right)^{-1}
+  \mSigma \equiv \left(\mLambda + \mA^T \mL \mA \right)^{-1}.
 \end{equation}
 
 
