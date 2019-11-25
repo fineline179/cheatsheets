@@ -30,7 +30,7 @@
   \item $\mbf{I}_k$: $k \times k$ identity matrix
   \item Boldface capital letters are matrices, \eeg $\mA = \mU \mW \mV^T$
   \item $\log$ is base $e$ by default $\to$ entropy in nats.
-  \item $\mathbb{E}_{\theta}$ : Expectation value (with repect to some parameter
+  \item $\mathbb{E}_{\theta}$ : Expectation value (with respect to some parameter
   $\theta$. Parameter may be omitted if clear from context.)
 \end{itemize}
 
@@ -110,9 +110,9 @@ with $p$ the actual outputs, and $q$ the hypothesis $h_\theta(x)$
 
 \subsection{2+ classes}
 
-\tbf{One-versus-all:} For $k$ classes, do $k$ normal log regs. Each has two classes: the
-target class, and all the rest. New examples are classified by whichever of these $k$
-log regs. has highest score.
+\tbf{One-versus-all:} For $k$ classes, do $k$ normal logistic regressions. Each has two
+classes: the target class, and all the rest. New examples are classified by whichever of
+these $k$ logistic regressions has highest score.
 
 \tbf{Softmax regression:} Model classification cases as \emph{multinomial}
 distribution. For $k$ classes, hypothesis is $k$-dim vector
@@ -126,8 +126,8 @@ so that the final output layer has $k$ units. The log-likelihood is
   \log \frac{\exp(\theta^{(l)T} x)}{\sum_{m=1}^k \exp(\theta^{(m)T} x)} 
 \end{equation}
 
-\TODO{show how 2-class log reg cost func can be written this way. write down deriv of
-  cost func. clean up notation.}
+\TODO{show how 2-class logistic regression cost func can be written this way. write down
+  deriv of cost func. clean up notation.}
 
 
 
@@ -198,7 +198,7 @@ model) because ``we could just tweak the values of the hypers until the estimato
 performs optimally [on the test set]''.
 
 Cross-validation allows you to do model scoring (on frequentist stats, versus \eeg info
-criteria for Bayesian stats.. \TODO{verify i know what i'm talking about}).
+criteria for Bayesian stats.. \TODO{verify I know what I'm talking about}).
 
 Can average together multiple models with high capacity (low bias, but high
 variance). The result of combining is to \emph{reduce} the variance of the combined
@@ -231,7 +231,7 @@ or in-class (positive). We define the \tbfit{precision} and \tbfit{recall}:
 (\eie \emph{low} false positives). So \eeg if positive is ``person doesn't have
 cancer'', we want \emph{high precision}.
 
-\tbfit{Recall} is ability of classifer to find all positive samples.
+\tbfit{Recall} is ability of classifier to find all positive samples.
 
 \subsubsection{Receiver operating characteristic curve (ROC)}
 \tbfit{True Positive Rate (TPR):} same as recall \\
@@ -273,8 +273,8 @@ metric for evaluating effectiveness of different classifiers on problem:
 \section{PCA}
 \label{sec:pca}
 PCA is unsupervised technique for finding directions of most variance in dataset. The
-\tbfit{principal components} are a set of $n$ orthonormal $n$-dim basis vects along the
-directions of maximum variance, ordered by decreasing variance in their directions.
+\tbfit{principal components} are a set of $n$ orthonormal $n$-dim basis vectors along
+the directions of maximum variance, ordered by decreasing variance in their directions.
 
 \tbf{To calc:}
 \begin{itemize}
@@ -319,11 +319,11 @@ directions of maximum variance, ordered by decreasing variance in their directio
 Following the treatment in section 6.4 of \cite{BISHOP} (with Bishop's notation).
 
 Let $d$ be the number of \tbfit{basis functions} $\v{\phi}$, which are non-linear
-functions of the $n$ dimensional training examples $\v{x}$. We write the hypothesis as
+functions of the $n$-dim training examples $\v{x}$. We write the hypothesis as
 \begin{equation}
   y(\v{x}) = \v{w}^T \v{\phi}(\v{x})
 \end{equation}
-where $\v{w}$ is a $d$ dimensional vector of weights.
+where $\v{w}$ is a $d$-dim vector of weights.
 
 As in MAP and Bayesian linear regression, we introduce a isotropic Gaussian prior over
 the weights, with $\alpha$ its inverse variance:
@@ -333,7 +333,7 @@ the weights, with $\alpha$ its inverse variance:
 The prior over $\v{w}$ thus induces a prior over \emph{functions} $y(\v{x})$.
 
 The design matrix is now $\mbbb{X} \in \mbb{R}^{m \times\, d}$, so the hypothesis
-evaluated on our training examples is an $m$ dim vector
+evaluated on our training examples is an $m$-dim vector
 \begin{equation}
   \v{y} = \mbbb{X} \v{w}
 \end{equation}
@@ -365,13 +365,13 @@ with added Gaussian noise
   p(t_i | y_i) = \mathcal{N}(t_i | y_i, \beta^{-1}) \qquad 1 \leq i \leq m
 \end{equation}
 where $\beta$ is the inverse variance of the Gaussian, and the noise is i.i.d for each
-training example. The $m$ dim vector of target variables, $\v{t}$, is then given by a
+training example. The $m$-dim vector of target variables, $\v{t}$, is then given by a
 multivariate Gaussian
 \begin{equation}
   p(\v{t} | \v{y}) = \mathcal{N}(\v{t} | \v{y}, \beta^{-1} \mbf{I}_m)
 \end{equation}
 To get the joint distribution $p(\v{t})$ over all the target variables, we integrate out
-$\v{y}$ via \ref{eq:gauss_bayes_marg}, analagous to how we integrate out the weights
+$\v{y}$ via \ref{eq:gauss_bayes_marg}, analogous to how we integrate out the weights
 $\v{w}$ in Bayesian regression,
 \begin{equation}
   p(\v{t}) = \int p(\v{t} | \v{y}) p(\v{y}) d\v{y} = \mathcal{N}(\v{t} | \v{0}, \mbf{C})
@@ -384,7 +384,7 @@ distribution over $m+1$ examples,
 \begin{equation}
   \mathcal{N}(\v{t} | \v{0}, \mbf{C}_{m+1})
 \end{equation}
-where $\v{t}$ is now $m+1$-dimensional, and the $(m+1) \times (m+1)$ matrix
+where $\v{t}$ is now $(m+1)$-dim, and the $(m+1) \times (m+1)$ matrix
 $\mbf{C}_{m+1}$ is partitioned as
 \begin{equation}
   \mbf{C}_{m+1} = 
@@ -419,8 +419,8 @@ which we obtain by using \ref{eq:gauss_part_cond}.
 \label{sec:nn}
 
 \subsection{Hyperparameters}
-Hypers: learning rate, num iteractions, num hidden layers, num units in each layer,
-choice of activation function, amout of momentum, minibatch size, regularization type
+Hypers: learning rate, num iterations, num hidden layers, num units in each layer,
+choice of activation function, amount of momentum, minibatch size, regularization type
 and amount.
 
 \subsection{Bias/Variance}
@@ -582,9 +582,9 @@ A square $N \times N$ symmetric matrix $\mA$ has \emph{real} eigenvalues from it
 symmetricity, and $N$ linearly independent eigenvectors.  We can write
 $\mA = \mU \mD \mU^{-1} = \mU \mD \mU^T$, with $\mU$ an orthogonal\footnote{An
   \emph{orthogonal} matrix should really be called an \emph{orthonormal} matrix, as its
-  columns are linearly indepdendent, but also normalized.} matrix with columns $\v{u}_i$
-equal to $\mA$'s eigenvectors, and $\mD$ a diagonal matrix of $\mA$'s eigenvalues,
-$\lambda_i$.
+  columns are not just linearly independent, but also normalized.} matrix with columns
+$\v{u}_i$ equal to $\mA$'s eigenvectors, and $\mD$ a diagonal matrix of $\mA$'s
+eigenvalues, $\lambda_i$.
 
 We can also write down the \tbfit{spectral decomposition} of $\mA$:
 \begin{equation}
