@@ -28,7 +28,8 @@
   \item $\mbf{1}$($\cdot$) : indicator function --- 1 when arg is true, 0 when arg is
   false.
   \item $\mbf{I}_k$: $k \times k$ identity matrix
-  \item Boldface capital letters are matrices, \eeg $\mA = \mU \mW \mV^T$
+  \item Boldface capital letters (roman or greek) are matrices, \eeg $\mA = \mU \mLambda
+  \mV^T$ 
   \item $\log$ is base $e$ by default $\to$ entropy in nats.
   \item $\mathbb{E}_{\theta}$ : Expectation value (with respect to some parameter
   $\theta$. Parameter may be omitted if clear from context.)
@@ -42,13 +43,21 @@
   $1 \leq i \leq m$
   \item $y^{(i)}$ : $i^{th}$ output (\emph{column} vector), $1 \leq i \leq m$
   \item $x_j$ : $j^{th}$ component of a training example, $1 \leq j \leq n$.
-  \item $\mX \in \mbb{R}^{n \times\, m}$ : (input/design) matrix (training examples are
-  \emph{column} vectors)\footnote{Note our non-conventional definition of the design
-    matrix $\mX$. The more conventional version is denoted $\mbbb{X}$.}
-  \item $\mbbb{X} \in \mbb{R}^{m \times\, n}$ : (input/design) matrix (training examples
-  are \emph{row} vectors)
+  \item $\mX \in \mbb{R}^{m \times n}$ : (input/design) matrix (training examples are
+  \emph{row} vectors)
 \end{itemize}
 
+\paragraph{\cite{BISHOP}}
+\begin{itemize}
+  \item $N$ : number of training examples in the dataset
+  \item $D$ : dimension of training examples
+  \item $M$ : number of basis functions
+  \item Boldface lower-case letters (roman or greek) are \emph{column} vectors, \eeg
+  $d = \mbf{x}^T \mA \mbf{x}$, or $\mbf{y} = \mA \mbf{x}$.
+  \item $\bms{\phi}$: $M$-dim basis function
+  \item $\mPhi \in \mathbb{R}^{N \times M}$: Design matrix (basis functions are
+  \emph{row} vectors)
+\end{itemize}
 
 
 \newpage
@@ -65,9 +74,9 @@
     J(\theta) = \frac{1}{2} \sum_{i=1}^m \left(h_\theta(x^{(i)}) - y^{(i)}\right)^2
   \end{equation}
   \item Analytically solve via normal equations, where $\mX$ is the augmented
-  $(n+1) \times m$ design matrix
+  $m \times (n+1)$ design matrix
   \begin{equation}
-    \v{\theta} = \left(\mX \mX^T \right)^{-1} \mX\, \v{y}
+    \v{\theta} = \left(\mX^T \mX \right)^{-1} \mX^T \, \v{y}
   \end{equation}
   where $\v{\theta}$ and $\v{y}$ are column vectors of the $n+1$ weights and $m$
   outputs, respectively.
@@ -278,16 +287,18 @@ the directions of maximum variance, ordered by decreasing variance in their dire
 
 \tbf{To calc:}
 \begin{itemize}
-  \item \tbf{via eigenvectors:} Principal components of \emph{de-meaned} $n \times m$
+  \item \tbf{via eigenvectors:} Principal components of \emph{de-meaned} $m \times n$
   design matrix $\mX$ are the eigenvectors of the covariance matrix of $\mX$,
-  $\mbf{C_X} = \frac{1}{m} \mX \mX^T$.
-  \item \tbf{via SVD:} Define $\mY = \frac{1}{\sqrt{m}} \mX^T$, and take its SVD
+  $\mbf{C_X} = \frac{1}{m} \mX^T \mX$.
+  \item \tbf{via SVD:} Define $\mY = \frac{1}{\sqrt{m}} \mX$, and take its SVD
   \ref{subsubsec:SVD}, which is $\mY = \mU \mW \mV^T$. Then $\mU^T$ is $n \times m$
   matrix that projects $\mX$ onto its principal components, $\mW$ is the matrix of
   principal comp values, and $\mV$ is orthonormal matrix of the principal
   components. \TODO{Verify/fix statement on $\mU$ projection.}
 \end{itemize}
 
+
+\TODO{re-check everything in PCA section, as I have redefined the design matrix $\mX$.}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -332,20 +343,20 @@ the weights, with $\alpha$ its inverse variance:
 \end{equation}
 The prior over $\v{w}$ thus induces a prior over \emph{functions} $y(\v{x})$.
 
-The design matrix is now $\mbbb{X} \in \mbb{R}^{m \times\, d}$, so the hypothesis
-evaluated on our training examples is an $m$-dim vector
+The design matrix of basis functions is now $\mPhi \in \mbb{R}^{m \times d}$, so the
+hypothesis evaluated on our training examples is an $m$-dim vector
 \begin{equation}
-  \v{y} = \mbbb{X} \v{w}
+  \v{y} = \mPhi \v{w}
 \end{equation}
 Each element of $\v{y}$ is a linear combination of Gaussians (given by the $\v{w}$
 prior), where the weights in the linear combination come from elements of the design
 matrix. Thus the vector $\v{y}$ itself is a multivariate Gaussian, completely specified
 by its mean vector and covariance matrix.
 \begin{align}
-  \mathbb{E}_{\v{w}}[\v{y}] &= \mbbb{X}\, \mathbb{E}_{\v{w}}[\v{w}] = \v{0} \\
+  \mathbb{E}_{\v{w}}[\v{y}] &= \mPhi\, \mathbb{E}_{\v{w}}[\v{w}] = \v{0} \\
   \trm{cov}[\v{y}]  &= \mathbb{E}_{\v{w}}[\v{y} \v{y}^T]
-                      = \mbbb{X}\, \mathbb{E}_{\v{w}}[\v{w} \v{w}^T]\, \mbbb{X}^T
-                      = \alpha^{-1} \mbbb{X}\, \mbbb{X}^T
+                      = \mPhi\, \mathbb{E}_{\v{w}}[\v{w} \v{w}^T]\, \mPhi^T
+                      = \alpha^{-1} \mPhi\, \mPhi^T
                       \equiv \mbf{K}
 \end{align}
 where $\mbf{K}$ is the $m \times m$ \tbfit{Gram matrix} with elements
