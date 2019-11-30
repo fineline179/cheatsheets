@@ -25,24 +25,103 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Distributions}
 \subsection{Gaussians}
-
+\subsubsection{Basics}
 \begin{enumerate}
   \item To start with, \emph{memorize} that
   \begin{equation}
-    \boxed{\int_{-\infty}^{\infty} dx\, e^{-x^2} = \sqrt{\pi}}
+    \boxed{\int_{-\infty}^{\infty} dx\, e^{-x^2} = \pi^{1/2}}
   \end{equation}
 
   \item Next, anything multiplying the $x^2$ in the integrand is present in inverse
   under the square root.
   \begin{equation}
-    \int_{-\infty}^{\infty} dx\, e^{-\trm{stuff}\, x^2} = \sqrt{\frac{\pi}{\trm{stuff}}} 
+    \int_{-\infty}^{\infty} dx\, e^{-\trm{stuff}\, x^2} =
+    \left(\frac{\pi}{\trm{stuff}}\right)^{1/2}
   \end{equation}
   so, for example:
   \begin{equation}
-    \int_{-\infty}^{\infty} dx\, e^{-\frac{1}{2} a x^2} = \sqrt{\frac{2 \pi}{a}}
+    \label{eq:int_gauss_a2}
+    \int_{-\infty}^{\infty} dx\, e^{-\frac{1}{2} a x^2} =
+    \left( \frac{2 \pi}{a} \right)^{1/2} 
   \end{equation}
 
+  \item The traditional Gaussian pdf is thus easily seen to be
+  \begin{equation}
+    \mathcal{N}(x|0,\sigma^2) = \frac{1}{\left( 2 \pi \sigma^2 \right)^{1/2}}\,
+    e^{-\frac{1}{2 \sigma^2} x^2}
+  \end{equation}
 \end{enumerate}
+
+\subsubsection{Differentiation moment trick}
+By differentiating Eq. \ref{eq:int_gauss_a2} wrt $a$, we obtain an expression for
+integrals of the form $\int_{-\infty}^{\infty}dx \, x^{2n} e^{-\frac{1}{2} a x^2}$, with
+$n \in \mathbb{Z^+}$.
+
+\eeg for $n=1$:
+\begin{equation}
+  - 2 \frac{d}{da} \int_{-\infty}^{\infty}dx \, e^{-\frac{1}{2} a x^2} =
+  \int_{-\infty}^{\infty}dx \, x^2 e^{-\frac{1}{2} a x^2} =
+  - 2 \frac{d}{da} \left( \frac{2\pi}{a} \right)^{1/2} =
+  \left( \frac{2\pi}{a} \right)^{1/2} \, \frac{1}{a} 
+\end{equation}
+For $n=2$:
+\begin{equation}
+  \left(- 2 \frac{d}{da}\right)^2 \int_{-\infty}^{\infty}dx \, e^{-\frac{1}{2} a x^2} =
+  \int_{-\infty}^{\infty}dx \, x^4 e^{-\frac{1}{2} a x^2} =
+  \left(- 2 \frac{d}{da}\right)^2 \left( \frac{2\pi}{a} \right)^{1/2} =
+  \left(\frac{2\pi}{a} \right)^{1/2} \, \frac{1}{a} \, \frac{3}{a}
+\end{equation}
+We thus obtain an expression for the expectation value of $x^{2n}$ under the Gaussian
+distribution: 
+\begin{equation}
+  \langle x^{2n} \rangle =
+  \frac{\int_{-\infty}^{\infty}dx \, x^{2n} e^{-\frac{1}{2} a x^2}}
+       {\int_{-\infty}^{\infty}dx \, e^{-\frac{1}{2} a x^2}} =
+  \frac{1}{a^n} (2n-1) (2n-3) \cdot\cdot\cdot 5 \cdot 3 \cdot 1
+\end{equation}
+
+\subsubsection{Gaussian with Linear Term}
+To evaluate integrals of the form
+\begin{equation}
+  \label{eq:int_gauss_a2_j}
+  \int_{-\infty}^{\infty} dx\, e^{-\frac{1}{2} a x^2 + J x},
+\end{equation}
+first complete the square in the exponent
+\begin{equation}
+  -\frac{a}{2} x^2 + J x = -\frac{a}{2} (x^2 - \frac{2Jx}{a}) =
+  -\frac{a}{2} \left(x - \frac{J}{a}\right)^2 + \frac{J^2}{2a}
+\end{equation}
+which gives
+\begin{equation}
+  \int_{-\infty}^{\infty} dx\, e^{-\frac{1}{2} a x^2 + J x} =
+  \int_{-\infty}^{\infty} dx\, e^{-\frac{1}{2} a\, \left(x - J/a \right)} e^{J^2 / 2a} =
+  \left(\frac{2\pi}{a} \right)^{1/2} \, e^{J^2 / 2a}
+\end{equation}
+where the first integral is done by shifting $x \to x + J a$.
+
+Eq. \ref{eq:int_gauss_a2} is also (close to) the \tbfit{moment generating function} of
+the Gaussian distribution. Given a pdf $p(x)$, the moment generating function is defined
+as
+\begin{equation}
+  \psi_x(J) = \int_{-\infty}^{\infty} dx\, e^{J x} p(x)
+\end{equation}
+so that the moment generating function for the Gaussian distribution is
+\begin{equation}
+  \frac{1}{\left( 2 \pi \sigma^2 \right)^{1/2}}\, \int_{-\infty}^{\infty} dx\,
+  e^{J x}  e^{-\frac{1}{2 \sigma^2} x^2}, 
+\end{equation}
+\TODO{Finish. Figure out clear way to include normalization factor of pdf in exposition}
+
+\subsubsection{Multivariate Gaussians}
+Promoting $a$ to a real $N \times N$ symmetric matrix $\mA$, and x and J to a $N$-dim
+vectors $\v{x}$ and $\v{J}$ with components $x_i$ and $J_i$, we have the multivariate
+Gaussian integral 
+\begin{equation}
+  \prod_{i=1}^N \left( \int_{-\infty}^{\infty} dx_i \right)
+  e^{-\frac{1}{2} \v{x}^T \mA \v{x} + \v{J}^T \v{x}} =
+  \left( \frac{(2 \pi)^N}{|\mA|} \right)^{1/2} e^{\frac{1}{2} \v{J}^T \mA^{-1} \v{J}}
+\end{equation}
+\TODOFIN{}
 
 \subsection{Bernoulli}
 For $x \in \{0, 1\}$, Bernoulli dist parametrized by $\mu$, with
