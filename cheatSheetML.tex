@@ -31,7 +31,7 @@
   \item Boldface capital letters (roman or greek) are matrices, \eeg $\mA = \mU \mLambda
   \mV^T$ 
   \item $\log$ is base $e$ by default $\to$ entropy in nats.
-  \item $\mathbb{E}_{\theta}$ : Expectation value (with respect to some parameter
+  \item $\E_{\theta}$ : Expectation value (with respect to some parameter
   $\theta$. Parameter may be omitted if clear from context.)
 \end{itemize}
 
@@ -353,9 +353,9 @@ prior), where the weights in the linear combination come from elements of the de
 matrix. Thus the vector $\v{y}$ itself is a multivariate Gaussian, completely specified
 by its mean vector and covariance matrix.
 \begin{align}
-  \mathbb{E}_{\v{w}}[\v{y}] &= \mPhi\, \mathbb{E}_{\v{w}}[\v{w}] = \v{0} \\
-  \trm{cov}[\v{y}]  &= \mathbb{E}_{\v{w}}[\v{y} \v{y}^T]
-                      = \mPhi\, \mathbb{E}_{\v{w}}[\v{w} \v{w}^T]\, \mPhi^T
+  \E_{\v{w}}[\v{y}] &= \mPhi\, \E_{\v{w}}[\v{w}] = \v{0} \\
+  \trm{cov}[\v{y}]  &= \E_{\v{w}}[\v{y} \v{y}^T]
+                      = \mPhi\, \E_{\v{w}}[\v{w} \v{w}^T]\, \mPhi^T
                       = \alpha^{-1} \mPhi\, \mPhi^T
                       \equiv \mbf{K}
 \end{align}
