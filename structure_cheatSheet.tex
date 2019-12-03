@@ -48,17 +48,23 @@
   \kern-\bshft$\SavedStyle#1$\cr%
   \kern\bshft$\SavedStyle#1$}}}
 
-%%% Macros
+%%% Macros %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\nn}{\nonumber} % kill eqnum
 \newcommand{\nncr}{\nonumber\\} % to kill eqnums on all eqs in env except last
 \newcommand{\eeg}{\emph{e.g. }}
 \newcommand{\eie}{\emph{i.e. }}
 \newcommand{\E}{\mathbb{E}} % (statistical) expectation
+\newcommand{\lp}{\left(}
+\newcommand{\rp}{\right)}
+\newcommand{\lb}{\left[}
+\newcommand{\rb}{\right]}
+
 %% Text
 \newcommand{\tbf}[1]{\textbf{#1}} % bold text
 \newcommand{\tit}[1]{\textit{#1}} % italic text
 \newcommand{\tbfit}[1]{\textbf{\textit{#1}}} % bold italic text
 \newcommand{\ttt}[1]{\texttt{#1}} % verbatim text
+
 %% Math
 \newcommand{\trm}[1]{\textrm{#1}} % text stylee math in math env
 \newcommand{\mbf}[1]{\mathbf{#1}} % bold math
@@ -67,13 +73,13 @@
 %% Bold math SYMBOLS. note \mathbf doesn't work on greek symbols. The modern way to
 % handle this is to use the bm package, but it doesn't seem to work.
 \newcommand{\bms}[1]{\boldsymbol{#1}}
+\renewcommand{\v}{\vec} % abbreviated vector (redefined from \vec)
 
 %% Other
 \newcommand{\blue}[1]{{\color{blue}#1}} % blue color shortcut
 \newcommand{\red}[1]{{\color{red}#1}}   % red color shortcut
 \newcommand{\TODO}[1]{\red{\tbf{TODO: #1}}} % colored TODO item
 \newcommand{\TODOFIN}[1]{\red{\tbf{TODO: finish --- #1}}} % colored TODO item++
-\renewcommand{\v}{\vec} % abbreviated vector (redefined from \vec)
 
 %% Bold matrix macros
 % Latin
@@ -90,6 +96,7 @@
 \newcommand{\mX}{\mbf{X}}
 \newcommand{\mY}{\mbf{Y}}
 \newcommand{\mZ}{\mbf{Z}}
+
 % Greek
 \newcommand{\mSigma}{\bms{\Sigma}}
 \newcommand{\mLambda}{\bms{\Lambda}}

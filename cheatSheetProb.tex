@@ -36,18 +36,17 @@
   under the square root.
   \begin{equation}
     \int_{-\infty}^{\infty} dx\, e^{-\trm{stuff}\, x^2} =
-    \left(\frac{\pi}{\trm{stuff}}\right)^{1/2}
+    \lp \frac{\pi}{\trm{stuff}} \rp^{1/2}
   \end{equation}
   so, for example:
   \begin{equation}
     \label{eq:int_gauss_a2}
-    \int_{-\infty}^{\infty} dx\, e^{-\frac{1}{2} a x^2} =
-    \left( \frac{2 \pi}{a} \right)^{1/2} 
+    \int_{-\infty}^{\infty} dx\, e^{-\frac{1}{2} a x^2} = \lp \frac{2 \pi}{a} \rp^{1/2} 
   \end{equation}
 
   \item The traditional Gaussian pdf is thus easily seen to be
   \begin{equation}
-    \mathcal{N}(x|0,\sigma^2) = \frac{1}{\left( 2 \pi \sigma^2 \right)^{1/2}}\,
+    \mathcal{N}(x|0,\sigma^2) = \frac{1}{\lp 2 \pi \sigma^2 \rp^{1/2}}\,
     e^{-\frac{1}{2 \sigma^2} x^2}
   \end{equation}
 \end{enumerate}
@@ -61,15 +60,15 @@ $n \in \mathbb{Z^+}$.
 \begin{equation}
   - 2 \frac{d}{da} \int_{-\infty}^{\infty}dx \, e^{-\frac{1}{2} a x^2} =
   \int_{-\infty}^{\infty}dx \, x^2 e^{-\frac{1}{2} a x^2} =
-  - 2 \frac{d}{da} \left( \frac{2\pi}{a} \right)^{1/2} =
-  \left( \frac{2\pi}{a} \right)^{1/2} \, \frac{1}{a} 
+  - 2 \frac{d}{da} \lp \frac{2\pi}{a} \rp^{1/2} =
+  \lp \frac{2\pi}{a} \rp^{1/2} \, \frac{1}{a} 
 \end{equation}
 For $n=2$:
 \begin{equation}
-  \left(- 2 \frac{d}{da}\right)^2 \int_{-\infty}^{\infty}dx \, e^{-\frac{1}{2} a x^2} =
+  \lp -2 \frac{d}{da} \rp^2 \int_{-\infty}^{\infty}dx \, e^{-\frac{1}{2} a x^2} =
   \int_{-\infty}^{\infty}dx \, x^4 e^{-\frac{1}{2} a x^2} =
-  \left(- 2 \frac{d}{da}\right)^2 \left( \frac{2\pi}{a} \right)^{1/2} =
-  \left(\frac{2\pi}{a} \right)^{1/2} \, \frac{1}{a} \, \frac{3}{a}
+  \lp -2 \frac{d}{da} \rp^2 \lp \frac{2\pi}{a} \rp^{1/2} =
+  \lp \frac{2\pi}{a} \rp^{1/2} \, \frac{1}{a} \, \frac{3}{a}
 \end{equation}
 We thus obtain an expression for the expectation value of $x^{2n}$ under the Gaussian
 distribution: 
@@ -89,13 +88,13 @@ To evaluate integrals of the form
 first complete the square in the exponent
 \begin{equation}
   -\frac{a}{2} x^2 + J x = -\frac{a}{2} (x^2 - \frac{2Jx}{a}) =
-  -\frac{a}{2} \left(x - \frac{J}{a}\right)^2 + \frac{J^2}{2a}
+  -\frac{a}{2} \lp x - \frac{J}{a} \rp^2 + \frac{J^2}{2a}
 \end{equation}
 which gives
 \begin{equation}
   \int_{-\infty}^{\infty} dx\, e^{-\frac{1}{2} a x^2 + J x} =
-  \int_{-\infty}^{\infty} dx\, e^{-\frac{1}{2} a\, \left(x - J/a \right)} e^{J^2 / 2a} =
-  \left(\frac{2\pi}{a} \right)^{1/2} \, e^{J^2 / 2a}
+  \int_{-\infty}^{\infty} dx\, e^{-\frac{1}{2} a\, \lp x - J/a \rp} e^{J^2 / 2a} =
+  \lp\frac{2\pi}{a} \rp^{1/2} \, e^{J^2 / 2a}
 \end{equation}
 where the first integral is done by shifting $x \to x + J a$.
 
@@ -107,7 +106,7 @@ as
 \end{equation}
 so that the moment generating function for the Gaussian distribution is
 \begin{equation}
-  \frac{1}{\left( 2 \pi \sigma^2 \right)^{1/2}}\, \int_{-\infty}^{\infty} dx\,
+  \frac{1}{\lp 2 \pi \sigma^2 \rp^{1/2}}\, \int_{-\infty}^{\infty} dx\,
   e^{J x}  e^{-\frac{1}{2 \sigma^2} x^2}, 
 \end{equation}
 \TODO{Finish. Figure out clear way to include normalization factor of pdf in exposition}
@@ -117,9 +116,9 @@ Promoting $a$ to a real $N \times N$ symmetric matrix $\mA$, and x and J to a $N
 vectors $\v{x}$ and $\v{J}$ with components $x_i$ and $J_i$, we have the multivariate
 Gaussian integral 
 \begin{equation}
-  \prod_{i=1}^N \left( \int_{-\infty}^{\infty} dx_i \right)
+  \prod_{i=1}^N \lp \int_{-\infty}^{\infty} dx_i \rp
   e^{-\frac{1}{2} \v{x}^T \mA \v{x} + \v{J}^T \v{x}} =
-  \left( \frac{(2 \pi)^N}{|\mA|} \right)^{1/2} e^{\frac{1}{2} \v{J}^T \mA^{-1} \v{J}}
+  \lp \frac{(2 \pi)^N}{|\mA|} \rp^{1/2} e^{\frac{1}{2} \v{J}^T \mA^{-1} \v{J}}
 \end{equation}
 \TODOFIN{}
 
@@ -144,16 +143,56 @@ Using $p(y|x) p(x) = p(x,y) = p(x|y) p(y)$, we have
   p(y|x) = \frac{p(x|y) p(y)}{p(x)} = \frac{p(x|y) p(y)}{\sum\limits_y p(x|y) p(y)}
 \end{equation}
 
-\subsection{Covariance}
+\subsection{Expectation and Variance}
+\label{sec:ExpVar}
+\begin{itemize}
+  \item \tbf{Expectations of sum of variables add}:\\
+  If $X_1, \dots, X_n$ are random variables, and $a_1, \dots, a_n$ are constants, then
+  \begin{equation}
+    \E \lp \sum_{i=1}^n a_i X_i \rp = \sum_{i=1}^n a_i\, \E (X_i)
+  \end{equation}
 
+  \item \tbf{Variances of sum of independent variables add}:\\
+  If $X_1, \dots, X_n$ are \emph{independent} random variables, and $a_1, \dots, a_n$
+  are constants, then
+  \begin{equation}
+    \trm{Var} \lp \sum_{i=1}^n a_i X_i \rp = \sum_{i=1}^n a_i^2\, \trm{Var} (X_i)
+  \end{equation}
+
+  \item \tbf{Variances of sum of (dependent) variables}:\\
+  If $X$ and $Y$ are random variables, then
+  \begin{align}
+    \trm{Var} (X + Y) &= \trm{Var}(X) + \trm{Var}(Y) + 2 \trm{Cov}(X, Y) \nncr
+    \trm{Var} (X - Y) &= \trm{Var}(X) + \trm{Var}(Y) - 2 \trm{Cov}(X, Y)
+  \end{align}
+  
+\end{itemize}
+
+\subsection{Central Limit Theorem}
+Let $S_N = \sum_{i=1}^N X_i$, where each $X_i$ is \tbf{iid} with mean $\mu$ and variance
+$\sigma^2$. Then, as $N \to \infty$, the pdf of $S_N$ approaches a normal distribution:
+\begin{equation}
+  p(S_N = s) = \frac{1}{\lp 2 \pi N \sigma^2 \rp^{1/2}} \exp \lb - \frac{(s - N
+    \mu)^2}{2 N \sigma^2} \rb 
+\end{equation}
+NB the factors of $N$ in the pdf, which make the pdf mean/variance equal to $N$ times
+the original mean/variance (\eie means and variances of independent variables add; see
+section \ref{sec:ExpVar}.)
+
+
+\subsection{(Weak) Law of Large Numbers}
+Let $X_1, \dots, X_n$ be \tbf{iid}, and $\mu = \E(X_1)$\footnote{$\mu = \E(X_1) =
+  \E(X_i)$ for any $1 \leq i \leq n$}. Defining the \tbfit{sample mean} as
+$\overline{X}_n = n^{-1} \sum_{i=1}^n X_i$, the WLLN states that $\overline{X}_n$
+converges in probability to $\mu$. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Information Theory}
 \paragraph{KL divergence:}
 \begin{align}
-  KL\big[p(x) || q(x)\big] &= \sum_{x_i} p(x_i) \log\left(\frac{p(x_i)}{q(x_i)} \right)
-                             = -\sum_{x_i} p(x_i) \log\left(\frac{q(x_i)}{p(x_i)}
-                             \right) \nncr 
+  KL\big[p(x) || q(x)\big] &= \sum_{x_i} p(x_i) \log \lp \frac{p(x_i)}{q(x_i)} \rp
+                             = -\sum_{x_i} p(x_i) \log \lp \frac{q(x_i)}{p(x_i)} \rp
+                             \nncr 
                            &= -\sum_{x_i} p(x_i) \log q(x_i) + \sum_{x_i} p(x_i) \log
                              p(x_i) \nncr 
                            &= H(p,q) - H(p)
