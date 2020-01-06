@@ -207,7 +207,7 @@ model) because ``we could just tweak the values of the hypers until the estimato
 performs optimally [on the test set]''.
 
 Cross-validation allows you to do model scoring (on frequentist stats, versus \eeg info
-criteria for Bayesian stats.. \TODO{verify I know what I'm talking about}).
+criteria for Bayesian stats.. \LATODO{verify I know what I'm talking about}).
 
 Can average together multiple models with high capacity (low bias, but high
 variance). The result of combining is to \emph{reduce} the variance of the combined
@@ -382,7 +382,7 @@ multivariate Gaussian
   p(\v{t} | \v{y}) = \mathcal{N}(\v{t} | \v{y}, \beta^{-1} \mbf{I}_m)
 \end{equation}
 To get the joint distribution $p(\v{t})$ over all the target variables, we integrate out
-$\v{y}$ via \ref{eq:gauss_bayes_marg}, analogous to how we integrate out the weights
+$\v{y}$ via \eqref{eq:gauss_bayes_marg}, analogous to how we integrate out the weights
 $\v{w}$ in Bayesian regression,
 \begin{equation}
   p(\v{t}) = \int p(\v{t} | \v{y}) p(\v{y}) d\v{y} = \mathcal{N}(\v{t} | \v{0}, \mbf{C})
@@ -419,9 +419,8 @@ The conditional distribution $p(t_{m+1} | \v{t})$ is then given by a Gaussian wi
   m(\v{x}_{m+1})         &= \v{k}^T \mbf{C}_m^{-1}\, \v{t}\\
   \sigma^2 (\v{x}_{m+1}) &= c - \v{k}^T \mbf{C}_m^{-1}\, \v{k}.
 \end{align}
-which we obtain by using \ref{eq:gauss_part_cond}.
-
-\TODO{check this to make sure it's the right eq.}
+which we obtain by using \eqref{eq:gauss_part_cond}. \LATODO{check to make sure this is
+  the right eq.}
 
 
 

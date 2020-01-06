@@ -17,6 +17,7 @@
 \usepackage{parskip}
 % use biblatex for citation management. 'style=draft' allows for literal citation names
 \usepackage[backend=biber,style=draft]{biblatex}
+\usepackage{amsthm} % more advanced theorem environments
 
 % increase spacing between paragraphs (to make up for the lack of indentaiton)
 \setlength{\parskip}{4pt}
@@ -54,10 +55,14 @@
 \newcommand{\eeg}{\emph{e.g. }}
 \newcommand{\eie}{\emph{i.e. }}
 \newcommand{\E}{\mathbb{E}} % (statistical) expectation
+\newcommand{\cO}{\mathcal{O}} % abbreviation for script "O", (for 'order')
+\newcommand{\cN}{\mathcal{N}} % abbreviation for script "N", (eg Normal distribution)
 \newcommand{\lp}{\left(}
 \newcommand{\rp}{\right)}
 \newcommand{\lb}{\left[}
 \newcommand{\rb}{\right]}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
 
 %% Text
 \newcommand{\tbf}[1]{\textbf{#1}} % bold text
@@ -66,6 +71,11 @@
 \newcommand{\ttt}[1]{\texttt{#1}} % verbatim text
 
 %% Math
+% Math symbol abbreviations
+\renewcommand{\v}{\vec} % abbreviated vector (redefined from \vec)
+\renewcommand{\d}{\delta}
+\newcommand{\p}{\partial}
+% Math styles
 \newcommand{\trm}[1]{\textrm{#1}} % text stylee math in math env
 \newcommand{\mbf}[1]{\mathbf{#1}} % bold math
 \newcommand{\mbb}[1]{\mathbb{#1}} % set-type math chars
@@ -73,12 +83,12 @@
 %% Bold math SYMBOLS. note \mathbf doesn't work on greek symbols. The modern way to
 % handle this is to use the bm package, but it doesn't seem to work.
 \newcommand{\bms}[1]{\boldsymbol{#1}}
-\renewcommand{\v}{\vec} % abbreviated vector (redefined from \vec)
 
 %% Other
 \newcommand{\blue}[1]{{\color{blue}#1}} % blue color shortcut
 \newcommand{\red}[1]{{\color{red}#1}}   % red color shortcut
 \newcommand{\TODO}[1]{\red{\tbf{TODO: #1}}} % colored TODO item
+\newcommand{\LATODO}[1]{\red{$\leftarrow$ \tbf{TODO: #1}}} % TODO preceded by left arrow 
 \newcommand{\TODOFIN}[1]{\red{\tbf{TODO: finish --- #1}}} % colored TODO item++
 
 %% Bold matrix macros
@@ -96,16 +106,40 @@
 \newcommand{\mX}{\mbf{X}}
 \newcommand{\mY}{\mbf{Y}}
 \newcommand{\mZ}{\mbf{Z}}
-
 % Greek
 \newcommand{\mSigma}{\bms{\Sigma}}
 \newcommand{\mLambda}{\bms{\Lambda}}
 \newcommand{\mPhi}{\bms{\Phi}}
 
-% Proclamation styles
+%% Proclamation styles
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem} % unnumbered theorem
 \newtheorem{definition}{Definition}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{lemma}{Lemma}
 
-% Non-indenting itemize
+%% Proclamation styles with manual numbering
+\newtheorem{innercustomthm}{Theorem}
+\newenvironment{customthm}[1]
+{\renewcommand\theinnercustomthm{#1}\innercustomthm}
+{\endinnercustomthm}
+
+\newtheorem{innercustomdef}{Definition}
+\newenvironment{customdef}[1]
+{\renewcommand\theinnercustomdef{#1}\innercustomdef}
+{\endinnercustomdef}
+
+\newtheorem{innercustomconj}{Conjecture}
+\newenvironment{customconj}[1]
+{\renewcommand\theinnercustomconj{#1}\innercustomconj}
+{\endinnercustomconj}
+
+\newtheorem{innercustomlem}{Lemma}
+\newenvironment{customlem}[1]
+{\renewcommand\theinnercustomlem{#1}\innercustomlem}
+{\endinnercustomlem}
+
+%% Non-indenting itemize
 \newenvironment{itemize-noindent}
 {\setlength{\leftmargini}{0em}\begin{itemize}}
 {\end{itemize}}
