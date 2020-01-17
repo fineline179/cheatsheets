@@ -4,7 +4,7 @@
 \documentclass[11pt]{article}
 \synctex=1
 \input{structure_cheatSheet.tex}
-\addbibresource{refs.bib}
+\addbibresource{refs_cheatSheet.bib}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title{ML Cheatsheet}
@@ -505,7 +505,7 @@ closed form. Try:
 
 \subsection{Gaussians}
 \subsubsection{Partitioned Gaussians: Conditional and Marginal Distributions}
-From \cite{BISHOP}, sections 2.3.1 - 2.3.2.
+From \cite[sections 2.3.1 - 2.3.2]{BISHOP}.
 
 Consider a joint Gaussian distribution, $\mathcal{N}(\v{x} | \v{\mu}, \mSigma)$ with
 $\mLambda \equiv \mSigma^{-1}$ and
@@ -562,7 +562,7 @@ The \tit{marginal distribution} is:
 \end{equation}
 
 \subsubsection{Bayes' theorem for Gaussian variables}
-From \cite{BISHOP}, section 2.3.3. NB This is known as a \tbfit{linear Gaussian model}.
+From \cite[section 2.3.3]{BISHOP}. NB This is known as a \tbfit{linear Gaussian model}.
 
 Given a marginal Gaussian distribution for $\v{x}$ and a conditional Gaussian
 distribution for $\v{y}$ given $\v{x}$ in the form:

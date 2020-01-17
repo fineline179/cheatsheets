@@ -5,7 +5,7 @@
 \synctex=1
 \input{structure_cheatSheet.tex}
 \usepackage{xfrac}
-\addbibresource{refs.bib}
+\addbibresource{refs_cheatSheet.bib}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title{Prob/Stats Cheatsheet}
@@ -44,7 +44,7 @@
     \int_{-\infty}^{\infty} dx\, e^{-\frac{1}{2} a x^2} = \lp \frac{2 \pi}{a} \rp^{1/2} 
   \end{equation}
 
-  \item The traditional Gaussian pdf is thus easily seen to be
+  \item The traditional Gaussian pdf has $a = 1 / \sigma^2$, and is easily seen to be
   \begin{equation}
     \mathcal{N}(x|0,\sigma^2) = \frac{1}{\lp 2 \pi \sigma^2 \rp^{1/2}}\,
     e^{-\frac{1}{2 \sigma^2} x^2}
@@ -52,6 +52,7 @@
 \end{enumerate}
 
 \subsubsection{Differentiation moment trick}
+\label{subsubsec:dmt}
 By differentiating Eq. \ref{eq:int_gauss_a2} wrt $a$, we obtain an expression for
 integrals of the form $\int_{-\infty}^{\infty}dx \, x^{2n} e^{-\frac{1}{2} a x^2}$, with
 $n \in \mathbb{Z^+}$.
@@ -70,9 +71,17 @@ For $n=2$:
   \lp -2 \frac{d}{da} \rp^2 \lp \frac{2\pi}{a} \rp^{1/2} =
   \lp \frac{2\pi}{a} \rp^{1/2} \, \frac{1}{a} \, \frac{3}{a}
 \end{equation}
+Generally:
+\begin{equation}
+  \int_{-\infty}^{\infty}dx \, x^{2n} e^{-\frac{1}{2} a x^2} =
+  \lp \frac{2\pi}{a} \rp^{1/2} \frac{1}{a^n} (2n-1) (2n-3) \cdot\cdot\cdot 5 \cdot 3
+  \cdot 1 
+\end{equation}
+
 We thus obtain an expression for the expectation value of $x^{2n}$ under the Gaussian
 distribution: 
 \begin{equation}
+  \label{eq:x2n_moments}
   \langle x^{2n} \rangle =
   \frac{\int_{-\infty}^{\infty}dx \, x^{2n} e^{-\frac{1}{2} a x^2}}
        {\int_{-\infty}^{\infty}dx \, e^{-\frac{1}{2} a x^2}} =
@@ -87,7 +96,7 @@ To evaluate integrals of the form
 \end{equation}
 first complete the square in the exponent
 \begin{equation}
-  -\frac{a}{2} x^2 + J x = -\frac{a}{2} (x^2 - \frac{2Jx}{a}) =
+  -\frac{a}{2} x^2 + J x = -\frac{a}{2} \lp x^2 - \frac{2Jx}{a} \rp =
   -\frac{a}{2} \lp x - \frac{J}{a} \rp^2 + \frac{J^2}{2a}
 \end{equation}
 which gives
@@ -96,19 +105,29 @@ which gives
   \int_{-\infty}^{\infty} dx\, e^{-\frac{1}{2} a\, \lp x - J/a \rp} e^{J^2 / 2a} =
   \lp\frac{2\pi}{a} \rp^{1/2} \, e^{J^2 / 2a}
 \end{equation}
-where the first integral is done by shifting $x \to x + J a$.
+where the integral is done by shifting $x \to x + J a$ (or noting that the infinite
+integral of a Gaussian is independent of its mean.)
 
-Eq. \ref{eq:int_gauss_a2_j} is also (close to) the \tbfit{moment generating function} of
-the Gaussian distribution. Given a pdf $p(x)$, the moment generating function is defined
-as
+By differentiating this expression wrt $J$ repeatedly, and finally setting $J=0$, we
+obtain another way of deriving the moments of the Gaussian,
+Eq. \eqref{eq:x2n_moments}. This motivates the introduction of the \tbfit{moment
+  generating function}: given a pdf $p(x)$, the moment generating function is
 \begin{equation}
-  \psi_x(J) = \int_{-\infty}^{\infty} dx\, e^{J x} p(x)
+  \psi_x(J) = \E_x \lb e^{J x} \rb = \int_{-\infty}^{\infty} dx\, e^{J x} p(x)
 \end{equation}
-so that the moment generating function for the Gaussian distribution is
+which satisfies
 \begin{equation}
-  \frac{1}{\lp 2 \pi \sigma^2 \rp^{1/2}}\, \int_{-\infty}^{\infty} dx\,
-  e^{J x}  e^{-\frac{1}{2 \sigma^2} x^2}, 
+  \la x^n \ra = \frac{d^n\, \psi_x(J)}{d J^n}\Bigg|_{J=0}
 \end{equation}
+
+% so that the moment generating function for the Gaussian distribution is
+% \begin{equation}
+%   \frac{1}{\lp 2 \pi \sigma^2 \rp^{1/2}}\, \int_{-\infty}^{\infty} dx\,
+%   e^{J x}  e^{-\frac{1}{2 \sigma^2} x^2}, 
+% \end{equation}
+
+
+
 \TODO{Finish. Figure out clear way to include normalization factor of pdf in exposition}
 
 \subsubsection{Multivariate Gaussians}
@@ -122,11 +141,15 @@ Gaussian integral
 \end{equation}
 \TODOFIN{}
 
+A detailed workthrough of multivariate Gaussian integrals is in
+\href{http://vixra.org/abs/1404.0026}{\ttt{viXra:1404.0026}}.
+
 \subsection{Bernoulli}
-For $x \in \{0, 1\}$, Bernoulli dist parametrized by $\mu$, with
+For $x \in \{0, 1\}$, Bernoulli dist parameterized by $\mu$, with
 \begin{equation}
   p(x; \mu) = \mu^x (1-\mu)^{1-x}
 \end{equation}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -186,18 +209,20 @@ Let $X_1, \dots, X_n$ be \tbf{iid}, and $\mu = \E(X_1)$\footnote{$\mu = \E(X_1) 
 $\overline{X}_n = n^{-1} \sum_{i=1}^n X_i$, the WLLN states that $\overline{X}_n$
 converges in probability to $\mu$. 
 
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Information Theory}
 \paragraph{KL divergence:}
 \begin{align}
-  KL\big[p(x) || q(x)\big] &= \sum_{x_i} p(x_i) \log \lp \frac{p(x_i)}{q(x_i)} \rp
-                             = -\sum_{x_i} p(x_i) \log \lp \frac{q(x_i)}{p(x_i)} \rp
-                             \nncr 
-                           &= -\sum_{x_i} p(x_i) \log q(x_i) + \sum_{x_i} p(x_i) \log
-                             p(x_i) \nncr 
-                           &= H(p,q) - H(p)
+  KL\big[p(x) || q(x)\big]
+  &= \sum_{x_i} p(x_i) \log \lp \frac{p(x_i)}{q(x_i)} \rp
+    = -\sum_{x_i} p(x_i) \log \lp \frac{q(x_i)}{p(x_i)} \rp \nncr 
+  &= -\sum_{x_i} p(x_i) \log q(x_i) + \sum_{x_i} p(x_i) \log p(x_i) \nncr 
+  &= H(p,q) - H(p)
 \end{align}
 where $H(p,q)$ is the cross entropy, and $H(p)$ is the entropy.
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
