@@ -137,7 +137,7 @@ Gaussian integral
 \begin{equation}
   \prod_{i=1}^N \lp \int_{-\infty}^{\infty} dx_i \rp
   e^{-\frac{1}{2} \v{x}^T \mA \v{x} + \v{J}^T \v{x}} =
-  \lp \frac{(2 \pi)^N}{|\mA|} \rp^{1/2} e^{\frac{1}{2} \v{J}^T \mA^{-1} \v{J}}
+  \lp \frac{(2 \pi)^{N/2}}{|\mA|^{1/2}} \rp e^{\frac{1}{2} \v{J}^T \mA^{-1} \v{J}}
 \end{equation}
 \TODOFIN{}
 
@@ -150,7 +150,21 @@ For $x \in \{0, 1\}$, Bernoulli dist parameterized by $\mu$, with
   p(x; \mu) = \mu^x (1-\mu)^{1-x}
 \end{equation}
 
+\subsection{Exponential Family}
+These are pdfs of the form
+\begin{equation}
+  p(x;\eta) = b(x) \exp \lb \eta^T T(x) - a(\eta) \rb
+\end{equation}
+where
+\begin{itemize}
+  \item $\eta$ is the \tbfit{natural} or \tbfit{canonical parameter}
+  \item $T(x)$ is the \tbfit{sufficient statistic}
+  \item $a(\eta)$ is the \tbfit{log partition function}
+  \item $b(x)$ determines the distribution at $\eta = 0$
+\end{itemize}
 
+\TODO{more detail about the above terms. \eeg the $\eta$ are the sources or external
+  fields.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Prob and stats}
