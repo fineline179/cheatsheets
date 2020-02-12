@@ -153,17 +153,17 @@ For $x \in \{0, 1\}$, Bernoulli dist parameterized by $\mu$, with
 \subsection{Exponential Family}
 These are pdfs of the form
 \begin{equation}
-  p(x;\eta) = b(x) \exp \lb \eta^T T(x) - a(\eta) \rb
+  p(x;\theta) = h(x) \exp \lb \theta^T T(x) - A(\theta) \rb
 \end{equation}
 where
 \begin{itemize}
-  \item $\eta$ is the \tbfit{natural} or \tbfit{canonical parameter}
+  \item $\theta$ is the \tbfit{natural} or \tbfit{canonical parameter}
   \item $T(x)$ is the \tbfit{sufficient statistic}
-  \item $a(\eta)$ is the \tbfit{log partition function}
-  \item $b(x)$ determines the distribution at $\eta = 0$
+  \item $A(\theta)$ is the \tbfit{log partition function}
+  \item $h(x)$ determines the distribution at $\theta = 0$
 \end{itemize}
 
-\TODO{more detail about the above terms. \eeg the $\eta$ are the sources or external
+\TODO{more detail about the above terms. \eeg the $\theta$ are the sources or external
   fields.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

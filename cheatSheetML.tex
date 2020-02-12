@@ -350,8 +350,8 @@ hypothesis evaluated on our training examples is an $m$-dim vector
 \end{equation}
 Each element of $\v{y}$ is a linear combination of Gaussians (given by the $\v{w}$
 prior), where the weights in the linear combination come from elements of the design
-matrix. Thus the vector $\v{y}$ itself is a multivariate Gaussian, completely specified
-by its mean vector and covariance matrix.
+matrix; thus each element of $\v{y}$ is a Gaussian. Then the vector $\v{y}$ itself is a
+multivariate Gaussian, completely specified by its mean vector and covariance matrix.
 \begin{align}
   \E_{\v{w}}[\v{y}] &= \mPhi\, \E_{\v{w}}[\v{w}] = \v{0} \\
   \trm{cov}[\v{y}]  &= \E_{\v{w}}[\v{y} \v{y}^T]
@@ -414,7 +414,7 @@ where
   \item $c = k(\v{x}_{m+1}, \v{x}_{m+1}) + \beta^{-1}$
 \end{itemize}
 
-The conditional distribution $p(t_{m+1} | \v{t})$ is then given by a Gaussian with
+The conditional distribution $p\lp t_{m+1} | \v{t} \rp$ is then given by a Gaussian with
 \begin{align}
   m(\v{x}_{m+1})         &= \v{k}^T \mbf{C}_m^{-1}\, \v{t}\\
   \sigma^2 (\v{x}_{m+1}) &= c - \v{k}^T \mbf{C}_m^{-1}\, \v{k}.
