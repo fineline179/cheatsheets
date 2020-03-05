@@ -18,7 +18,45 @@
 \TODO{make sidebar marker telling what python library command depends on (and
 needs to be loaded beforehand)}
 
-\section{Data Processing}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\section{Python}
+
+\subsection{Lists and Dicts}
+
+\subsubsection{Lists}
+With list name \ttt{foo}:
+\begin{description}
+  \setlength\itemsep{1pt}
+  \item[Init list of length <n> with <constant>:] \ttt{foo = [<constant>] * <n>} 
+  \item[Add <val> to end of list:] \ttt{foo.append(<val>)}
+  \item[Remove list item at pos <n> (or end if <n> unspecified):] \ttt{foo.pop(<n>)}
+  \item[Sum of list:] \ttt{sum(foo)}
+  \item[Get indexed elements as tuples (index, el) from list or NDArray:]
+  \ttt{enumerate(list)} 
+\end{description}
+
+\subsubsection{Dicts}
+Dictionaries are key-value stores, \eie hashtables. With dictionary name \ttt{foo}:
+\begin{description}
+  \setlength\itemsep{1pt}
+  \item[Add <key>-<value> pair:] \ttt{foo[<key>] = <value>} 
+  \item[Iterate though <key>-<value> pairs:] \ttt{for (key, value) in foo.items()}
+  \item[Test if <key> in dict:] \ttt{<key> in foo}
+\end{description}
+
+\subsection{Sorting}
+With sortable-thing name \ttt{foo}:
+\begin{description}
+  \setlength\itemsep{1pt}
+  \item[Sort (modify in place):] \ttt{foo.sort()}
+  \item[Sort (make a copy):] \ttt{foo.sorted()}
+  \item[Specify field to sort by (here by 2nd element of tuple):]
+  \ttt{foo.sorted(key=lambda x: x[1])}
+  \item[Sort in reverse order:] \ttt{foo.sorted(reverse=True)}
+\end{description}
+
+\subsection{Data Processing}
 \begin{description}
   \setlength\itemsep{1pt}
   \item[Read data from json file:] \ttt{with open('data.json', 'r') as f: data =
@@ -30,15 +68,23 @@ needs to be loaded beforehand)}
   {https://docs.python.org/3/library/re.html}
 \end{description}
 
-
-\section{Misc}
+\subsection{Misc}
 \begin{description}
   \setlength\itemsep{1pt}
-  \item[Get indexed elements from list or NDArray:] \ttt{enumerate(list)}
+  \item[Return integer representing Unicode <char>:] \ttt{ord(<char>)} 
 \end{description}
 
+\subsection{re}
+\begin{description}
+  \setlength\itemsep{1pt}
+  \item{}
+\end{description}
+
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Numpy}
-Using \ttt{import numpy as np}
+Using \ttt{import numpy as np}:
 
 \subsection{Data Processing}
 \begin{description}
@@ -98,11 +144,10 @@ Using \ttt{import numpy as np}
 \end{description}
 
 
-
 \newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Matplotlib}
-Using \ttt{import matplotlib as mpl}, \ \ttt{import matplotlib.pyplot as plt}
+Using \ttt{import matplotlib as mpl}, \ \ttt{import matplotlib.pyplot as plt}:
 
 \begin{description}
   \setlength\itemsep{1pt}
@@ -123,23 +168,15 @@ Using \ttt{import matplotlib as mpl}, \ \ttt{import matplotlib.pyplot as plt}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{sklearn}
+\section{Scikit-learn}
 
 \begin{description}
   \setlength\itemsep{1pt}
   \item[Cross Validation:] \ttt{sklearn.model\_selection.cross\_val\_score}
 \end{description}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{re}
 
-\begin{description}
-  \setlength\itemsep{1pt}
-  \item{}
-
-\end{description}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 \section{packages to try}
 
 \begin{description}
