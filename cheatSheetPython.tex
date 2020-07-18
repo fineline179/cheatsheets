@@ -31,6 +31,7 @@ With list name \ttt{foo}:
   \item[Init list of length <n> with <constant>:] \ttt{foo = [<constant>] * <n>} 
   \item[Add <val> to end of list:] \ttt{foo.append(<val>)}
   \item[Remove list item at pos <n> (or end if <n> unspecified):] \ttt{foo.pop(<n>)}
+  \item[Insert <val> into list before position <n>:] \ttt{foo.insert(<n>, <val>)}
   \item[Sum of list:] \ttt{sum(foo)}
   \item[Get indexed elements as tuples (index, el) from list or NDArray:]
   \ttt{enumerate(list)} 
@@ -95,7 +96,7 @@ Using \ttt{import numpy as np}:
 \subsection{Number generation}
 \begin{description}
   \setlength\itemsep{1pt}
-  \item[Constant matrix:] \ttt{np.full(shape, val)}
+  \item[Constant matrix of <val>:] \ttt{np.full(shape, <val>)}
   \item[Matrix of ones/zeros:] \ttt{np.ones(shape)}, \quad \ttt{np.zeros(shape)}
   \item[Id matrix:] \ttt{np.eye(dim)}
   \item[Uniform dist on (low,high):] \ttt{np.random.uniform(low, high, numsamps or
@@ -131,8 +132,8 @@ Using \ttt{import numpy as np}:
   \item[fill diagonal of sq matrix:] \ttt{np.fill\_diagonal(NDArray, val)}
   \item[round elements to nearest int:] \ttt{np.rint(NDArray)}
   \item[return bin counts in histogram:] \ttt{np.histogram(NDArray, binboundaries)}
-  \item[nth difference of array:]\footnote{Think transforming array of tick prices into
-    array of tick prices \emph{changes}} \ttt{np.diff(NDArray, n)}
+  \item[<n>th difference of array:]\footnote{Think transforming array of tick prices
+    into array of tick prices \emph{changes}} \ttt{np.diff(NDArray, <n>)}
 \end{description}
 
 \subsection{Linear Algebra}

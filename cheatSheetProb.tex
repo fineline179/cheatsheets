@@ -145,7 +145,8 @@ A detailed workthrough of multivariate Gaussian integrals is in
 \href{http://vixra.org/abs/1404.0026}{\ttt{viXra:1404.0026}}.
 
 \subsection{Bernoulli}
-For $x \in \{0, 1\}$, Bernoulli dist parameterized by $\mu$, with
+For $x \in \{0, 1\}$, Bernoulli dist parameterized by $\mu$ (prob of drawing $x=1$ is
+$\mu$).
 \begin{equation}
   p(x; \mu) = \mu^x (1-\mu)^{1-x}
 \end{equation}
@@ -222,6 +223,20 @@ Let $X_1, \dots, X_n$ be \tbf{iid}, and $\mu = \E(X_1)$\footnote{$\mu = \E(X_1) 
   \E(X_i)$ for any $1 \leq i \leq n$}. Defining the \tbfit{sample mean} as
 $\overline{X}_n = n^{-1} \sum_{i=1}^n X_i$, the WLLN states that $\overline{X}_n$
 converges in probability to $\mu$. 
+
+
+\subsection{Misc}
+
+\subsubsection{Expected Number of Trials (Geometric Distribution)}
+For Benoulli var which is 1 with prob $\mu$, what is expected number of independent draws
+to get first 1?
+
+\begin{align}
+  p(\textrm{1 first occurs on $k$th draw}) &= (1-\mu)^{k-1} \mu \nncr
+  \E[k] = \sum_{k=1}^{\infty} k \cdot p(\textrm{1 first occurs on $k$th draw}) &=
+          \sum_{k=1}^{\infty} k (1-\mu)^{k-1} \mu = \frac{1}{\mu}
+\end{align}
+
 
 
 
