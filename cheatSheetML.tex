@@ -649,10 +649,10 @@ Q: what is proper way to estimate $\beta$ and $\alpha$ here?
 \subsection{Full Bayesian (stationary prior)}
 Calc posterior
 $p(\theta | y) = p(y | \theta ; \beta) p(\theta ; \alpha) / p(y ; \alpha, \beta)$, where
-$p(y ; \alpha, \beta) = \int_\theta p(y | \theta ; \beta) p(\theta ; \alpha)$ is the
-evidence. Determine values of hypers $\alpha, \beta$ by maximizing evidence. This is
-difficult to do directly, as derivs wrt $\alpha, \beta$ are hard to compute, so use EM
-algorithm.
+$p(y ; \alpha, \beta) = \int_\theta p(y | \theta ; \beta) p(\theta ; \alpha) d\theta$ is
+the \tbfit{evidence}. Determine values of hypers $\alpha, \beta$ by maximizing evidence
+wrt them. This is difficult to do directly, as derivs wrt $\alpha, \beta$ are hard to
+compute, so use EM algorithm.
 
 \subsection{Variational Bayes (non-stationary prior)}
 
