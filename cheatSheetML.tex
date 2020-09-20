@@ -475,33 +475,81 @@ closed form. Try:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{appendices}
-  \section{Math Stuff}
 
-  \subsection{Matrix Stuff}
-  \subsubsection{Partitioned Matrix Inversion}
-  Given block decomposition of matrix into submatrices
-  $\mA, \mB, \mC, \mD$, the inverse is:
-  \begin{equation}
-    \left(
-      \begin{matrix}
-        \mA & \mB \\
-        \mC & \mD
-      \end{matrix}
-    \right)^{-1}
-    =
-    \left(
-      \begin{matrix}
-        \mM                     & - \mM \mB \mD^{-1} \\
-        -\mD^{-1} \mC \mM \quad & \mD^{-1} + \mD^{-1} \mC \mM \mB \mD^{-1}
-      \end{matrix}
-    \right),
-  \end{equation}
-  where
-  \begin{equation}
-    \mM = \left(\mA - \mB \mD^{-1} \mC \right)^{-1}
-  \end{equation}
-  (NB compare with Matt Headrick's compendium inversion formula)
+\section{Math Stuff}
 
+\subsection{Matrix Stuff}
+  
+\subsubsection{Matrix Identities}
+\paragraph{Trace Identities}
+\begin{itemize}
+  \item $\trm{Tr}(\mA^T) = \trm{Tr}(\mA)$
+  \item $\trm{Tr}(\mA + \mB) = \trm{Tr}(\mA) + \trm{Tr}(\mB)$
+  \item $\trm{Tr}(a \mA) = a \trm{Tr}(\mA)$ \qquad (with $a$ a scalar)
+  \item $\trm{Tr}(\mA \mB) = \trm{Tr}(\mB \mA)$
+  \item $\trm{Tr}(\mA \mB \mC) = \trm{Tr}(\mB \mC \mA) = \trm{Tr}(\mC \mA \mB)$ \qquad
+  (cyclicity of trace)
+\end{itemize}
+
+\paragraph{Determinant Identities}
+\begin{itemize}
+  \item $|\mA \mB| = |\mA| |\mB|$
+  \item $|\mA^{-1}| = \frac{1}{|\mA|}$
+\end{itemize}
+
+\paragraph{Transpose Identities}
+\begin{itemize}
+  \item $(\mA \mB)^T = \mB^T \mA^T$
+\end{itemize}
+
+\paragraph{Inverse Indentities}
+\begin{itemize}
+  \item $(\mA \mB)^{-1} = \mB^{-1} \mA^{-1}$
+  \item $(\mA^T)^{-1} = (\mA^{-1})^T$
+\end{itemize}
+
+\subsubsection{Matrix derivatives}
+\begin{equation}
+  \frac{\partial}{\partial \v{x}} \left( \v{x}^T \v{a} \right) =
+  \frac{\partial}{\partial \v{x}} \left( \v{a}^T \v{x} \right) =
+  \v{a}\footnote{\TODO{review understanding of this (I recall this expression was not
+      enough to answer my questions on a formula derivation) and give examples.}}  
+\end{equation}
+
+For a matrix $\mA(x)$ as a function of a scalar $x$ (equivalently a component $x_i$ of a
+vector $\vec x$)
+
+\begin{equation}
+  \frac{\partial}{\partial x} \log |\mA| = \trm{Tr} \left(\mA^{-1} \frac{\partial
+      \mA}{\partial x} \right)
+\end{equation}
+
+\subsubsection{Partitioned Matrix Inversion}
+Given block decomposition of matrix into submatrices
+$\mA, \mB, \mC, \mD$, the inverse is:
+\begin{equation}
+  \left(
+    \begin{matrix}
+      \mA & \mB \\
+      \mC & \mD
+    \end{matrix}
+  \right)^{-1}
+  =
+  \left(
+    \begin{matrix}
+      \mM                     & - \mM \mB \mD^{-1} \\
+      -\mD^{-1} \mC \mM \quad & \mD^{-1} + \mD^{-1} \mC \mM \mB \mD^{-1}
+    \end{matrix}
+  \right),
+\end{equation}
+where
+\begin{equation}
+  \mM = \left(\mA - \mB \mD^{-1} \mC \right)^{-1}
+\end{equation}
+(NB compare with Matt Headrick's compendium inversion formula)
+  
+\subsubsection{Symmetric Matrix Properties}
+\TODO{Do this section.}
 
 \subsection{Gaussians}
 \subsubsection{Partitioned Gaussians: Conditional and Marginal Distributions}
@@ -621,16 +669,6 @@ eigenvalues.
 
 \TODOFIN{}
 
-\subsection{Matrix derivatives}
-
-\begin{equation}
-  \frac{\partial}{\partial \v{x}} \left( \v{x}^T \v{a} \right) =
-  \frac{\partial}{\partial \v{x}} \left( \v{a}^T \v{x} \right) =
-  \v{a} 
-\end{equation}
-
-\TODO{review understanding of this (I recall this expression was not enough to answer my
-  questions on a formula derivation) and give examples.}
 
 
 
