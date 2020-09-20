@@ -481,6 +481,9 @@ closed form. Try:
 \subsection{Matrix Stuff}
   
 \subsubsection{Matrix Identities}
+
+(NB More useful stuff in \cite{BARBER} chapter 29.)
+
 \paragraph{Trace Identities}
 \begin{itemize}
   \item $\trm{Tr}(\mA^T) = \trm{Tr}(\mA)$
@@ -491,15 +494,16 @@ closed form. Try:
   (cyclicity of trace)
 \end{itemize}
 
+\paragraph{Transpose Identities}
+\begin{itemize}
+  \item $(\mA \mB)^T = \mB^T \mA^T$
+\end{itemize}
+
 \paragraph{Determinant Identities}
 \begin{itemize}
   \item $|\mA \mB| = |\mA| |\mB|$
   \item $|\mA^{-1}| = \frac{1}{|\mA|}$
-\end{itemize}
-
-\paragraph{Transpose Identities}
-\begin{itemize}
-  \item $(\mA \mB)^T = \mB^T \mA^T$
+  \item $|\mA^T| = |\mA|$
 \end{itemize}
 
 \paragraph{Inverse Indentities}
@@ -523,6 +527,8 @@ vector $\vec x$)
   \frac{\partial}{\partial x} \log |\mA| = \trm{Tr} \left(\mA^{-1} \frac{\partial
       \mA}{\partial x} \right)
 \end{equation}
+
+
 
 \subsubsection{Partitioned Matrix Inversion}
 Given block decomposition of matrix into submatrices
