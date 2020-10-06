@@ -90,7 +90,7 @@ Using \ttt{import numpy as np}:
 \subsection{Data Processing}
 \begin{description}
   \setlength\itemsep{1pt}
-  \item[Import data from csv file:] \ttt{np.genfromtxt('filename', delimiter='','')}
+  \item[Import data from csv file:] \ttt{np.genfromtxt('filename', delimiter=',')}
 \end{description}
 
 \subsection{Number generation}
@@ -109,8 +109,11 @@ Using \ttt{import numpy as np}:
   \item[Permute elements of (range or ndarray) \emph{in place}:]
   \ttt{np.random.shuffle(int or NDArray)}
   \item[Integers over specified range:] \ttt{np.arange(start, stop)}
-  \item[Even spaced numbers over specified range:] \ttt{np.linspace(start, stop,
+  \item[Evenly spaced numbers over range w/ int \ttt{stepsize}:] \ttt{np.arange(beg,
+    end, stepsize)}
+  \item[\ttt{numvals} Evenly spaced numbers over range:] \ttt{np.linspace(bed, end,
     numvals)}
+
 \end{description}
 
 \subsection{NDArray handling}
