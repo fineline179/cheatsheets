@@ -1,7 +1,7 @@
 %% Python cheat sheet
 %% (compile with XeTeX. see notes in structure_cheatSheet.tex if no XeTeX.)
 
-\documentclass[11pt]{article}
+\documentclass[10pt]{article}
 \synctex=1
 \input{structure_cheatSheet.tex}
 
@@ -25,7 +25,8 @@ needs to be loaded beforehand)}
 \subsection{Lists and Dicts}
 
 \subsubsection{Lists}
-With list name \ttt{foo}:
+! With list name \ttt{foo}:
+
 \begin{description}
   \setlength\itemsep{1pt}
   \item[Init list of length <n> with <constant>:] \ttt{foo = [<constant>] * <n>} 
@@ -38,7 +39,8 @@ With list name \ttt{foo}:
 \end{description}
 
 \subsubsection{Dicts}
-Dictionaries are key-value stores, \eie hashtables. With dictionary name \ttt{foo}:
+! Dictionaries are key-value stores, \eie hashtables. With dictionary name \ttt{foo}:
+
 \begin{description}
   \setlength\itemsep{1pt}
   \item[Add <key>-<value> pair:] \ttt{foo[<key>] = <value>} 
@@ -47,7 +49,8 @@ Dictionaries are key-value stores, \eie hashtables. With dictionary name \ttt{fo
 \end{description}
 
 \subsection{Sorting}
-With sortable-thing name \ttt{foo}:
+! With sortable-thing name \ttt{foo}:
+
 \begin{description}
   \setlength\itemsep{1pt}
   \item[Sort (modify in place):] \ttt{foo.sort()}
@@ -60,9 +63,9 @@ With sortable-thing name \ttt{foo}:
 \subsection{Data Processing}
 \begin{description}
   \setlength\itemsep{1pt}
-  \item[Read data from json file:] \ttt{with open('data.json', 'r') as f: data =
+  \item[Read data from json file:] \ttt{with open('data.json','r') as f: data =
     json.load(f) }
-  \item[Write data to json file:] \ttt{with open('data.json', 'w') as f: data =
+  \item[Write data to json file:] \ttt{with open('data.json','w') as f: data =
     json.dump(f) }
   \item[Regex processing of text, \ttt{re} package:] look at
   \href{https://docs.python.org/3/library/re.html}
@@ -75,17 +78,28 @@ With sortable-thing name \ttt{foo}:
   \item[Return integer representing Unicode <char>:] \ttt{ord(<char>)} 
 \end{description}
 
-\subsection{re}
+\subsection{Regex (re)}
+%% For items that have multiple lines of code after the description, instead of using a
+%% \description env on the outside of all items, use a \paragraph for each item,
+%% followed by a \description env hack for the lines of code. Alternatively use a
+%% \textbf instead of a \paragraph to reduce spacing between items.
+%%
+%% the \description env hack for a multi-line code listing has less spacing between
+%% lines than is standard for a list env (as \description env is a list env). So eg use
+%% a '\setlength\itemsep{-5pt}' inside the \description env.
+
+\paragraph{List all files in dir that match some regular expression:}
 \begin{description}
-  \setlength\itemsep{1pt}
-  \item{}
+  \setlength\itemsep{-5pt} 
+  \item \ttt{regex = re.compile(<regex string>)}
+  \item \ttt{filepaths = [f for f in os.listdir(<dir>) if re.match(regex, f)]}
 \end{description}
 
 
 \newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Numpy}
-Using \ttt{import numpy as np}:
+! Using \ttt{import numpy as np}:
 
 \subsection{Data Processing}
 \begin{description}
@@ -108,19 +122,16 @@ Using \ttt{import numpy as np}:
   \item[Random permutation of elements in ndarray:] \ttt{np.random.permutation(NDArray)}
   \item[Permute elements of (range or ndarray) \emph{in place}:]
   \ttt{np.random.shuffle(int or NDArray)}
-  \item[Integers over specified range:] \ttt{np.arange(start, stop)}
-  \item[Evenly spaced numbers over range w/ int \ttt{stepsize}:] \ttt{np.arange(beg,
-    end, stepsize)}
+  \item[Integers over specified range:] \ttt{np.arange(beg, end)}
+  \item[Evenly spaced numbers over range w/ interval \ttt{stepsize}:]
+  \ttt{np.arange(beg, end, stepsize)}
   \item[\ttt{numvals} Evenly spaced numbers over range:] \ttt{np.linspace(bed, end,
     numvals)}
-
 \end{description}
 
 \subsection{NDArray handling}
-\begin{itemize}
-  \setlength\itemsep{1pt}
-  \item NDArrays are naturally \emph{row vectors}, and of shape $(m,)$.
-\end{itemize}
+! NDArrays are naturally \emph{row vectors}, and of shape $(m,)$.
+
 \begin{description}
   \setlength\itemsep{1pt}
   \item[Reshape array:] \ttt{np.reshape(NDArray, tuple of shape)}
@@ -130,11 +141,12 @@ Using \ttt{import numpy as np}:
 \begin{description}
   \setlength\itemsep{1pt}
   \item[max/min element of array:] \ttt{np.max(NDArray)},\quad \ttt{np.min(NDArray)}
-  \item[index of max/min element of array:] \ttt{np.argmax(NDArray)},\quad
+  \item[Index of max/min element of array:] \ttt{np.argmax(NDArray)},\quad
   \ttt{np.argmin(NDArray)}
-  \item[fill diagonal of sq matrix:] \ttt{np.fill\_diagonal(NDArray, val)}
-  \item[round elements to nearest int:] \ttt{np.rint(NDArray)}
-  \item[return bin counts in histogram:] \ttt{np.histogram(NDArray, binboundaries)}
+  \item[Fill diagonal of sq matrix:] \ttt{np.fill\_diagonal(NDArray, val)}
+  \item[Make diag matrix w/ <vec> as diagonal:] \ttt{np.diag(<vec>)}
+  \item[Round elements to nearest int:] \ttt{np.rint(NDArray)}
+  \item[Return bin counts in histogram:] \ttt{np.histogram(NDArray, binboundaries)}
   \item[<n>th difference of array:]\footnote{Think transforming array of tick prices
     into array of tick prices \emph{changes}} \ttt{np.diff(NDArray, <n>)}
 \end{description}
@@ -144,27 +156,30 @@ Using \ttt{import numpy as np}:
   \setlength\itemsep{1pt}
   \item[Inverse matrix:] \ttt{np.linalg.inv(square NDArray)}
   \item[Transpose matrix:] \ttt{np.linalg.transpose(NDArray)}
-  \item[evals and right evects:] \ttt{np.linalg.eig(square NDArray)}
+  \item[Eigenvalues and right eigenvectors:] \ttt{np.linalg.eig(square NDArray)}
 \end{description}
 
 
 \newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Matplotlib}
-Using \ttt{import matplotlib as mpl}, \ \ttt{import matplotlib.pyplot as plt}:
+! Using \ttt{import matplotlib as mpl}, \ \ttt{import matplotlib.pyplot as plt}:
 
+\subsection{MATLAB interface}
 \begin{description}
   \setlength\itemsep{1pt}
-  \item[show image (if not in inline mode):] \ttt{plt.show()}
-  \item[plot image:] \ttt{plt.imshow(NDArray)}
-  \item[set axis bounds:] \ttt{plt.axis([xmin, xmax, ymin, ymax])}
-  \item[set x,y axis label:] \ttt{plt.xlabel(name)}, \quad \ttt{plt.ylabel(name)}
-  \item[set plot title:] \ttt{plt.title(name)}
-  \item[show plot legend:] \ttt{plt.legend()}
-  \item[visualize matrix vals as heat map:] \ttt{plt.matshow(NDArray)}
-  \item[pan/zoomable plots in PyCharm:] insert \ttt{mpl.use('Qt5agg')} before
+  \item[Show image (if not in inline mode):] \ttt{plt.show()}
+  \item[Plot image:] \ttt{plt.imshow(NDArray)}
+  \item[Set axis bounds:] \ttt{plt.axis([xmin, xmax, ymin, ymax])}
+  \item[Set x,y axis label:] \ttt{plt.xlabel(name)}, \quad \ttt{plt.ylabel(name)}
+  \item[Set plot title:] \ttt{plt.title(name)}
+  \item[Show plot legend:] \ttt{plt.legend()}
+  \item[Visualize matrix vals as heat map:] \ttt{plt.matshow(NDArray)}
+  \item[Pan/zoomable plots in PyCharm:] insert \ttt{mpl.use('Qt5agg')} before
   \ttt{import matplotlib.pyplot as plt}
 \end{description}
+
+\subsection{Object-oriented interface}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -178,16 +193,6 @@ Using \ttt{import matplotlib as mpl}, \ \ttt{import matplotlib.pyplot as plt}:
   \setlength\itemsep{1pt}
   \item[Cross Validation:] \ttt{sklearn.model\_selection.cross\_val\_score}
 \end{description}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-\section{packages to try}
-
-\begin{description}
-  \setlength\itemsep{1pt}
-  \item[text from PDFs:] \ttt{PyPDF2}
-\end{description}
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

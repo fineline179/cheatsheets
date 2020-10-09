@@ -206,8 +206,9 @@ Can't use the test set to decide on values of hypers (\eeg number of parameters 
 model) because ``we could just tweak the values of the hypers until the estimator
 performs optimally [on the test set]''.
 
-Cross-validation allows you to do model scoring (on frequentist stats, versus \eeg info
-criteria for Bayesian stats.. \LATODO{verify I know what I'm talking about}).
+Cross-validation allows you to do model comparison to find best value of hypers (on
+frequentist stats), versus using things like computing the evidence in Bayesian
+stats. \LATODO{more detail here}
 
 Can average together multiple models with high capacity (low bias, but high
 variance). The result of combining is to \emph{reduce} the variance of the combined
@@ -260,6 +261,8 @@ metric for evaluating effectiveness of different classifiers on problem:
   \trm{F1} = \frac{2}{\left(\frac{1}{\trm{prec}} + \frac{1}{\trm{rec}}\right)}
 \end{equation}
 
+\subsection{Regression}
+\TODO{Write this section.}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -687,11 +690,17 @@ Maximize likelihood $p(y | \theta ; \beta)$ wrt $\theta$, $\beta$.
 \subsection{Maximum a posteriori}
 Introduce prior $p(\theta ; \alpha) = \exp(-\alpha \theta^T \theta)$. Find $\theta$
 by maximizing $p(y | \theta ; \beta) p(\theta ; \alpha)$ wrt $\theta$.
-\\
-Q: what is proper way to estimate $\beta$ and $\alpha$ here?
+
+\begin{itemize}
+  \item Q: what is proper way to estimate $\beta$ and $\alpha$ here?
+  \item half-A: not sure if you can? You typically use the evidence approx (see ``Full
+  Bayesian'', below) to find best values for $\beta$ and $\alpha$.. OTOH we found most
+  likely $\beta$ in previous section (``Maximum Likelihood''), so why can't we do it
+  here?  \LATODO{finish answering this.}
+\end{itemize}
 
 \subsection{Full Bayesian (stationary prior)}
-Calc posterior
+Calculate posterior
 $p(\theta | y) = p(y | \theta ; \beta) p(\theta ; \alpha) / p(y ; \alpha, \beta)$, where
 $p(y ; \alpha, \beta) = \int_\theta p(y | \theta ; \beta) p(\theta ; \alpha) d\theta$ is
 the \tbfit{evidence}. Determine values of hypers $\alpha, \beta$ by maximizing evidence
