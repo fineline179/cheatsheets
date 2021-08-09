@@ -232,7 +232,9 @@ positives, true positives\}, we have the \tbfit{loss} or \tbfit{confusion matrix
   \rp,
 \end{equation}
 where the rows/columns are actual/predicted numbers of examples not-in-class (negative),
-or in-class (positive). We define the \tbfit{precision} and \tbfit{recall}:
+or in-class (positive).
+
+We define the \tbfit{precision} and \tbfit{recall}:
 \begin{equation}
   \trm{precision} = \frac{\trm{TP}}{\trm{TP} + \trm{FP}}, \qquad
   \trm{recall} = \frac{\trm{TP}}{\trm{TP} + \trm{FN}}.
@@ -247,7 +249,7 @@ cancer'', we want \emph{high precision}.
 \tbfit{True Positive Rate (TPR):} same as recall \\
 \tbfit{True Negative Rate (TNR):} fraction of actual negatives that are classified as
 negative $\trm{TN}/(\trm{TN} + \trm{FP})$
-\tbfit{False Positive Rate (FPR):} 1 - TNR
+\tbfit{False Positive Rate (FPR):} $1 - \trm{TNR} = \trm{FP}/(\trm{TN} + \trm{FP})$ 
 
 ROC plots TPR versus FPR.
 
