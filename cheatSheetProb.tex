@@ -51,6 +51,12 @@
   \end{equation}
 \end{enumerate}
 
+\begin{itemize}
+  \item Normal dist has ~67\% of pdf between mean \pm 1 std, ~95\% of pdf between mean
+  \pm 2 std
+\end{itemize}
+
+
 \subsubsection{Differentiation moment trick}
 \label{subsubsec:dmt}
 By differentiating Eq. \ref{eq:int_gauss_a2} wrt $a$, we obtain an expression for
@@ -223,6 +229,29 @@ Let $X_1, \dots, X_n$ be \tbf{iid}, and $\mu = \E(X_1)$\footnote{$\mu = \E(X_1) 
   \E(X_i)$ for any $1 \leq i \leq n$}. Defining the \tbfit{sample mean} as
 $\overline{X}_n = n^{-1} \sum_{i=1}^n X_i$, the WLLN states that $\overline{X}_n$
 converges in probability to $\mu$. 
+
+
+\subsection{Statistical Tests of Hypotheses}
+\TODO{Write this section. about how to do a/b tests. Stuff from inferentialthinking.com}
+
+\begin{itemize}
+  \item \textbf{total variation distance (between two categorical distributions)}:
+  \item \tbfit{p-value}: The p-value of a test is the chance, based on the model in the
+  null hypothesis, that the test statistic will be equal to the observed value in the
+  sample or even further in the direction that supports the alternative
+
+
+\end{itemize}
+
+\subsubsection{A/B Testing}
+For comparing two random samples (see if two samples come from same underlying
+distribution).  \TODO{write this section}
+
+
+
+\subsection{All About Regression}
+\TODO{Write this section. All the relevant basics about linear regression (errors on fit
+  coeffs, $R^2$ value, etc...)}
 
 
 \subsection{Misc}

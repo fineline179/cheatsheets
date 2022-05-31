@@ -34,8 +34,10 @@ needs to be loaded beforehand)}
   \item[Remove list item at pos <n> (or end if <n> unspecified):] \ttt{foo.pop(<n>)}
   \item[Insert <val> into list before position <n>:] \ttt{foo.insert(<n>, <val>)}
   \item[Sum of list:] \ttt{sum(foo)}
-  \item[Get indexed elements as tuples (index, el) from list or NDArray:]
-  \ttt{enumerate(list)}
+  \item[Get indexed elements as tuples (index, el) from iterable:]
+  \ttt{enumerate(iterable)}
+  \item[Same as above, with index starting at <startval>:]
+  \ttt{enumerate(iterable, startval)}
   \item[Append <list2> to end of list:] \ttt{foo.extend(<list2>)}
 \end{description}
 
@@ -46,6 +48,8 @@ needs to be loaded beforehand)}
   \setlength\itemsep{1pt}
   \item[Add <key>-<value> pair:] \ttt{foo[<key>] = <value>} 
   \item[Iterate though <key>-<value> pairs:] \ttt{for (key, value) in foo.items()}
+  \item[Iterate though keys:] \ttt{for key in foo.keys()}
+  \item[Iterate though values:] \ttt{for value in foo.values()}
   \item[Test if <key> in dict:] \ttt{<key> in foo}
 \end{description}
 
