@@ -19,7 +19,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conventions}
 \paragraph{Math Notation}
-
+\begin{itemize}
+  \item $\mathbb{Z^+}$: positive integers
+\end{itemize}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -44,7 +46,8 @@
     \int_{-\infty}^{\infty} dx\, e^{-\frac{1}{2} a x^2} = \lp \frac{2 \pi}{a} \rp^{1/2} 
   \end{equation}
 
-  \item The traditional Gaussian pdf has $a = 1 / \sigma^2$, and is easily seen to be
+  \item The traditional Gaussian pdf (or \tbfit{Normal distribution}) has
+  $a = 1 / \sigma^2$, and is easily seen to be
   \begin{equation}
     \mathcal{N}(x|0,\sigma^2) = \frac{1}{\lp 2 \pi \sigma^2 \rp^{1/2}}\,
     e^{-\frac{1}{2 \sigma^2} x^2}
@@ -52,8 +55,8 @@
 \end{enumerate}
 
 \begin{itemize}
-  \item Normal dist has ~67\% of pdf between mean \pm 1 std, ~95\% of pdf between mean
-  \pm 2 std
+  \item Normal distribution has ~67\% of pdf between mean \pm 1 std, ~95\% of pdf
+  between mean \pm 2 std
 \end{itemize}
 
 
@@ -212,23 +215,38 @@ Using $p(y|x) p(x) = p(x,y) = p(x|y) p(y)$, we have
   
 \end{itemize}
 
+\subsection{(Weak) Law of Large Numbers (WLLN)}
+\label{subsec:wlln}
+\begin{itemize}
+  \item Let $X_1, \dots, X_n$ be \tbf{iid}, each with mean $\mu$ and variance
+  $\sigma^{2}$. Defining the \tbfit{sample mean} as
+  $Y_n = \frac{1}{n} (X_1 + \dots + X_n)$, the WLLN states that $Y_n$ converges in
+  probability to $\mu$. The variance of $Y_n$ goes to $\sigma^{2}/n$.
+
+  \item The \textbf{practical application} of this is that we use the average of
+  repeated samples of an \textbf{iid} variable to estimate the variable's \textbf{mean}.
+
+\end{itemize}
+
 \subsection{Central Limit Theorem}
-Let $S_N = \sum_{i=1}^N X_i$, where each $X_i$ is \tbf{iid} with mean $\mu$ and variance
-$\sigma^2$. Then, as $N \to \infty$, the pdf of $S_N$ approaches a normal distribution:
+Let $S_n = \sum_{i=1}^n X_i$, where each $X_i$ is \tbf{iid} with mean $\mu$ and variance
+$\sigma^2$. The \tbfit{central limit theorem} says that as $n \to \infty$, the pdf of
+$S_n$ approaches a normal distribution:
 \begin{equation}
-  p(S_N = s) = \frac{1}{\lp 2 \pi N \sigma^2 \rp^{1/2}} \exp \lb - \frac{(s - N
-    \mu)^2}{2 N \sigma^2} \rb 
+  p(S_n = s) = \frac{1}{\lp 2 \pi n \sigma^2 \rp^{1/2}} \exp \lb - \frac{(s - n
+    \mu)^2}{2 n \sigma^2} \rb 
 \end{equation}
-NB the factors of $N$ in the pdf, which make the pdf mean/variance equal to $N$ times
+NB the factors of $n$ in the pdf, which make the pdf mean/variance equal to $n$ times
 the original mean/variance (\eie means and variances of independent variables add; see
 section \ref{sec:ExpVar}.)
 
-
-\subsection{(Weak) Law of Large Numbers}
-Let $X_1, \dots, X_n$ be \tbf{iid}, and $\mu = \E(X_1)$\footnote{$\mu = \E(X_1) =
-  \E(X_i)$ for any $1 \leq i \leq n$}. Defining the \tbfit{sample mean} as
-$\overline{X}_n = n^{-1} \sum_{i=1}^n X_i$, the WLLN states that $\overline{X}_n$
-converges in probability to $\mu$. 
+\textbf{Another interpretation}\footnote{From MIT finance 18.S096 course, probability
+  lecture}: Compare to WLLN in section \ref{subsec:wlln}, where we had
+$Y_n = \frac{1}{n} (X_1 + \dots + X_n)$, with variance $\sigma^2/n$. Now consider the
+case where each $X_i$ has mean 0, and instead form the sum
+$Z_n = \sqrt{n}\, Y_n = \frac{1}{\sqrt{n}} (X_1 + \dots + X_n)$. It follows that $Z_n$
+has mean 0 and variance $\sigma^2$, and the central limit theorem says that $Z_n$ in
+fact converges to $\mathcal{N}(0, \sigma^2)$ as $n \to \infty$.
 
 
 \subsection{Statistical Tests of Hypotheses}
@@ -289,9 +307,11 @@ where $H(p,q)$ is the cross entropy, and $H(p)$ is the entropy.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Optimal Stopping Theory}
-
-
+\section{\TODO{Remaining topics}}
+\begin{itemize}
+  \item Probability change of variables (with examples)
+  \item Optimal Stopping Theory
+\end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
